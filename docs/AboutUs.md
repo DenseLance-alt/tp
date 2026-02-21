@@ -40,15 +40,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Chin Ling Xing, Lance
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/denselance-alt.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/denselance-alt)]
+[[portfolio](team/denselance-alt.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Ensure timely submission of deliverables and code quality
 
 ### James Doe
 
