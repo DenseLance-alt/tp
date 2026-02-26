@@ -352,20 +352,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
+#### ⚙️ Technical
+1. The application should be implemented primarily using the Object-Oriented Paradigm (OOP), where core logic are encapsulated within classes. A small mix of other styles (e.g. lambda expressions from the Functional Programming Paradigm) are allowed if justifiable (e.g. if it improves conciseness or readability within a method).
+
+#### 🚧 Operational Constraints
+1. It should be operated as a single-user application. It should not support shared usage nor share access to data amongst multiple users.
+2. The application should not depend on its own remote server.
+
 #### 💻 Portability
 1. The system should support **any mainstream OS** with Java `17` or higher.
 2. The system should deliver the product as a **single, executable JAR file**.
 3. The system should function as a **standalone product** that does not require additional user installations.
+4. The application should be packaged into a single JAR file or a single zip file, with a maximum size of 100MB.
 
 #### ⌨️ Usability
 1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2. The application's GUI should not cause any resolution-related inconvenience to the user for standard screen resolutions 1920x1080 and higher, and for screen scales 100% and 125%.
+3. The application's GUI should be usable (i.e. allow all application functions to be usable, even if the user experience is not optimal) for resolutions 1280x720 and higher, and for screen scale 150%.
 
 #### 🚀 Performance
 1. The system should remain **responsive** even when managing 1000 customer records.
 
 #### 💾 Data Persistence
-1. The system should store customer data locally in a **human editable JSON file**.
-2. The system should **automatically load the stored customer records** upon every system launch.
+1. The application should not use a Database Management System (DBMS) to store data.
+2. The application should store data locally in a human editable text file (e.g. in JSON format).
+
+#### 📖 Documentation
+1. The Developer Guide and User Guide should be PDF-friendly (e.g. no expandable panels, embedded videos, animated GIFs, etc.).
+2. The Developer Guide and User Guide should have a maximum size of 15MB each, when downloaded as PDF files.
 
 #### 📝 Additional Requirements
 1. The system should use the standardized **Singapore address and phone number format**.
