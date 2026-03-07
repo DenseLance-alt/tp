@@ -32,7 +32,7 @@ public class Time {
     public Time(String time) {
         requireNonNull(time);
         checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
-        this.time = LocalTime.parse(time);
+        this.time = LocalTime.parse(time, formatter);
     }
 
     /**
