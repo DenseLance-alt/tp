@@ -8,23 +8,23 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TypicalDeliveries {
-    public static final Delivery deliveryOne = new DeliveryBuilder().withStartDate("2025-10-19")
+    public static final Delivery DELIVERY_ONE = new DeliveryBuilder().withStartDate("2025-10-19")
             .withEndDate("2025-10-30").withDeliveryDays("Monday", "Tuesday")
             .withDeliveryTime("12:00")
             .withSkippedDates("2025-10-21", "2025-10-22").build();
-    public static final Delivery deliveryTwo = new DeliveryBuilder().withStartDate("2025-10-19")
+    public static final Delivery DELIVERY_TWO = new DeliveryBuilder().withStartDate("2025-10-19")
             .withEndDate("2025-10-30").withDeliveryDays("Monday", "Tuesday", "Thursday")
             .withDeliveryTime("14:14")
             .withSkippedDates("2025-10-21", "2025-10-24").build();
-    public static final Delivery deliveryThree = new DeliveryBuilder().withStartDate("2024-10-21")
+    public static final Delivery DELIVERY_THREE = new DeliveryBuilder().withStartDate("2024-10-21")
             .withEndDate("2024-10-29").withDeliveryDays("Tuesday", "Wednesday", "Thursday")
             .withDeliveryTime("15:15")
             .withSkippedDates("2024-10-24").build();
-    public static final Delivery deliveryFour = new DeliveryBuilder().withStartDate("2019-03-19")
+    public static final Delivery DELIVERY_FOUR = new DeliveryBuilder().withStartDate("2019-03-19")
             .withEndDate("2019-03-27").withDeliveryDays("Wednesday", "Friday")
             .withDeliveryTime("12:00")
             .withSkippedDates().build();
-    public static final Delivery deliveryFive = new DeliveryBuilder().withStartDate("2019-05-21")
+    public static final Delivery DELIVERY_FIVE = new DeliveryBuilder().withStartDate("2019-05-21")
             .withEndDate("2019-06-29").withDeliveryDays("Monday", "Thursday")
             .withDeliveryTime("11:11")
             .withSkippedDates("2019-05-28").build();
@@ -41,6 +41,6 @@ public class TypicalDeliveries {
     }
 
     public static List<Delivery> getTypicalDeliveries() {
-        return new ArrayList<>(Arrays.asList(deliveryOne, deliveryTwo, deliveryThree, deliveryFour, deliveryFive));
+        return new ArrayList<>(Arrays.asList(DELIVERY_ONE, DELIVERY_TWO, DELIVERY_THREE, DELIVERY_FOUR, DELIVERY_FIVE));
     }
 }
