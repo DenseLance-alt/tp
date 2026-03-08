@@ -1,9 +1,11 @@
 package seedu.address.model.delivery;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.testutil.Assert.assertThrows;
 
 public class DeliveryDayTest {
 
@@ -35,21 +37,21 @@ public class DeliveryDayTest {
 
     @Test
     public void equals() {
-        DeliveryDay Day = new DeliveryDay("Tuesday");
+        DeliveryDay day = new DeliveryDay("Tuesday");
 
         // same values -> returns true
-        assertTrue(Day.equals(new DeliveryDay("Tuesday")));
+        assertTrue(day.equals(new DeliveryDay("Tuesday")));
 
         // same object -> returns true
-        assertTrue(Day.equals(Day));
+        assertTrue(day.equals(day));
 
         // null -> returns false
-        assertFalse(Day.equals(null));
+        assertFalse(day.equals(null));
 
         // different types -> returns false
-        assertFalse(Day.equals(5.0f));
+        assertFalse(day.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(Day.equals(new DeliveryDay("Thursday")));
+        assertFalse(day.equals(new DeliveryDay("Thursday")));
     }
 }

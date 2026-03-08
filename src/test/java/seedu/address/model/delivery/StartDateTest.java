@@ -1,10 +1,10 @@
 package seedu.address.model.delivery;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class StartDateTest {
 
@@ -39,21 +39,21 @@ public class StartDateTest {
 
     @Test
     public void equals() {
-        StartDate Date = new StartDate("2019-10-15");
+        StartDate date = new StartDate("2019-10-15");
 
         // same values -> returns true
-        assertTrue(Date.equals(new StartDate("2019-10-15")));
+        assertTrue(date.equals(new StartDate("2019-10-15")));
 
         // same object -> returns true
-        assertTrue(Date.equals(Date));
+        assertTrue(date.equals(date));
 
         // null -> returns false
-        assertFalse(Date.equals(null));
+        assertFalse(date.equals(null));
 
         // different types -> returns false
-        assertFalse(Date.equals(5.0f));
+        assertFalse(date.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(Date.equals(new StartDate("2020-11-12")));
+        assertFalse(date.equals(new StartDate("2020-11-12")));
     }
 }

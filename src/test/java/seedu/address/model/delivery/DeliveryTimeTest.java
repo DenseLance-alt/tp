@@ -1,10 +1,10 @@
 package seedu.address.model.delivery;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class DeliveryTimeTest {
     @Test
@@ -37,21 +37,21 @@ public class DeliveryTimeTest {
 
     @Test
     public void equals() {
-        DeliveryTime Time = new DeliveryTime("12:59");
+        DeliveryTime time = new DeliveryTime("12:59");
 
         // same values -> returns true
-        assertTrue(Time.equals(new DeliveryTime("12:59")));
+        assertTrue(time.equals(new DeliveryTime("12:59")));
 
         // same object -> returns true
-        assertTrue(Time.equals(Time));
+        assertTrue(time.equals(time));
 
         // null -> returns false
-        assertFalse(Time.equals(null));
+        assertFalse(time.equals(null));
 
         // different types -> returns false
-        assertFalse(Time.equals(5.0f));
+        assertFalse(time.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(Time.equals(new DeliveryTime("13:43")));
+        assertFalse(time.equals(new DeliveryTime("13:43")));
     }
 }
