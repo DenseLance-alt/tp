@@ -74,10 +74,8 @@ public class Delivery {
         }
 
         return otherDelivery != null
-                && (
-                        endDate.date.isAfter(otherDelivery.startDate.date)
-                    || otherDelivery.endDate.date.isAfter(startDate.date)
-                );
+                && endDate.date.isAfter(otherDelivery.startDate.date)
+                && otherDelivery.endDate.date.isAfter(startDate.date);
     }
 
     @Override
