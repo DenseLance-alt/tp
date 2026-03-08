@@ -37,6 +37,17 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
+    public static final String VALID_START_DATE_ONE = "2019-11-12";
+    public static final String VALID_START_DATE_TWO = "2020-02-13";
+    public static final String VALID_END_DATE_ONE = "2020-01-11";
+    public static final String VALID_END_DATE_TWO = "2020-11-11";
+    public static final String VALID_DELIVERY_TIME_ONE = "20:20";
+    public static final String VALID_DELIVERY_TIME_TWO = "12:13";
+    public static final String VALID_DELIVERY_DAY_FIRST = "Monday";
+    public static final String VALID_DELIVERY_DAY_SECOND = "Thursday";
+    public static final String VALID_SKIPPED_DATE_FIRST = "2020-01-13";
+    public static final String VALID_SKIPPED_DATE_SECOND = "2020-02-10";
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
