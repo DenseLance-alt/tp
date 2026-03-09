@@ -19,6 +19,11 @@ public class DeliveryDay {
     /**
      * The day must follow the format of
      * having the complete day of the week word.
+     *
+     * Examples of day inputs accepted by the formatter: Monday, Tuesday.
+     *
+     * Examples of valid input from the user
+     * (after capitalization and lowercasing of some letters): monday, TUESDAY, WEDnesDay.
      */
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH);
 
