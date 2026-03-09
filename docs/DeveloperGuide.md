@@ -339,21 +339,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. Any required field is missing.
 
-    * 1a1. ServeMate shows an error message describing the correct command format.
+    * 1a1. ServeMate shows an error message describing the correct command format and requests for a new command from the user.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. Any parameter value is invalid.
 
-    * 1b1. ServeMate shows an error message describing the violated constraint.
+    * 1b1. ServeMate shows an error message describing the violated constraint and requests for a new command from the user.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1c. A customer with the same name already exists.
 
-    * 1c1. ServeMate shows an error message "This person already exists in the address book".
+    * 1c1. ServeMate shows an error message indicating that the customer already exists and requests for a new command from the user.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 **Use case 2: Delete a customer**
 
@@ -369,21 +369,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
 
 * 3a. The given index is not a positive integer.
 
-    * 3a1. ServeMate shows an error message describing the correct command format.
+    * 3a1. ServeMate shows an error message describing the correct command format and requests for a new command from the user.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 * 3b. The given index is out of range.
 
-    * 3b1. ServeMate shows an error message "The person index provided is invalid".
+    * 3b1. ServeMate shows an error message indicating that the provided index is invalid and requests for a new command from the user.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 **Use case 3: Edit customer record**
 
@@ -399,39 +399,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
 
 * 3a. The given index is not a positive integer.
 
-    * 3a1. ServeMate shows an error message describing the correct command format.
+    * 3a1. ServeMate shows an error message describing the correct command format and requests for a new command from the user.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 * 3b. The given index is out of range.
 
-    * 3b1. ServeMate shows an error message "The person index provided is invalid".
+    * 3b1. ServeMate shows an error message indicating that the provided index is invalid and requests for a new command from the user.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 * 3c. No fields are specified for editing.
 
-    * 3c1. ServeMate shows an error message "At least one field to edit must be provided".
+    * 3c1. ServeMate shows an error message indicating that at least one field must be provided for editing and requests for a new command from the user.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 * 3d. Any provided field value is invalid.
 
-    * 3d1. ServeMate shows an error message describing the violated constraint.
+    * 3d1. ServeMate shows an error message describing the violated constraint and requests for a new command from the user.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 * 3e. Editing the name causes a duplicate with an existing customer.
 
-    * 3e1. ServeMate shows an error message "This person already exists in the address book".
+    * 3e1. ServeMate shows an error message indicating that the customer already exists and requests for a new command from the user.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 **Use case 4: Filter customer records**
 
@@ -446,19 +446,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The command format is invalid.
 
-    * 1a1. ServeMate shows an error message describing the correct command format.
+    * 1a1. ServeMate shows an error message describing the correct command format and requests for a new command from the user.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. Any provided attribute value violates format constraints.
 
-    * 1b1. ServeMate shows an error message describing the violated constraint.
+    * 1b1. ServeMate shows an error message describing the violated constraint and requests for a new command from the user.
 
-      Use case ends.
+      Use case resumes at step 1.
 
-* 2a. No customers match the specified criteria.
+* 1c. No customers match the specified criteria.
 
-    * 2a1. ServeMate shows an empty result list.
+    * 1c1. ServeMate shows an empty result list.
 
       Use case ends.
 
@@ -601,9 +601,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. The Developer Guide and User Guide should be PDF-friendly (e.g. no expandable panels, embedded videos, animated GIFs, etc.).
 2. The Developer Guide and User Guide should have a maximum size of 15MB each, when downloaded as PDF files.
 
-#### 📝 Additional Requirements
-1. The application should use the standardized **Singapore address and phone number format**.
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
@@ -617,8 +614,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Delivery Route**: A sequence of stops planned for delivering meals to customers.
 * **Subscription**: A predefined plan for meal delivery over a specific period (e.g., 5, 10, or 20 days).
 * **Command**: A user input that triggers a specific action in the application (e.g., `add`, `delete`, `list`).
-* **Singapore Address Format:** A sequence of elements used to physically locate buildings, in the form `<Block Number>, <Street Name>, <Unit Number (if any)>, Singapore <Postal Code>` (e.g., 757 Woodlands Ave 4, #04-27, Singapore 730757).
-* **Singapore Phone Number Format:** A 8-digit number containing no spaces used for telecommunications within Singapore (e.g., `81234567`).
 * **JavaScript Object Notation (JSON)**: A file format for storing and transmitting data as human-readable text.
 * **Java Archive (JAR)**: A file format that can be used to compress and bundle multiple files associated with a Java application into a single file for ease of distribution and execution.
 
