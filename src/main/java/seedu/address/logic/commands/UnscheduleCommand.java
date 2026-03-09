@@ -18,7 +18,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Deletes a person's delivery identified using the person's
+ * Unschedules a person's delivery identified using their
  * displayed index from the address book.
  */
 public class UnscheduleCommand extends Command {
@@ -66,7 +66,7 @@ public class UnscheduleCommand extends Command {
         Address address = personToUnschedule.getAddress();
         Set<Tag> tags = personToUnschedule.getTags();
 
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, tags, null);
     }
 
     @Override
