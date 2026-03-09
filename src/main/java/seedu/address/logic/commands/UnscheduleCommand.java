@@ -3,13 +3,19 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Tag;
 
 /**
  * Deletes a person's delivery identified using the person's
@@ -41,8 +47,26 @@ public class UnscheduleCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person lastPerson = lastShownList.get(targetIndex.getZeroBased());
-        return new CommandResult(String.format(MESSAGE_DELETE_DELIVERY_SUCCESS, Messages.formatDelivery(lastPerson)));
+        Person personToUnschedule = lastShownList.get(targetIndex.getZeroBased());
+        model.setPerson(personToUnschedule, removeDelivery(personToUnschedule));
+        return new CommandResult(String.format(MESSAGE_DELETE_DELIVERY_SUCCESS,
+                Messages.formatDelivery(personToUnschedule)));
+    }
+
+    /**
+     * Creates and returns a {@code Person} with the details of {@code personToUnschedule}
+     * but has delivery removed.
+     */
+    private static Person removeDelivery(Person personToUnschedule) {
+        assert personToUnschedule != null;
+
+        Name name = personToUnschedule.getName();
+        Phone phone = personToUnschedule.getPhone();
+        Email email = personToUnschedule.getEmail();
+        Address address = personToUnschedule.getAddress();
+        Set<Tag> tags = personToUnschedule.getTags();
+
+        return new Person(name, phone, email, address, tags);
     }
 
     @Override
