@@ -154,8 +154,8 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person on the list.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd customer on the list.
+* `find Betsy` followed by `delete 1` deletes the 1st customer in the results of the `find` command.
 
 ### Unscheduling a delivery : `unschedule`
 
@@ -169,8 +169,8 @@ Format: `unschedule INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `unschedule 2` deletes the delivery for the 2nd person on the list.
-* `find Betsy` followed by `unschedule 1` deletes the delivery for the 1st person in the results of the `find` command.
+* `list` followed by `unschedule 2` deletes the delivery for the 2nd customer on the list.
+* `find Betsy` followed by `unschedule 1` deletes the delivery for the 1st customer in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 

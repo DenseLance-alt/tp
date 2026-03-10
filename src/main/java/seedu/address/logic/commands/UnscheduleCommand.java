@@ -51,7 +51,7 @@ public class UnscheduleCommand extends Command {
         }
 
         Person personToUnschedule = lastShownList.get(targetIndex.getZeroBased());
-        Person personWithNoDelivery = removeDelivery(personToUnschedule);
+        Person personWithNoDelivery = removeDeliveryIfExists(personToUnschedule);
 
         if (!personToUnschedule.hasDelivery()) {
             throw new CommandException(MESSAGE_MISSING_DELIVERY);
@@ -64,10 +64,10 @@ public class UnscheduleCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToUnschedule}
-     * but has delivery removed.
+     * Creates and returns a new {@code Person} with the details of
+     * {@code personToUnschedule} but has their delivery removed.
      */
-    private static Person removeDelivery(Person personToUnschedule) {
+    private static Person removeDeliveryIfExists(Person personToUnschedule) {
         assert personToUnschedule != null;
 
         Name name = personToUnschedule.getName();
