@@ -51,7 +51,7 @@ public class Messages {
 
     /**
      * Formats the {@code person}'s delivery for display to the user.
-     * Returns only the person's name if person does not have delivery
+     * Returns only the person's name if person does not have a delivery.
      */
     public static String formatDelivery(Person person) {
         if (!person.hasDelivery()) {
