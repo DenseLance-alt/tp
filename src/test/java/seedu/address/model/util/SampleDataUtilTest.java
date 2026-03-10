@@ -1,9 +1,10 @@
 package seedu.address.model.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.model.util.SampleDataUtil.getDeliveryDaySet;
+import static seedu.address.model.util.SampleDataUtil.getSkippedDateSet;
 import static seedu.address.model.util.SampleDataUtil.getTagSet;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -11,6 +12,8 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.delivery.DeliveryDay;
+import seedu.address.model.delivery.SkippedDate;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -21,11 +24,17 @@ public class SampleDataUtilTest {
     @Test
     void getTagSet_validTags_hasSameTags() {
         // non-empty set
-        assertEquals(getTagSet(TAG_DESC_FRIEND, TAG_DESC_HUSBAND),
-                Set.of(TAG_DESC_FRIEND, TAG_DESC_HUSBAND));
+        Tag friendTag = new Tag(VALID_TAG_FRIEND);
+        Tag husbandTag = new Tag(VALID_TAG_HUSBAND);
+        assertEquals(Set.of(friendTag, husbandTag),
+                getTagSet(VALID_TAG_FRIEND, VALID_TAG_HUSBAND));
+
+        // duplicate items are removed from set
+        assertEquals(Set.of(friendTag),
+                getTagSet(VALID_TAG_FRIEND, VALID_TAG_FRIEND));
 
         // empty set
-        assertEquals(getTagSet(), Set.<Tag>of());
+        assertEquals(Set.<Tag>of(), getTagSet());
     }
 
     @Test
@@ -34,12 +43,83 @@ public class SampleDataUtilTest {
         String emptyTagName = "";
         assertThrows(IllegalArgumentException.class, () -> getTagSet(emptyTagName));
 
-        // non alphanumeric tag
-        assertThrows(IllegalArgumentException.class, () -> getTagSet(INVALID_TAG_DESC));
+        // non-alphanumeric tag
+        String nonAlphanumericTagName = "(foodie)";
+        assertThrows(IllegalArgumentException.class, () -> getTagSet(nonAlphanumericTagName));
 
         // one invalid tag with many valid tags
         assertThrows(IllegalArgumentException.class, () -> getTagSet(
-                TAG_DESC_FRIEND, TAG_DESC_HUSBAND, INVALID_TAG_DESC));
+                VALID_TAG_FRIEND, VALID_TAG_HUSBAND, nonAlphanumericTagName));
+    }
+
+    @Test
+    void getDeliveryDaySet_validDeliveryDay_hasSameDeliveryDays() {
+        // non-empty set
+        String mondayString = "Monday";
+        String tuesdayString = "TueSDAy";
+        DeliveryDay monday = new DeliveryDay(mondayString);
+        DeliveryDay tuesday = new DeliveryDay(tuesdayString);
+        assertEquals(Set.of(monday, tuesday),
+                getDeliveryDaySet(mondayString, tuesdayString));
+
+        // duplicate items are removed from set
+        assertEquals(Set.of(monday),
+                getDeliveryDaySet(mondayString, mondayString));
+
+        // empty set
+        assertEquals(Set.<DeliveryDay>of(), getDeliveryDaySet());
+    }
+
+    @Test
+    public void getDeliveryDaySet_invalidDeliveryDay_throwsIllegalArgumentException() {
+        // empty delivery day
+        String emptyDeliveryDayString = "";
+        assertThrows(IllegalArgumentException.class, () -> getDeliveryDaySet(emptyDeliveryDayString));
+
+        // wrong format for delivery day
+        String invalidDeliveryDayString = "Mon";
+        assertThrows(IllegalArgumentException.class, () -> getDeliveryDaySet(invalidDeliveryDayString));
+
+        // one invalid delivery day with many valid delivery days
+        String mondayString = "Monday";
+        String tuesdayString = "TueSDAy";
+        assertThrows(IllegalArgumentException.class, () -> getDeliveryDaySet(
+                mondayString, tuesdayString, invalidDeliveryDayString));
+    }
+
+    @Test
+    void getSkippedDateSet_validSkippedDate_hasSameSkippedDates() {
+        // non-empty set
+        String firstSkippedDateString = "2026-03-10";
+        String secondSkippedDateString = "2026-04-02";
+        SkippedDate firstSkippedDate = new SkippedDate(firstSkippedDateString);
+        SkippedDate secondSkippedDate = new SkippedDate(secondSkippedDateString);
+        assertEquals(Set.of(firstSkippedDate, secondSkippedDate),
+                getSkippedDateSet(firstSkippedDateString, secondSkippedDateString));
+
+        // duplicate items are removed from set
+        assertEquals(Set.of(firstSkippedDate),
+                getSkippedDateSet(firstSkippedDateString, firstSkippedDateString));
+
+        // empty set
+        assertEquals(Set.<SkippedDate>of(), getSkippedDateSet());
+    }
+
+    @Test
+    public void getSkippedDateSet_invalidSkippedDate_throwsIllegalArgumentException() {
+        // empty skipped date
+        String emptySkippedDateString = "";
+        assertThrows(IllegalArgumentException.class, () -> getSkippedDateSet(emptySkippedDateString));
+
+        // wrong format for skipped date
+        String invalidSkippedDateString = "10 March 2026";
+        assertThrows(IllegalArgumentException.class, () -> getSkippedDateSet(invalidSkippedDateString));
+
+        // one invalid skipped date with many valid skipped date
+        String firstSkippedDateString = "2026-03-10";
+        String secondSkippedDateString = "2026-04-02";
+        assertThrows(IllegalArgumentException.class, () -> getSkippedDateSet(
+                firstSkippedDateString, secondSkippedDateString, invalidSkippedDateString));
     }
 
 }

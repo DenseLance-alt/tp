@@ -1,6 +1,5 @@
 package seedu.address.model.tag;
 
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,8 @@ public class TagTest {
         assertThrows(IllegalArgumentException.class, () -> new Tag(emptyTagName));
 
         // non alphanumeric tag
-        assertThrows(IllegalArgumentException.class, () -> new Tag(INVALID_TAG_DESC));
+        String nonAlphanumericTagName = "(foodie)";
+        assertThrows(IllegalArgumentException.class, () -> new Tag(nonAlphanumericTagName));
     }
 
     @Test
