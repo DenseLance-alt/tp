@@ -30,4 +30,10 @@ ServeMate helps tingkat caterers to:
 * Add, list, and delete detailed customer records.
 
 ## ✔️ Acknowledgement
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
+### Original Source
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
+### AI Generated Work
+* Gemini was used to generate the ServeMate icon for the application and Graphical User Interface (GUI) window.
+  * **Prompt Used:** `Logo design for address book app created for administrative staff of tingkat caterers to manage their customer contacts`.
