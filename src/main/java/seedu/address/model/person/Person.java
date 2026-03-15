@@ -31,11 +31,11 @@ public class Person {
      * Constructs a {@code Person} with the given name, phone, email, address and tag.
      * <p>
      * The {@code delivery} field is set to {@code null} by default.
-     * @param name
-     * @param phone
-     * @param email
-     * @param address
-     * @param tags
+     * @param name Name of the person, which must not be null.
+     * @param phone Phone number of the person, which must not be null.
+     * @param email Email of the person, which must not be null.
+     * @param address Address of the person, which must not be null.
+     * @param tags Set of tags associated with the person, which must not be null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         this(name, phone, email, address, tags, null);
