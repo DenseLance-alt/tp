@@ -60,8 +60,19 @@ public class Messages {
 
         final StringBuilder builder = new StringBuilder();
         final Delivery delivery = person.getDelivery();
-        builder.append(person.getName())
-                .append("; Start Date: ")
+        return builder.append(person.getName())
+                .append(formatDelivery(delivery))
+                .toString();
+    }
+
+    /**
+     * Formats the {@code delivery} for display to the user.
+     * @param delivery The {@code delivery} to format.
+     * @return String representation of the delivery suitable for display.
+     */
+    private static String formatDelivery(Delivery delivery) {
+        final StringBuilder builder = new StringBuilder();
+        return builder.append("; Start Date: ")
                 .append(delivery.getStartDate())
                 .append("; End Date: ")
                 .append(delivery.getEndDate())
@@ -70,7 +81,7 @@ public class Messages {
                 .append("; Delivery Time: ")
                 .append(delivery.getDeliveryTime())
                 .append("; Skipped Dates: ")
-                .append(delivery.getSkippedDates());
-        return builder.toString();
+                .append(delivery.getSkippedDates())
+                .toString();
     }
 }

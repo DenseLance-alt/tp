@@ -50,6 +50,14 @@ public class Person {
     }
     //@@author
 
+    /**
+     * Returns a new {@code Person} without any delivery assigned.
+     * @return A copy of this person with their delivery removed.
+     */
+    public Person withoutDelivery() {
+        return new Person(name, phone, email, address, getTags());
+    }
+
     public Name getName() {
         return name;
     }
