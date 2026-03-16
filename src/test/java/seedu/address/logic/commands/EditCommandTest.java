@@ -56,7 +56,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_deliverySpecifiedUnfilteredList_success() {
+    public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withDelivery(DELIVERY_FIONA).build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
@@ -70,6 +70,22 @@ public class EditCommandTest {
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
 
+    }
+
+    @Test
+    public void execute_deliverySpecifiedUnfilteredList_success() {
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(firstPerson).withDelivery(DELIVERY_FIONA).build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withDelivery(DELIVERY_FIONA).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        String expectedMessage = String.format(
+                EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.formatPerson(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -195,6 +211,11 @@ public class EditCommandTest {
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_BOB)));
+
+        // different delivery -> returns false
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(DESC_AMY)
+                .withDelivery(DELIVERY_FIONA).build();
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, descriptor)));
     }
 
     @Test
