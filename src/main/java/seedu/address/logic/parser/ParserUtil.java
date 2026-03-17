@@ -220,9 +220,6 @@ public class ParserUtil {
     public static Set<DeliveryDay> parseDeliveryDays(String deliveryDays) throws ParseException {
         requireNonNull(deliveryDays);
 
-        // ensure that deliveryDays is not an empty string
-        assert !deliveryDays.equals("");
-
         String trimmedDeliveryDays = deliveryDays.trim();
         String[] listOfDeliveryDays = trimmedDeliveryDays.split("");
         Set<DeliveryDay> deliveryDaySet = new HashSet<>();
