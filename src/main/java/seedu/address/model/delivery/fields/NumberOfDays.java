@@ -29,6 +29,10 @@ public class NumberOfDays {
      * positive number of days.
      */
     public static boolean isValidNumberOfDays(String test) {
+        if (test == null) {
+            throw new NullPointerException();
+        }
+
         try {
             int number = Integer.parseUnsignedInt(test);
             return number > 0;
