@@ -8,7 +8,7 @@ import java.util.Set;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Represents a recurring Delivery in the address book.
+ * Represents a Delivery in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Delivery {
