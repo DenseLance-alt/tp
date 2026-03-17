@@ -86,7 +86,7 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Delivery} of the {@code EditPersonDescriptor} that we are building.
      *
-     * @param delivery
+     * @param delivery Delivery to be set for the {@code EditPersonDescriptor}.
      * @return {@code EditPersonDescriptorBuilder} with the delivery set
      */
     public EditPersonDescriptorBuilder withDelivery(Delivery delivery) {

@@ -39,9 +39,11 @@ public class EditCommandTest {
     @Test
     public void execute_allEditableFieldsSpecifiedUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        // Inject firstPerson's delivery to ensure that the delivery is retained
+
+        // A person whose name, phone, email, address, and tags changed but her delivery retained.
         Person editedPerson = new PersonBuilder().withDelivery(firstPerson.getDelivery()).build();
-        // Used to build EditedPerson Descriptor where delivery is null
+
+        // EditPersonDescriptor is built without delivery to ensure the initial person's delivery is not modified
         Person editedPersonNoDelivery = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPersonNoDelivery).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);

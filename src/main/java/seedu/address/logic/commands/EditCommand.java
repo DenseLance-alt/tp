@@ -216,7 +216,7 @@ public class EditCommand extends Command {
         /**
          * Set {@code delivery} to this object's {@code delivery}.
          *
-         * @param delivery
+         * @param delivery Delivery to be set for the {@code EditPersonDescriptor}.
          */
         public void setDelivery(Delivery delivery) {
             this.delivery = delivery;
