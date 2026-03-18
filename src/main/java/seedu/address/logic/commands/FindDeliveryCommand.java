@@ -12,7 +12,7 @@ import seedu.address.model.delivery.DeliveryDatePredicate;
  */
 public class FindDeliveryCommand extends Command {
 
-    public static final String COMMAND_WORD = "finddelivery";
+    public static final String COMMAND_WORD = "find-delivery";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds all persons who require delivery on the specified date.\n"
@@ -21,6 +21,10 @@ public class FindDeliveryCommand extends Command {
 
     private final DeliveryDatePredicate predicate;
 
+    /**
+     * Creates a FindDeliveryCommand to find persons whose delivery falls on the date
+     * specified by the given {@code predicate}.
+     */
     public FindDeliveryCommand(DeliveryDatePredicate predicate) {
         this.predicate = predicate;
     }
