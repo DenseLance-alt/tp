@@ -36,15 +36,20 @@ public class FindDeliveryCommandTest {
         FindDeliveryCommand findFirstCommand = new FindDeliveryCommand(firstPredicate);
         FindDeliveryCommand findSecondCommand = new FindDeliveryCommand(secondPredicate);
 
+        // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
+        // same values -> returns true
         FindDeliveryCommand findFirstCommandCopy = new FindDeliveryCommand(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
+        // different types -> returns false
         assertFalse(findFirstCommand.equals(1));
 
+        // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
+        // different delivery date -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
