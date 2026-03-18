@@ -175,6 +175,22 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd customer on the list.
 * `find Betsy` followed by `delete 1` deletes the 1st customer in the results of the `find` command.
 
+### Scheduling a delivery : `schedule`
+
+Adds a delivery or overwrites the existing delivery associated with the specified customer.
+
+Format: `schedule INDEX d/START_DATE n/NUMBER_OF_DAYS t/DELIVERY_TIME days/DELIVERY_DAYS`
+
+* Adds the delivery for the customer at the specified `INDEX`.
+* If the specified customer already has a delivery, the delivery field is overwritten.
+* The index refers to the index number shown in the displayed customer list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* `DELIVERY_DAYS` must be a set of numbers **within the range of 1-7 inclusive** without whitespaces where 1 = Monday, 2 = Tuesday, …​, 7 = Sunday.
+
+Examples:
+* `schedule 1 d/2026-02-01 n/1 t/12:59 days/125`
+* `schedule 4 d/2026-03-11 n/12 t/13:48 days/2456`
+
 ### Unscheduling a delivery : `unschedule`
 
 Deletes the delivery associated with the specified customer.
