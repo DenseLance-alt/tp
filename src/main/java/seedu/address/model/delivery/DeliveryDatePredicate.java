@@ -14,6 +14,9 @@ public class DeliveryDatePredicate implements Predicate<Person> {
 
     private final LocalDate targetDate;
 
+    /**
+     * Creates a DeliveryDatePredicate that tests whether a person has a delivery on {@code targetDate}.
+     */
     public DeliveryDatePredicate(LocalDate targetDate) {
         this.targetDate = targetDate;
     }
@@ -37,7 +40,7 @@ public class DeliveryDatePredicate implements Predicate<Person> {
         DayOfWeek targetDay = targetDate.getDayOfWeek();
 
         if (delivery.getDeliveryDays().stream()
-                .noneMatch(day -> day.day.equals(targetDay))) {
+                .noneMatch(deliveryDay -> deliveryDay.day.equals(targetDay))) {
             return false;
         }
 

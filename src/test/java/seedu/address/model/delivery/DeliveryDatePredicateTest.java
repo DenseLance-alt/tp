@@ -15,13 +15,20 @@ public class DeliveryDatePredicateTest {
 
     @Test
     public void equals() {
-        DeliveryDatePredicate first = new DeliveryDatePredicate(LocalDate.of(2026, 4, 1));
-        DeliveryDatePredicate second = new DeliveryDatePredicate(LocalDate.of(2026, 4, 2));
+        DeliveryDatePredicate firstPredicate = new DeliveryDatePredicate(LocalDate.of(2026, 4, 1));
+        DeliveryDatePredicate secondPredicate = new DeliveryDatePredicate(LocalDate.of(2026, 4, 2));
 
-        assertTrue(first.equals(first));
-        assertFalse(first.equals(second));
-        assertFalse(first.equals(null));
-        assertFalse(first.equals(1));
+        // same object -> returns true
+        assertTrue(firstPredicate.equals(firstPredicate));
+
+        // different types -> returns false
+        assertFalse(firstPredicate.equals(1));
+
+        // null -> returns false
+        assertFalse(firstPredicate.equals(null));
+
+        // different predicate -> returns false
+        assertFalse(firstPredicate.equals(secondPredicate));
     }
 
     @Test
