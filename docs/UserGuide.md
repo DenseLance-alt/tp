@@ -125,23 +125,29 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st customer to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd customer to be `Betsy Crower` and clears all existing tags.
 
-### Locating customers by name: `find`
+### Locating customers by attributes: `find`
 
-Finds customers whose names contain any of the given keywords.
+Find customers whose attributes (name, address, tag) match at least 1 of the keywords given in each filter (`n/`, `a/`, `t/`) specified.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [n/NAME_KEYWORDS...] [a/ADDRESS_KEYWORDS...] [t/TAG_KEYWORDS...]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Customers matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The search is case-insensitive. e.g `n/hans` will match a customer with the name `Hans`.
+* Only full words will be matched e.g. `n/Han` will not match a customer with the name `Hans`.
+* The order of keywords do not matter. e.g. `n/Hans Bo` is the same as `n/Bo Hans`.
+* The order of filters do not matter. e.g. `n/John t/Tampines` is the same as `t/Tampines n/John`.
+* At least 1 filter with a keyword must be specified.
+* If a filter is not specified or there are no keywords, the filter is *not applied*.
+* Only customers matching *all* filters specified will be displayed.
+* For each filter, multiple keywords (each separated by a space) can be specified. A customer matches the filter if *at least one* keyword matches (i.e. `OR` search).
+  e.g. `n/John Lily t/Vegetarian` will return all your customers whose name is `John` or `Lily`, and tagged with dietary restriction `Vegetarian`.
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find a/Jurong` displays all customers with address containing `Jurong`.
+* `find t/Vegetarian` displays all customers tagged with dietary restriction `Vegetarian`.
+* `find n/Alex t/Vegetarian` displays customers whose name is `Alex` *and* tagged with dietary restriction `Vegetarian`.
+* `find n/Bernice a/Yishun Jurong` displays customers whose name is `Bernice` *and* with address containing `Yishun` or `Jurong`.
+* `find n/Alex Bernice a/Yishun t/Vegetarian` displays customers whose name is `Alex` or `Bernice`, with address containing `Yishun` *and* tagged with dietary restriction `Vegetarian`.<br>
+  ![result for 'find n/Alex Bernice a/Yishun t/Vegetarian'](images/findAlexBerniceResult.png)
 
 ### Locating customers by delivery date: `find-delivery`
 
@@ -173,7 +179,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd customer on the list.
-* `find Betsy` followed by `delete 1` deletes the 1st customer in the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st customer in the results of the `find` command.
 
 ### Scheduling a delivery : `schedule`
 
@@ -204,7 +210,7 @@ Format: `unschedule INDEX`
 
 Examples:
 * `list` followed by `unschedule 2` deletes the delivery for the 2nd customer on the list.
-* `find Betsy` followed by `unschedule 1` deletes the delivery for the 1st customer in the results of the `find` command.
+* `find n/Betsy` followed by `unschedule 1` deletes the delivery for the 1st customer in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
@@ -267,7 +273,7 @@ Action         | Format, Examples
 **Clear**      | `clear`
 **Delete**     | `delete INDEX`<br> e.g., `delete 3`
 **Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find**       | `find [n/NAME_KEYWORDS...] [a/ADDRESS_KEYWORDS...] [t/TAG_KEYWORDS...]`<br> e.g., `find n/James Jake a/Jurong`
 **Unschedule** | `unschedule INDEX`<br> e.g., `unschedule 3`
 **List**       | `list`
 **Help**       | `help`
