@@ -19,16 +19,19 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Finds all persons whose names, addresses and tags (at least 1 attribute specified with keyword(s)) "
-            + " match the keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: "
-            + "[" + PREFIX_NAME + "NAMEKEYWORD" + " [MORE_KEYWORDS]...] "
-            + "[" + PREFIX_ADDRESS + "ADDRESSKEYWORD" + " [MORE_KEYWORDS]...] "
-            + "[" + PREFIX_TAG + "TAGKEYWORD" + " [MORE_KEYWORDS]...]\n"
+            + ": Finds all customers whose attributes (name, address, tag) match all filter(s) specified, "
+            + "and displays them as a list with index numbers.\n"
+            + "A customer matches a filter when at least 1 of the keywords (case-insensitive) "
+            + "in the filter matches.\n"
+            + "At least 1 filter with a keyword must be specified. "
+            + "Filters: "
+            + "[" + PREFIX_NAME + "NAME_KEYWORDS...] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS_KEYWORDS...] "
+            + "[" + PREFIX_TAG + "TAG_KEYWORDS...]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Alex Bernice "
-            + PREFIX_ADDRESS + "30 "
-            + PREFIX_TAG + "North";
+            + PREFIX_ADDRESS + "Jurong "
+            + PREFIX_TAG + "Vegetarian";
 
     public static final String MESSAGE_INVALID_NAME_KEYWORD =
             "Name keywords should only contain alphanumeric characters.";
