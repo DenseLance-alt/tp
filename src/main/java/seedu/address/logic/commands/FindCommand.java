@@ -1,28 +1,54 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.PersonMatchesFilterPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Finds and lists all persons in address book whose attributes (fields) match all the filters.
+ * Keyword matching is case insensitive. Full word match is required.
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Finds all customers whose attributes (name, address, tag) match all filter(s) specified, "
+            + "and displays them as a list with index numbers.\n"
+            + "A customer matches a filter when at least 1 of the keywords (case-insensitive) "
+            + "in the filter matches.\n"
+            + "At least 1 filter with a keyword must be specified. "
+            + "Filters: "
+            + "[" + PREFIX_NAME + "NAME_KEYWORDS...] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS_KEYWORDS...] "
+            + "[" + PREFIX_TAG + "TAG_KEYWORDS...]\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "Alex Bernice "
+            + PREFIX_ADDRESS + "Jurong "
+            + PREFIX_TAG + "Vegetarian";
 
-    private final NameContainsKeywordsPredicate predicate;
+    public static final String MESSAGE_INVALID_NAME_KEYWORD =
+            "Name keywords should only contain alphanumeric characters.";
+    public static final String MESSAGE_INVALID_ADDRESS_KEYWORD =
+            "Address keywords should not contain a space as the first character.";
+    public static final String MESSAGE_INVALID_TAG_KEYWORD =
+            "Tag keywords should only contain alphanumeric characters.";
+    public static final String MESSAGE_INVALID_PREFIX = "Invalid prefix provided. Only supports: "
+            + PREFIX_NAME + ", " + PREFIX_ADDRESS + ", " + PREFIX_TAG + ".";
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    private final PersonMatchesFilterPredicate predicate;
+
+    /**
+     * Creates a FindCommand to filter based on the specified {@code PersonMatchesFilterPredicate}
+     */
+    public FindCommand(PersonMatchesFilterPredicate predicate) {
+        requireNonNull(predicate); // defensive programming
         this.predicate = predicate;
     }
 
