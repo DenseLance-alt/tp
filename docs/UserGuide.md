@@ -78,11 +78,11 @@ If Java is not installed, follow the installation guide for your operating syste
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Viewing help : `help`
+### Getting help: `help`
 
-Shows a message explaining how to access the help page.
+Displays a help message with a link to access ServeMate's User Guide.
 
-![help message](images/helpMessage.png)
+![help message](images/helpResult.png)
 
 Format: `help`
 
