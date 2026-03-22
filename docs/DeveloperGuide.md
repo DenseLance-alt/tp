@@ -445,7 +445,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 1. User requests to list customers
 2. ServeMate shows a list of customers
-3. User requests to filter customers by attributes and provide one or more filter(s) with keyword(s)
+3. User requests to filter customers by attributes and provide one or more filters with keyword(s)
 4. ServeMate displays the list of customers that match the given filter(s)
 
    Use case ends.
@@ -458,7 +458,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 3.
 
-* 3b. Any provided filter violate keyword format constraints.
+* 3b. Any provided filter violates keyword format constraints.
 
     * 3b1. ServeMate shows an error message describing the violated constraint.
 
