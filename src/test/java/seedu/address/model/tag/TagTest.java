@@ -18,7 +18,7 @@ public class TagTest {
         assertThrows(IllegalArgumentException.class, () -> new Tag(emptyTagName));
 
         // non alphanumeric tag
-        String nonAlphanumericTagName = "(foodie)";
+        String nonAlphanumericTagName = "(vegan)";
         assertThrows(IllegalArgumentException.class, () -> new Tag(nonAlphanumericTagName));
     }
 

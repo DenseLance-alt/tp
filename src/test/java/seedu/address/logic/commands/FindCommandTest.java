@@ -106,7 +106,7 @@ public class FindCommandTest {
     @Test
     public void execute_multipleTagKeywords_multiplePersonsFound() {
         PersonMatchesFilterPredicate predicate = new PersonMatchesFilterPredicate(
-                Collections.emptyList(), Collections.emptyList(), Arrays.asList("friends", "colleagues"));
+                Collections.emptyList(), Collections.emptyList(), Arrays.asList("West", "Halal"));
         FindCommand command = new FindCommand(predicate);
 
         expectedModel.updateFilteredPersonList(predicate);
@@ -134,7 +134,7 @@ public class FindCommandTest {
     @Test
     public void execute_allFiltersAndMixedCaseKeywords_personFound() {
         PersonMatchesFilterPredicate predicate = new PersonMatchesFilterPredicate(
-                Arrays.asList("dAnieL"), Arrays.asList("strEEt"), Arrays.asList("FRiends"));
+                Arrays.asList("dAnieL"), Arrays.asList("strEEt"), Arrays.asList("hAlAL"));
         FindCommand command = new FindCommand(predicate);
 
         expectedModel.updateFilteredPersonList(predicate);

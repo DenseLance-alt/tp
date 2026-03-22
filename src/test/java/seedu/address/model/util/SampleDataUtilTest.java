@@ -1,8 +1,8 @@
 package seedu.address.model.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_VEGETARIAN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HALAL;
 import static seedu.address.model.util.SampleDataUtil.getDeliveryDaySet;
 import static seedu.address.model.util.SampleDataUtil.getSkippedDateSet;
 import static seedu.address.model.util.SampleDataUtil.getTagSet;
@@ -24,14 +24,14 @@ public class SampleDataUtilTest {
     @Test
     void getTagSet_validTags_hasSameTags() {
         // non-empty set
-        Tag friendTag = new Tag(VALID_TAG_FRIEND);
-        Tag husbandTag = new Tag(VALID_TAG_HUSBAND);
-        assertEquals(Set.of(friendTag, husbandTag),
-                getTagSet(VALID_TAG_FRIEND, VALID_TAG_HUSBAND));
+        Tag vegetarianTag = new Tag(VALID_TAG_VEGETARIAN);
+        Tag halalTag = new Tag(VALID_TAG_HALAL);
+        assertEquals(Set.of(vegetarianTag, halalTag),
+                getTagSet(VALID_TAG_VEGETARIAN, VALID_TAG_HALAL));
 
         // duplicate items are removed from set
-        assertEquals(Set.of(friendTag),
-                getTagSet(VALID_TAG_FRIEND, VALID_TAG_FRIEND));
+        assertEquals(Set.of(vegetarianTag),
+                getTagSet(VALID_TAG_VEGETARIAN, VALID_TAG_VEGETARIAN));
 
         // empty set
         assertEquals(Set.<Tag>of(), getTagSet());
@@ -49,7 +49,7 @@ public class SampleDataUtilTest {
 
         // one invalid tag with many valid tags
         assertThrows(IllegalArgumentException.class, () -> getTagSet(
-                VALID_TAG_FRIEND, VALID_TAG_HUSBAND, nonAlphanumericTagName));
+                VALID_TAG_VEGETARIAN, VALID_TAG_HALAL, nonAlphanumericTagName));
     }
 
     @Test
