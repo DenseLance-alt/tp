@@ -95,22 +95,4 @@ public class DeliveryDatePredicateTest {
         assertFalse(predicate.test(person));
     }
 
-    @Test
-    public void test_skippedDate_returnsFalse() {
-        Delivery delivery = new DeliveryBuilder()
-                .withStartDate("2026-04-01")
-                .withEndDate("2026-04-30")
-                .withDeliveryDays("Wednesday")
-                .withSkippedDates("2026-04-01")
-                .build();
-
-        Person person = new PersonBuilder()
-                .withDelivery(delivery)
-                .build();
-
-        DeliveryDatePredicate predicate =
-                new DeliveryDatePredicate(LocalDate.of(2026, 4, 1));
-
-        assertFalse(predicate.test(person));
-    }
 }

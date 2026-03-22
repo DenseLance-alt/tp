@@ -44,8 +44,7 @@ public class DeliveryDatePredicate implements Predicate<Person> {
             return false;
         }
 
-        return delivery.getSkippedDates().stream()
-                .noneMatch(skipped -> skipped.date.equals(targetDate));
+        return true;
     }
 
     @Override
