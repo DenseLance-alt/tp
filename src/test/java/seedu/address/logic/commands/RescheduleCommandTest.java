@@ -61,7 +61,7 @@ public class RescheduleCommandTest {
 
         Delivery firstPersonsDelivery = firstPerson.getDelivery();
 
-        // A hot fix before skipped date is removed from Delivery
+        // A hotfix before skipped date is removed from Delivery
         Delivery editedDelivery = new DeliveryBuilder()
                 .withStartDate(firstPersonsDelivery.getStartDate().toString())
                 .withEndDate(firstPersonsDelivery.getEndDate().toString())
@@ -93,7 +93,7 @@ public class RescheduleCommandTest {
 
         Delivery firstPersonsDelivery = firstPerson.getDelivery();
 
-        // A hot fix before skipped date is removed from Delivery
+        // A hotfix before skipped date is removed from Delivery
         Delivery editedDelivery = new DeliveryBuilder()
                 .withStartDate(firstPersonsDelivery.getStartDate().toString())
                 .withEndDate(firstPersonsDelivery.getEndDate().toString())
