@@ -24,6 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.RescheduleDeliveryDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -94,6 +95,9 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
+    public static final RescheduleCommand.RescheduleDeliveryDescriptor DESC_AMY_RESCHEDULE;
+    public static final RescheduleCommand.RescheduleDeliveryDescriptor DESC_BOB_RESCHEDULE;
+
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
@@ -101,6 +105,15 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+
+        DESC_AMY_RESCHEDULE = new RescheduleDeliveryDescriptorBuilder(). withStartDate(VALID_START_DATE_AMY)
+                .withEndDate(VALID_END_DATE_AMY)
+                .withDeliveryTime(VALID_DELIVERY_TIME_AMY)
+                .withDeliveryDays(VALID_DAYS_AMY).build();
+        DESC_BOB_RESCHEDULE = new RescheduleDeliveryDescriptorBuilder(). withStartDate(VALID_START_DATE_BOB)
+                .withEndDate(VALID_END_DATE_BOB)
+                .withDeliveryTime(VALID_DELIVERY_TIME_BOB)
+                .withDeliveryDays(VALID_DAYS_BOB).build();
     }
 
     /**
