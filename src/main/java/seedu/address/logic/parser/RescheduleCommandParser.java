@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static java.text.NumberFormat.Field.PREFIX;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAYS;
@@ -47,20 +46,20 @@ public class RescheduleCommandParser implements Parser<RescheduleCommand> {
         RescheduleDeliveryDescriptor rescheduleDeliveryDescriptor = new RescheduleDeliveryDescriptor();
 
         if (argMultimap.getValue(PREFIX_START_DATE).isPresent()) {
-            rescheduleDeliveryDescriptor.setStartDate(ParserUtil.parseStartDate(argMultimap.
-                    getValue(PREFIX_START_DATE).get()));
+            rescheduleDeliveryDescriptor.setStartDate(ParserUtil.parseStartDate(argMultimap
+                    .getValue(PREFIX_START_DATE).get()));
         }
         if (argMultimap.getValue(PREFIX_END_DATE).isPresent()) {
-            rescheduleDeliveryDescriptor.setEndDate(ParserUtil.parseEndDate(argMultimap.
-                    getValue(PREFIX_END_DATE).get()));
+            rescheduleDeliveryDescriptor.setEndDate(ParserUtil.parseEndDate(argMultimap
+                    .getValue(PREFIX_END_DATE).get()));
         }
         if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
-            rescheduleDeliveryDescriptor.setDeliveryTime(ParserUtil.parseDeliveryTime(argMultimap.
-                    getValue(PREFIX_TIME).get()));
+            rescheduleDeliveryDescriptor.setDeliveryTime(ParserUtil.parseDeliveryTime(argMultimap
+                    .getValue(PREFIX_TIME).get()));
         }
         if (argMultimap.getValue(PREFIX_DAYS).isPresent()) {
-            rescheduleDeliveryDescriptor.setDeliveryDays(ParserUtil.parseDeliveryDays(argMultimap.
-                    getValue(PREFIX_DAYS).get()));
+            rescheduleDeliveryDescriptor.setDeliveryDays(ParserUtil.parseDeliveryDays(argMultimap
+                    .getValue(PREFIX_DAYS).get()));
         }
 
         if (!rescheduleDeliveryDescriptor.isAnyFieldEdited()) {

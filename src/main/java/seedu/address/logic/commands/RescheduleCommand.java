@@ -81,7 +81,7 @@ public class RescheduleCommand extends Command {
         model.setPerson(personToReschedule, rescheduledPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_DELIVERY_SUCCESS,
-                Messages.formatDeliveryFromPerson(personToReschedule)));
+                Messages.formatDeliveryFromPerson(rescheduledPerson)));
     }
 
     /**
