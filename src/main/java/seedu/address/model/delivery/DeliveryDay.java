@@ -12,7 +12,15 @@ import java.time.DayOfWeek;
  * Guarantees: immutable;
  * is valid as declared in {@link #isValidDeliveryDay(String)}
  */
-public class DeliveryDay {
+public enum DeliveryDay {
+    MONDAY("Monday"),
+    TUESDAY("Tuesday"),
+    WEDNESDAY("Wednesday"),
+    THURSDAY("Thursday"),
+    FRIDAY("Friday"),
+    SATURDAY("Saturday"),
+    SUNDAY("Sunday");
+
     public static final String MESSAGE_CONSTRAINTS =
             "day should be of the valid delivery day format";
 
@@ -23,7 +31,7 @@ public class DeliveryDay {
      *
      * @param day A valid day string in the valid format.
      */
-    public DeliveryDay(String day) {
+    DeliveryDay(String day) {
         requireNonNull(day);
         checkArgument(isValidDeliveryDay(day), MESSAGE_CONSTRAINTS);
         this.day = parseDeliveryDayWord(day);
@@ -40,25 +48,5 @@ public class DeliveryDay {
     @Override
     public String toString() {
         return day.toString();
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof DeliveryDay)) {
-            return false;
-        }
-
-        DeliveryDay otherDay = (DeliveryDay) other;
-        return day.equals(otherDay.day);
-    }
-
-    @Override
-    public int hashCode() {
-        return day.hashCode();
     }
 }
