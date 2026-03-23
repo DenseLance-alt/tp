@@ -32,6 +32,8 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_DATE = "Date is not valid. It should be in the format yyyy-MM-dd.";
+    public static final String MESSAGE_INVALID_DAY_NUMBER =
+            "Day number is not valid. It can only be a whole number within 1 to 7 inclusive.";
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
@@ -227,7 +229,7 @@ public class ParserUtil {
     public static DeliveryDay parseDeliveryDayNumber(String deliveryDayNumber) throws ParseException {
         requireNonNull(deliveryDayNumber);
         if (!isValidDeliveryDayNumber(deliveryDayNumber)) {
-            throw new ParseException(DeliveryDay.MESSAGE_CONSTRAINTS);
+            throw new ParseException(MESSAGE_INVALID_DAY_NUMBER);
         }
 
         String deliveryDayWord = convertDayNumberToDayWord(deliveryDayNumber);
