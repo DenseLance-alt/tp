@@ -2,9 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.DateTimeUtil.*;
+import static seedu.address.model.delivery.DeliveryDay.toDeliveryDay;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -232,7 +232,7 @@ public class ParserUtil {
         }
 
         String deliveryDayWord = convertDayNumberToDayWord(deliveryDayNumber);
-        return new DeliveryDay(deliveryDayWord);
+        return toDeliveryDay(deliveryDayWord);
     }
 
     /**
