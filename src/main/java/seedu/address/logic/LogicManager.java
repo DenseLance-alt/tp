@@ -3,6 +3,7 @@ package seedu.address.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -69,6 +70,16 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public ObservableList<Person> getSortedPersonWithTodayDeliveryList() {
+        return model.getSortedPersonWithTodayDeliveryList();
+    }
+
+    @Override
+    public LocalDate getTodayDate() {
+        return model.getTodayDate();
     }
 
     @Override

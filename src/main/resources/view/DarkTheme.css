@@ -372,3 +372,65 @@
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
 }
+
+/* ===== Today's Deliveries Panel ===== */
+
+.today-panel {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+.today-panel-header-block {
+    -fx-background-color: derive(#1d1d1d, 10%);
+    -fx-spacing: 3;
+}
+
+.today-panel-title {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #a5ceee;
+}
+
+.today-panel-count {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 12px;
+    -fx-text-fill: white;
+}
+
+.today-panel-separator {
+    -fx-background-color: rgba(0, 115, 255, 0.2);
+}
+
+.today-card-name {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.today-card-time {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 12px;
+    -fx-text-fill: white;
+    -fx-padding: 2 0 0 0;
+}
+
+.today-card-address {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 12px;
+    -fx-text-fill: white;
+    -fx-padding: 2 0 0 0;
+}
+
+#todayCardTags {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+    -fx-padding: 2 0 0 0;
+}
+
+#todayCardTags .label {
+    -fx-text-fill: white;
+    -fx-background-color: #3e7b91;
+    -fx-padding: 1 4 1 4;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11px;
+}

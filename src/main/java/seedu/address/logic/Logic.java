@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -32,6 +33,17 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} with delivery scheduled today,
+     * sorted by ascending order of delivery time.
+     *
+     * @return List of {@code Person} with delivery scheduled today, sorted by ascending order of delivery time.
+     */
+    ObservableList<Person> getSortedPersonWithTodayDeliveryList();
+
+    /** Returns the current local date */
+    LocalDate getTodayDate();
 
     /**
      * Returns the user prefs' address book file path.

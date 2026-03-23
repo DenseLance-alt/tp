@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.VBox?>
+
+<!--Solution below adapted from Claude AI-->
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="today-panel">
+<VBox styleClass="today-panel-header-block">
+  <padding>
+        <Insets top="5" right="5" bottom="5" left="15"/>
+  </padding>
+  <Label fx:id="todayPanelTitle" styleClass="today-panel-title" />
+  <Label fx:id="todayPanelCount" styleClass="today-panel-count" />
+</VBox>
+  <Separator styleClass="today-panel-separator" />
+  <ListView fx:id="todayDeliveryListView" VBox.vgrow="ALWAYS" />
+</VBox>

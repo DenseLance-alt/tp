@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
@@ -91,6 +92,18 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getSortedPersonWithTodayDeliveryList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager
+                .getSortedPersonWithTodayDeliveryList().remove(0));
+    }
+
+    @Test
+    public void getTodayDate_sameDate_todayDateReturned() {
+        LocalDate sameDate = LocalDate.now();
+        assertEquals(sameDate, modelManager.getTodayDate());
     }
 
     @Test

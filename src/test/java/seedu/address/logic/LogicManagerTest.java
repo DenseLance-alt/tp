@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -85,6 +86,18 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getSortedPersonWithTodayDeliveryList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic
+                .getSortedPersonWithTodayDeliveryList().remove(0));
+    }
+
+    @Test
+    public void getTodayDate_sameDate_todayDateReturned() {
+        LocalDate sameDate = LocalDate.now();
+        assertEquals(sameDate, logic.getTodayDate());
     }
 
     /**
