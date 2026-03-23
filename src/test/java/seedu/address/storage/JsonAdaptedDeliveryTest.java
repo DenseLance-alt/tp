@@ -16,7 +16,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.delivery.DeliveryDay;
 import seedu.address.model.delivery.DeliveryTime;
 import seedu.address.model.delivery.EndDate;
-import seedu.address.model.delivery.SkippedDate;
 import seedu.address.model.delivery.StartDate;
 
 public class JsonAdaptedDeliveryTest {
@@ -24,7 +23,6 @@ public class JsonAdaptedDeliveryTest {
     private static final String INVALID_END_DATE = "2019/10/20";
     private static final String INVALID_DELIVERY_DAY = "sunnyDay";
     private static final String INVALID_DELIVERY_TIME = "20.20";
-    private static final String INVALID_SKIPPED_DATE = "2019/10/13";
 
     private static final String VALID_START_DATE = DELIVERY_ALICE.getStartDate().toString();
     private static final String VALID_END_DATE = DELIVERY_ALICE.getEndDate().toString();
@@ -32,21 +30,18 @@ public class JsonAdaptedDeliveryTest {
             .map(JsonAdaptedDeliveryDay::new)
             .collect(Collectors.toList());
     private static final String VALID_DELIVERY_TIME = DELIVERY_ALICE.getDeliveryTime().toString();
-    private static final List<JsonAdaptedSkippedDate> VALID_SKIPPED_DATES = DELIVERY_ALICE.getSkippedDates().stream()
-            .map(JsonAdaptedSkippedDate::new)
-            .collect(Collectors.toList());
 
     @Test
     public void toModelType_validDeliveryDetails_returnsDelivery() throws Exception {
-        JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(DELIVERY_ALICE);
-        assertEquals(DELIVERY_ALICE, delivery.toModelType());
+        JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(DELIVERY_ELLE);
+        assertEquals(DELIVERY_ELLE, delivery.toModelType());
     }
 
     @Test
     public void toModelType_invalidStartDate_throwsIllegalValueException() {
         JsonAdaptedDelivery delivery =
                 new JsonAdaptedDelivery(INVALID_START_DATE, VALID_END_DATE,
-                        VALID_DELIVERY_DAYS, VALID_DELIVERY_TIME, VALID_SKIPPED_DATES);
+                        VALID_DELIVERY_DAYS, VALID_DELIVERY_TIME);
         String expectedMessage = StartDate.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
     }
@@ -54,7 +49,7 @@ public class JsonAdaptedDeliveryTest {
     @Test
     public void toModelType_nullStartDate_throwsIllegalValueException() {
         JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(null, VALID_END_DATE,
-                VALID_DELIVERY_DAYS, VALID_DELIVERY_TIME, VALID_SKIPPED_DATES);
+                VALID_DELIVERY_DAYS, VALID_DELIVERY_TIME);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, StartDate.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
     }
@@ -63,7 +58,7 @@ public class JsonAdaptedDeliveryTest {
     public void toModelType_invalidEndDate_throwsIllegalValueException() {
         JsonAdaptedDelivery delivery =
                 new JsonAdaptedDelivery(VALID_START_DATE, INVALID_END_DATE,
-                        VALID_DELIVERY_DAYS, VALID_DELIVERY_TIME, VALID_SKIPPED_DATES);
+                        VALID_DELIVERY_DAYS, VALID_DELIVERY_TIME);
         String expectedMessage = EndDate.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
     }
@@ -71,7 +66,7 @@ public class JsonAdaptedDeliveryTest {
     @Test
     public void toModelType_nullEndDate_throwsIllegalValueException() {
         JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(VALID_START_DATE, null,
-                VALID_DELIVERY_DAYS, VALID_DELIVERY_TIME, VALID_SKIPPED_DATES);
+                VALID_DELIVERY_DAYS, VALID_DELIVERY_TIME);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, EndDate.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
     }
@@ -82,7 +77,7 @@ public class JsonAdaptedDeliveryTest {
         invalidDeliveryDays.add(new JsonAdaptedDeliveryDay(INVALID_DELIVERY_DAY));
         JsonAdaptedDelivery delivery =
                 new JsonAdaptedDelivery(VALID_START_DATE, VALID_END_DATE, invalidDeliveryDays,
-                        VALID_DELIVERY_TIME, VALID_SKIPPED_DATES);
+                        VALID_DELIVERY_TIME);
         String expectedMessage = DeliveryDay.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
     }
@@ -90,7 +85,7 @@ public class JsonAdaptedDeliveryTest {
     @Test
     public void toModelType_nullDeliveryDays_throwsIllegalValueException() {
         JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(VALID_START_DATE, VALID_END_DATE, null,
-                VALID_DELIVERY_TIME, VALID_SKIPPED_DATES);
+                VALID_DELIVERY_TIME);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, DeliveryDay.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
     }
@@ -99,7 +94,7 @@ public class JsonAdaptedDeliveryTest {
     public void toModelType_invalidDeliveryTime_throwsIllegalValueException() {
         JsonAdaptedDelivery delivery =
                 new JsonAdaptedDelivery(VALID_START_DATE, VALID_END_DATE, VALID_DELIVERY_DAYS,
-                        INVALID_DELIVERY_TIME, VALID_SKIPPED_DATES);
+                        INVALID_DELIVERY_TIME);
         String expectedMessage = DeliveryTime.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
     }
@@ -107,29 +102,8 @@ public class JsonAdaptedDeliveryTest {
     @Test
     public void toModelType_nullDeliveryTime_throwsIllegalValueException() {
         JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(VALID_START_DATE, VALID_END_DATE,
-                VALID_DELIVERY_DAYS, null, VALID_SKIPPED_DATES);
+                VALID_DELIVERY_DAYS, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, DeliveryTime.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
-    }
-
-    @Test
-    public void toModelType_invalidSkippedDate_throwsIllegalValueException() {
-        List<JsonAdaptedSkippedDate> invalidSkippedDates = new ArrayList<>(VALID_SKIPPED_DATES);
-        invalidSkippedDates.add(new JsonAdaptedSkippedDate(INVALID_SKIPPED_DATE));
-        JsonAdaptedDelivery delivery =
-                new JsonAdaptedDelivery(VALID_START_DATE, VALID_END_DATE, VALID_DELIVERY_DAYS,
-                        VALID_DELIVERY_TIME, invalidSkippedDates);
-        String expectedMessage = SkippedDate.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
-    }
-
-    @Test
-    public void toModelType_nullSkippedDates_returnsDelivery() throws Exception {
-        JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(DELIVERY_ELLE.getStartDate().toString(),
-                DELIVERY_ELLE.getEndDate().toString(),
-                DELIVERY_ELLE.getDeliveryDays().stream().map(JsonAdaptedDeliveryDay::new).collect(Collectors.toList()),
-                DELIVERY_ELLE.getDeliveryTime().toString(),
-                DELIVERY_ELLE.getSkippedDates().stream().map(JsonAdaptedSkippedDate::new).collect(Collectors.toList()));
-        assertEquals(DELIVERY_ELLE, delivery.toModelType());
     }
 }

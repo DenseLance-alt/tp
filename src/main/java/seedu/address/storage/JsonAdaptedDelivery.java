@@ -14,7 +14,6 @@ import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryDay;
 import seedu.address.model.delivery.DeliveryTime;
 import seedu.address.model.delivery.EndDate;
-import seedu.address.model.delivery.SkippedDate;
 import seedu.address.model.delivery.StartDate;
 
 
@@ -29,7 +28,6 @@ public class JsonAdaptedDelivery {
     private final String endDate;
     private final List<JsonAdaptedDeliveryDay> deliveryDays = new ArrayList<>();
     private final String deliveryTime;
-    private final List<JsonAdaptedSkippedDate> skippedDates = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedDelivery} with the given delivery details.
@@ -37,17 +35,13 @@ public class JsonAdaptedDelivery {
     @JsonCreator
     public JsonAdaptedDelivery(@JsonProperty("startDate") String startDate, @JsonProperty("endDate") String endDate,
                                @JsonProperty("deliveryDays") List<JsonAdaptedDeliveryDay> deliveryDays,
-                               @JsonProperty("deliveryTime") String deliveryTime,
-                               @JsonProperty("skippedDates") List<JsonAdaptedSkippedDate> skippedDates) {
+                               @JsonProperty("deliveryTime") String deliveryTime) {
         this.startDate = startDate;
         this.endDate = endDate;
         if (deliveryDays != null) {
             this.deliveryDays.addAll(deliveryDays);
         }
         this.deliveryTime = deliveryTime;
-        if (skippedDates != null) {
-            this.skippedDates.addAll(skippedDates);
-        }
     }
 
     /**
@@ -60,9 +54,6 @@ public class JsonAdaptedDelivery {
                 .map(JsonAdaptedDeliveryDay::new)
                 .collect(Collectors.toList()));
         deliveryTime = source.getDeliveryTime().toString();
-        skippedDates.addAll(source.getSkippedDates().stream()
-                .map(JsonAdaptedSkippedDate::new)
-                .collect(Collectors.toList()));
     }
 
     /**
@@ -74,11 +65,6 @@ public class JsonAdaptedDelivery {
         final List<DeliveryDay> deliveryDays = new ArrayList<>();
         for (JsonAdaptedDeliveryDay deliveryDay : this.deliveryDays) {
             deliveryDays.add(deliveryDay.toModelType());
-        }
-
-        final List<SkippedDate> skippedDates = new ArrayList<>();
-        for (JsonAdaptedSkippedDate skippedDate : this.skippedDates) {
-            skippedDates.add(skippedDate.toModelType());
         }
 
         if (startDate == null) {
@@ -96,7 +82,7 @@ public class JsonAdaptedDelivery {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EndDate.class.getSimpleName()));
         }
 
-        if (!StartDate.isValidStartDate(endDate)) {
+        if (!EndDate.isValidEndDate(endDate)) {
             throw new IllegalValueException(EndDate.MESSAGE_CONSTRAINTS);
         }
 
@@ -120,7 +106,7 @@ public class JsonAdaptedDelivery {
 
         final DeliveryTime modelDeliveryTime = new DeliveryTime(deliveryTime);
 
-        final Set<SkippedDate> modelSkippedDates = new HashSet<>(skippedDates);
-        return new Delivery(modelStartDate, modelEndDate, modelDeliveryDays, modelDeliveryTime, modelSkippedDates);
+        // Hotfix until SkippedDate is removed from Delivery
+        return new Delivery(modelStartDate, modelEndDate, modelDeliveryDays, modelDeliveryTime, new HashSet<>());
     }
 }

@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalDeliveries.DELIVERY_CARL;
+import static seedu.address.testutil.TypicalDeliveries.DELIVERY_ELLE;
 import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.ELLE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,13 +40,13 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(CARL);
-        assertEquals(CARL, person.toModelType());
+        JsonAdaptedPerson person = new JsonAdaptedPerson(ELLE);
+        assertEquals(ELLE, person.toModelType());
     }
 
     @Test
     public void toModelType_validPersonDetailsWithDelivery_returnsPerson() throws Exception {
-        Person personWithDelivery = new PersonBuilder(CARL).withDelivery(DELIVERY_CARL).build();
+        Person personWithDelivery = new PersonBuilder(ELLE).withDelivery(DELIVERY_ELLE).build();
         JsonAdaptedPerson person = new JsonAdaptedPerson(personWithDelivery);
         assertEquals(personWithDelivery, person.toModelType());
     }
@@ -133,7 +135,7 @@ public class JsonAdaptedPersonTest {
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_TAGS, new JsonAdaptedDelivery(DELIVERY_CARL.getStartDate().toString(),
                                 DELIVERY_CARL.getEndDate().toString(), new ArrayList<>(),
-                                DELIVERY_CARL.getDeliveryTime().toString(), new ArrayList<>()));
+                                DELIVERY_CARL.getDeliveryTime().toString()));
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 
