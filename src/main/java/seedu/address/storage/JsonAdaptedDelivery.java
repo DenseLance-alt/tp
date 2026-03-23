@@ -82,7 +82,7 @@ public class JsonAdaptedDelivery {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EndDate.class.getSimpleName()));
         }
 
-        if (!StartDate.isValidStartDate(endDate)) {
+        if (!EndDate.isValidEndDate(endDate)) {
             throw new IllegalValueException(EndDate.MESSAGE_CONSTRAINTS);
         }
 
