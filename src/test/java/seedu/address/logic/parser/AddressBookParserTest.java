@@ -25,6 +25,8 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RescheduleCommand;
+import seedu.address.logic.commands.RescheduleCommand.RescheduleDeliveryDescriptor;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.UnscheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -36,6 +38,7 @@ import seedu.address.testutil.DeliveryUtil;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.RescheduleDeliveryDescriptorBuilder;
 
 public class AddressBookParserTest {
 
@@ -116,6 +119,16 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_reschedule() throws Exception {
+        Delivery delivery = new DeliveryBuilder().build();
+        RescheduleDeliveryDescriptor descriptor = new RescheduleDeliveryDescriptorBuilder(delivery).build();
+        RescheduleCommand command = (RescheduleCommand) parser.parseCommand(RescheduleCommand.COMMAND_WORD
+                + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + DeliveryUtil.getDeliveryDetailsHotFix(delivery));
+        assertEquals(new RescheduleCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test

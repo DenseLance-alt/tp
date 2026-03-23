@@ -42,12 +42,14 @@ public class ParserUtilTest {
 
     private static final String INVALID_START_DATE = "12-11-2012";
     private static final String INVALID_NUMBER_OF_DAYS = "-12";
+    private static final String INVALID_END_DATE = "12-13-2012";
     private static final String INVALID_TIME = "25:67";
     private static final String INVALID_DAY_NUMBER = "0";
     private static final String INVALID_DAYS = "579";
 
     private static final String VALID_START_DATE = "2021-12-11";
     private static final String VALID_NUMBER_OF_DAYS = "2";
+    private static final String VALID_END_DATE = "2021-12-13";
     private static final String VALID_TIME = "23:23";
     private static final String VALID_DAY_NUMBER_1 = "1";
     private static final String VALID_DAY_NUMBER_2 = "4";
@@ -238,6 +240,29 @@ public class ParserUtilTest {
         String startDateWithWhitespace = WHITESPACE + VALID_START_DATE + WHITESPACE;
         StartDate expectedStartDate = new StartDate(VALID_START_DATE);
         assertEquals(expectedStartDate, ParserUtil.parseStartDate(startDateWithWhitespace));
+    }
+
+    @Test
+    public void parseEndDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEndDate((String) null));
+    }
+
+    @Test
+    public void parseEndDate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseEndDate(INVALID_END_DATE));
+    }
+
+    @Test
+    public void parseEndDate_validValueWithoutWhitespace_returnsEndDate() throws Exception {
+        EndDate expectedStartDate = new EndDate(VALID_END_DATE);
+        assertEquals(expectedStartDate, ParserUtil.parseEndDate(VALID_END_DATE));
+    }
+
+    @Test
+    public void parseEndDate_validValueWithWhitespace_returnsTrimmedEndDate() throws Exception {
+        String endDateWithWhitespace = WHITESPACE + VALID_END_DATE + WHITESPACE;
+        EndDate expectedEndDate = new EndDate(VALID_END_DATE);
+        assertEquals(expectedEndDate, ParserUtil.parseEndDate(endDateWithWhitespace));
     }
 
     @Test

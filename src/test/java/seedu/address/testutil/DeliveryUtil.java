@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAYS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NUMBER_OF_DAYS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
@@ -29,6 +30,19 @@ public class DeliveryUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_START_DATE + delivery.getStartDate().date.toString() + " ");
         sb.append(PREFIX_NUMBER_OF_DAYS + String.valueOf(numberOfDays) + " ");
+        sb.append(PREFIX_TIME + delivery.getDeliveryTime().time.toString() + " ");
+        sb.append(PREFIX_DAYS + getDeliveryDaysArgument(delivery.getDeliveryDays()) + " ");
+        return sb.toString();
+    }
+
+    /**
+     * Returns the part of command string for the given {@code delivery}'s details.
+     * This is a hotfix until schedule command that takes end date is implemented.
+     */
+    public static String getDeliveryDetailsHotFix(Delivery delivery) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(PREFIX_START_DATE + delivery.getStartDate().date.toString() + " ");
+        sb.append(PREFIX_END_DATE + delivery.getEndDate().date.toString() + " ");
         sb.append(PREFIX_TIME + delivery.getDeliveryTime().time.toString() + " ");
         sb.append(PREFIX_DAYS + getDeliveryDaysArgument(delivery.getDeliveryDays()) + " ");
         return sb.toString();

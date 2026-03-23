@@ -10,7 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.NUMBER_OF_DAYS_DESC_B
 import static seedu.address.logic.commands.CommandTestUtil.START_DATE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TIME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DAYS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_DAY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_DAY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_TIME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NUMBER_OF_DAYS_BOB;
@@ -42,7 +42,7 @@ public class ScheduleCommandParserTest {
     public void parse_allFieldsPresent_success() {
         Index index = INDEX_FIRST_PERSON;
         Delivery delivery = new DeliveryBuilder().withStartDate(VALID_START_DATE_BOB)
-                .withEndDate(VALID_END_DATE_BOB).withDeliveryDays(VALID_DELIVERY_DAY)
+                .withEndDate(VALID_END_DATE_BOB).withDeliveryDays(VALID_DELIVERY_DAY_BOB)
                 .withDeliveryTime(VALID_DELIVERY_TIME_BOB).build();
 
         assertParseSuccess(parser,

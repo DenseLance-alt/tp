@@ -171,6 +171,22 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code String endDate} into a {@code EndDate}.
+     *
+     * @param endDate The end date to be parsed.
+     * @return The EndDate object representing the end date.
+     * @throws ParseException if the given {@code endDate} is invalid.
+     */
+    public static EndDate parseEndDate(String endDate) throws ParseException {
+        requireNonNull(endDate);
+        String trimmedEndDate = endDate.trim();
+        if (!EndDate.isValidEndDate(trimmedEndDate)) {
+            throw new ParseException(EndDate.MESSAGE_CONSTRAINTS);
+        }
+        return new EndDate(trimmedEndDate);
+    }
+
+    /**
      * Parses {@code String numberOfDays} into a {@code NumberOfDays}.
      * Leading and trailing whitespaces will be trimmed.
      *
