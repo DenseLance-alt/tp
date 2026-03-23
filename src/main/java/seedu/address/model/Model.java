@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -84,4 +85,15 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} with delivery scheduled today,
+     * sorted by ascending order of delivery time.
+     *
+     * @return List of {@code Person} with delivery scheduled today, sorted by ascending order of delivery time.
+     */
+    ObservableList<Person> getSortedPersonWithTodayDeliveryList();
+
+    /** Returns the current local date */
+    LocalDate getTodayDate();
 }

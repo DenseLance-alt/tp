@@ -25,6 +25,14 @@ public class DeliveryTest {
     }
 
     @Test
+    public void getFormattedDeliverySchedule_validDelivery_returnsDeliverySchedule() {
+        assertEquals(DELIVERY_ALICE.getStartDate()
+                        + " to " + DELIVERY_ALICE.getEndDate()
+                        + "  |  " + DELIVERY_ALICE.getDeliveryTime(),
+                DELIVERY_ALICE.getFormattedDeliverySchedule());
+    }
+
+    @Test
     public void equals() {
         // same values -> returns true
         Delivery deliveryOneCopy = new DeliveryBuilder(DELIVERY_ALICE).build();

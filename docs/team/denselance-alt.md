@@ -16,6 +16,7 @@ Given below are my contributions to the project.
 
 * **Enhancements to Existing Features**:
   * Erase all traces of AB3 and replace them with ServeMate ([\#13](https://github.com/AY2526S2-CS2103T-W14-2/tp/pull/13), [\#69](https://github.com/AY2526S2-CS2103T-W14-2/tp/pull/69), [\#94](https://github.com/AY2526S2-CS2103T-W14-2/tp/pull/94)).
+  * Update UI to include delivery information for each person ([\#110](https://github.com/AY2526S2-CS2103T-W14-2/tp/pull/110)).
   * Write additional tests for existing and new features to increase test coverage from 78% to 80% ([\#80](https://github.com/AY2526S2-CS2103T-W14-2/tp/pull/80)).
 
 * **Contributions to Project Workflow**:
@@ -25,7 +26,7 @@ Given below are my contributions to the project.
 
 * **PRs Reviewed**: [GitHub Reviewed PRs](https://github.com/AY2526S2-CS2103T-W14-2/tp/pulls?q=reviewed-by%3ADenseLance-alt)
 
-* **Code Contributed**: [RepoSense link](https://nus-cs2103-ay2526-s2.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2026-02-20T00%3A00%3A00&filteredFileName=&tabOpen=true&tabType=authorship&tabAuthor=DenseLance-alt&tabRepo=AY2526S2-CS2103T-W14-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&chartGroupIndex=85&chartIndex=3&authorshipIsIgnoredFilesChecked=false)
+* **Code Contributed**: [RepoSense Link](https://nus-cs2103-ay2526-s2.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2026-02-20T00%3A00%3A00&filteredFileName=&tabOpen=true&tabType=authorship&tabAuthor=DenseLance-alt&tabRepo=AY2526S2-CS2103T-W14-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&chartGroupIndex=85&chartIndex=3&authorshipIsIgnoredFilesChecked=false)
 
 * **Documentation**:
   * User Guide:

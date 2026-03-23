@@ -31,6 +31,16 @@
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <VBox fx:id="deliverySection" styleClass="delivery-section">
+        <VBox.margin>
+          <Insets top="6" bottom="4"/>
+        </VBox.margin>
+        <Label text="Delivery Details" styleClass="delivery-header" />
+        <HBox fx:id="deliveryKeyInfo" spacing="6" alignment="CENTER_LEFT">
+          <Label fx:id="deliverySchedule" styleClass="delivery-schedule" text="-" />
+        </HBox>
+        <HBox fx:id="deliveryDaysContainer" spacing="4" alignment="CENTER_LEFT" />
+      </VBox>
     </VBox>
   </GridPane>
 </HBox>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.FlowPane?>
+
+<!--Solution below adapted from Claude AI-->
+<HBox id="todayCardPane" fx:id="todayCardPane"
+      xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+  <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+    <padding>
+      <Insets top="5" right="5" bottom="5" left="15" />
+    </padding>
+    <Label fx:id="todayCardName" styleClass="today-card-name" />
+    <Label fx:id="todayCardTime" styleClass="today-card-time" />
+    <Label fx:id="todayCardAddress" styleClass="today-card-address" />
+    <FlowPane fx:id="todayCardTags" />
+  </VBox>
+</HBox>

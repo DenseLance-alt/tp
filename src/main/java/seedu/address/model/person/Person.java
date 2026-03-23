@@ -6,9 +6,14 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryDay;
+import seedu.address.model.delivery.DeliveryTime;
+import seedu.address.model.delivery.EndDate;
+import seedu.address.model.delivery.StartDate;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -41,7 +46,7 @@ public class Person {
         this(name, phone, email, address, tags, null);
     }
 
-    //@author BenedTj
+    //@@author BenedTj
     /**
      * Every field must be present and not null.
      * This constructor should be used when delivery is not null.
@@ -82,18 +87,71 @@ public class Person {
         return address;
     }
 
+    public StartDate getDeliveryStartDate() {
+        return delivery.getStartDate();
+    }
+
+    public EndDate getDeliveryEndDate() {
+        return delivery.getEndDate();
+    }
+
+    public Set<DeliveryDay> getDeliveryDays() {
+        return delivery.getDeliveryDays();
+    }
+
+    public DeliveryTime getDeliveryTime() {
+        return delivery.getDeliveryTime();
+    }
+
     /**
-     * Returns true if the person has a {@code delivery}.
+     * Checks whether the person has a {@code delivery} assigned.
+     *
+     * @return {@code true} if a delivery is assigned to this person,
+     *         {@code false} otherwise.
      */
     public boolean hasDelivery() {
         return delivery != null;
     }
 
+    //@@author BenedTj
     /**
      * Returns the Delivery object of the person, which could be null.
      */
     public Delivery getDelivery() {
         return delivery;
+    }
+    //@@author
+
+    /**
+     * Returns a formatted string of the person's delivery schedule for display, or an empty string
+     * if person does not have a delivery assigned.
+     *
+     * @return Formatted string containing the start date, end date, and time of the person's delivery.
+     */
+    public String getFormattedDeliverySchedule() {
+        if (!hasDelivery()) {
+            return "";
+        }
+        return delivery.getFormattedDeliverySchedule();
+    }
+
+    /**
+     * Returns an immutable set of delivery day names.
+     * <p>If the person does not have a delivery assigned or has a delivery with no delivery days,
+     * an empty set is returned.
+     * <p>Example of delivery day names: Monday, Tuesday ...
+     *
+     * @return A set of delivery day names if the person has a delivery assigned.
+     */
+    public Set<String> getDeliveryDayNames() {
+        if (!hasDelivery()) {
+            return Collections.emptySet();
+        }
+        return delivery
+                .getDeliveryDays()
+                .stream()
+                .map(DeliveryDay::toString)
+                .collect(Collectors.toUnmodifiableSet());
     }
 
     /**

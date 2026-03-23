@@ -19,17 +19,17 @@ public class AddressContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("clementi");
         List<String> secondPredicateKeywordList = Arrays.asList("clementi", "jurong");
 
-        AddressContainsKeywordsPredicate firstPredicate =
-                new AddressContainsKeywordsPredicate(firstPredicateKeywordList);
-        AddressContainsKeywordsPredicate secondPredicate =
-                new AddressContainsKeywordsPredicate(secondPredicateKeywordList);
+        AddressContainsKeywordsPredicate firstPredicate = new AddressContainsKeywordsPredicate(
+                firstPredicateKeywordList);
+        AddressContainsKeywordsPredicate secondPredicate = new AddressContainsKeywordsPredicate(
+                secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        AddressContainsKeywordsPredicate firstPredicateCopy =
-                new AddressContainsKeywordsPredicate(firstPredicateKeywordList);
+        AddressContainsKeywordsPredicate firstPredicateCopy = new AddressContainsKeywordsPredicate(
+                firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -45,8 +45,8 @@ public class AddressContainsKeywordsPredicateTest {
     @Test
     public void test_addressContainsKeywords_returnsTrue() {
         // One keyword
-        AddressContainsKeywordsPredicate predicate =
-                new AddressContainsKeywordsPredicate(Collections.singletonList("clementi"));
+        AddressContainsKeywordsPredicate predicate = new AddressContainsKeywordsPredicate(
+                Collections.singletonList("clementi"));
         assertTrue(predicate.test(new PersonBuilder().withAddress("311, Clementi Ave 2, #02-25").build()));
 
         // Multiple keywords match
@@ -86,5 +86,4 @@ public class AddressContainsKeywordsPredicateTest {
         String expected = AddressContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";
         assertEquals(expected, predicate.toString());
     }
-
 }

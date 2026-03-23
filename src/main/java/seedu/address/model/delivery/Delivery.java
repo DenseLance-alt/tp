@@ -12,7 +12,6 @@ import seedu.address.commons.util.ToStringBuilder;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Delivery {
-
     // Data fields
     private final StartDate startDate;
     private final EndDate endDate;
@@ -61,6 +60,15 @@ public class Delivery {
      */
     public Set<SkippedDate> getSkippedDates() {
         return Collections.unmodifiableSet(skippedDates);
+    }
+
+    /**
+     * Returns a formatted string of the delivery schedule for display.
+     *
+     * @return Formatted string containing the start date, end date, and time of delivery.
+     */
+    public String getFormattedDeliverySchedule() {
+        return startDate + " to " + endDate + "  |  " + deliveryTime;
     }
 
     @Override

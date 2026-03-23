@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -22,17 +25,20 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RescheduleCommand;
+import seedu.address.logic.commands.RescheduleCommand.RescheduleDeliveryDescriptor;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.UnscheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.Delivery;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonMatchesFilterPredicate;
 import seedu.address.testutil.DeliveryBuilder;
 import seedu.address.testutil.DeliveryUtil;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.RescheduleDeliveryDescriptorBuilder;
 
 public class AddressBookParserTest {
 
@@ -75,10 +81,17 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        List<String> nameKeywords = Arrays.asList("foo", "bar", "baz");
+        List<String> addressKeywords = Arrays.asList("orchard");
+        List<String> tagKeywords = Arrays.asList("central");
+
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+                FindCommand.COMMAND_WORD + " "
+                        + PREFIX_NAME + nameKeywords.stream().collect(Collectors.joining(" ")) + " "
+                        + PREFIX_ADDRESS + addressKeywords.stream().collect(Collectors.joining(" ")) + " "
+                        + PREFIX_TAG + tagKeywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindCommand(new PersonMatchesFilterPredicate(nameKeywords, addressKeywords, tagKeywords)),
+                command);
     }
 
     @Test
@@ -106,6 +119,16 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_reschedule() throws Exception {
+        Delivery delivery = new DeliveryBuilder().build();
+        RescheduleDeliveryDescriptor descriptor = new RescheduleDeliveryDescriptorBuilder(delivery).build();
+        RescheduleCommand command = (RescheduleCommand) parser.parseCommand(RescheduleCommand.COMMAND_WORD
+                + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + DeliveryUtil.getDeliveryDetailsHotFix(delivery));
+        assertEquals(new RescheduleCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test

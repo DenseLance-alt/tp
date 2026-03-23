@@ -4,13 +4,17 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.delivery.DeliveryDatePredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -21,7 +25,10 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
+    private final LocalDate todayDate;
+
     private final FilteredList<Person> filteredPersons;
+    private final SortedList<Person> sortedPersonWithTodayDeliveryList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -33,7 +40,28 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.todayDate = LocalDate.now();
+
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+
+        // Matches all persons with delivery scheduled today
+        DeliveryDatePredicate todayDeliveryPredicate = new DeliveryDatePredicate(todayDate);
+
+        // A new FilteredList is created,
+        // so that personWithTodayDeliveryList is unaffected by filtering done on filteredPersons list.
+        FilteredList<Person> personWithTodayDeliveryList = new FilteredList<>(
+                this.addressBook.getPersonList(), todayDeliveryPredicate);
+
+        // Defensive programming:
+        // Assertion checks todayPredicate filters correctly, each person in the list must have a delivery.
+        assert personWithTodayDeliveryList.stream().allMatch(person -> person.getDelivery() != null);
+
+        // Solution below inspired by Claude AI
+        // Sort based on ascending delivery time (from earliest to latest).
+        this.sortedPersonWithTodayDeliveryList = new SortedList<>(personWithTodayDeliveryList,
+                Comparator.comparing(person -> person.getDelivery().getDeliveryTime().time));
+        // TODO: Resolve violation of LoD: getDeliverTime().time.
+        // TODO: Refactor to use Sort class in future, if sorting feature implemented.
     }
 
     public ModelManager() {
@@ -111,6 +139,19 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    //=========== Person with Delivery List Accessors =============================================================
+
+    @Override
+    public ObservableList<Person> getSortedPersonWithTodayDeliveryList() {
+        return sortedPersonWithTodayDeliveryList;
+    }
+
+    //=========== Current Local Date Accessors =============================================================
+    @Override
+    public LocalDate getTodayDate() {
+        return todayDate;
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -142,7 +183,9 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && todayDate.equals(otherModelManager.todayDate)
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && sortedPersonWithTodayDeliveryList.equals(otherModelManager.sortedPersonWithTodayDeliveryList);
     }
 
 }
