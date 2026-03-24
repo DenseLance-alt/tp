@@ -54,9 +54,29 @@ If Java is not installed, follow the installation guide for your operating syste
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Command summary
+
+Action | Command Format (with Examples)
+-----------------|-------------------------------------------------------------------------------------------------
+**Getting help** | `help`
+**Add customer** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`<br><br>Example:<br>`add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Vegan t/West`
+**List all customers** | `list`
+**Edit customer** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br><br>Example:<br>`edit 2 n/James Lee e/jameslee@example.com`
+**Delete customer** | `delete INDEX`<br><br>Example:<br>`delete 3`
+**Find customers by attribute** | `find [n/NAME_KEYWORDS...] [a/ADDRESS_KEYWORDS...] [t/TAG_KEYWORDS...]`<br><br>Example:<br>`find n/James Jake a/Jurong`
+**Find deliveries on date** | `find-delivery dt/DATE`<br><br>Example:<br>`find-delivery dt/2026-10-22`
+**Find deliveries within date range** | `find-delivery st/START_DATE ed/END_DATE`<br><br>Example:<br>`find-delivery st/2026-10-27 ed/2026-11-10`
+**Find expired deliveries** | `expired bf/DATE`<br><br>Example:<br>`expired bf/2026-12-22`
+**Schedule delivery** | `schedule INDEX st/START_DATE ed/END_DATE tm/DELIVERY_TIME d/DELIVERY_DAYS`<br><br>Example:<br>`schedule 3 st/2026-04-09 ed/2026-04-21 t/16:00 days/12367`
+**Unschedule delivery** | `unschedule INDEX`<br><br>Example:<br>`unschedule 3`
+**Clear all entries** | `clear`
+**Exit program** | `exit`
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Features
 
-<box type="info" seamless>
+<box type="info" light>
 
 **Notes about the command format:**<br>
 
@@ -64,7 +84,7 @@ If Java is not installed, follow the installation guide for your operating syste
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/Halal` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/Halal` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/Vegetarian`, `t/Vegetarian t/East` etc.
@@ -74,6 +94,9 @@ If Java is not installed, follow the installation guide for your operating syste
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* Dates are in `yyyy-MM-dd` format.<br>
+  e.g. 9th March 2026 can be written has `2026-03-09`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -93,7 +116,7 @@ Creates a new customer record.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-<box type="tip" seamless>
+<box type="tip" light>
 
 **Tip:** A customer can have any number of tags (including 0)
 </box>
@@ -124,6 +147,20 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st customer to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd customer to be `Betsy Crower` and clears all existing tags.
+
+### Deleting a customer : `delete`
+
+Deletes the specified customer and the delivery associated with them.
+
+Format: `delete INDEX`
+
+* Deletes the customer at the specified `INDEX`.
+* The index refers to the index number shown in the displayed customer list.
+* The index **must be a positive integer** 1, 2, 3, …
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd customer on the list.
+* `find n/Betsy` followed by `delete 1` deletes the 1st customer in the results of the `find` command.
 
 ### Locating customers by attributes: `find`
 
@@ -167,20 +204,6 @@ Examples:
 * `find-delivery 2026-04-01` returns all customers with a delivery on Wednesday, 1 April 2026.
 * `find-delivery 2026-12-25` returns all customers with a delivery on Friday, 25 December 2026.
 
-### Deleting a customer : `delete`
-
-Deletes the specified customer and the delivery associated with them.
-
-Format: `delete INDEX`
-
-* Deletes the customer at the specified `INDEX`.
-* The index refers to the index number shown in the displayed customer list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd customer on the list.
-* `find n/Betsy` followed by `delete 1` deletes the 1st customer in the results of the `find` command.
-
 ### Scheduling a delivery : `schedule`
 
 Adds a delivery or overwrites the existing delivery associated with the specified customer.
@@ -206,7 +229,7 @@ Format: `unschedule INDEX`
 * Deletes the delivery for the customer at the specified `INDEX`.
 * The specified customer must have an existing delivery.
 * The index refers to the index number shown in the displayed customer list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …
 
 Examples:
 * `list` followed by `unschedule 2` deletes the delivery for the 2nd customer on the list.
@@ -214,9 +237,9 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Deletes **all** customer records and delivery details. This operation **cannot be undone** and **data cannot be recovered**.
+Deletes **all** customer records and their delivery details (if any). This operation **cannot be undone** and **data cannot be recovered**.
 
-<box type="warning" seamless>
+<box type="warning" light>
 
 **Warning:**
 This action is permanent and cannot be undone. Ensure that you have thoroughly reviewed and backed up any necessary data before proceeding.
@@ -238,16 +261,12 @@ ServeMate data are saved in the hard disk automatically after any command that c
 
 ServeMate data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
+<box type="warning" light>
 
 **Warning:**
 If your changes to the data file makes its format invalid, ServeMate will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the ServeMate to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -264,16 +283,3 @@ _Details coming soon ..._
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
-
-## Command summary
-
-Action         | Format, Examples
----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Vegan t/West`
-**Clear**      | `clear`
-**Delete**     | `delete INDEX`<br> e.g., `delete 3`
-**Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**       | `find [n/NAME_KEYWORDS...] [a/ADDRESS_KEYWORDS...] [t/TAG_KEYWORDS...]`<br> e.g., `find n/James Jake a/Jurong`
-**Unschedule** | `unschedule INDEX`<br> e.g., `unschedule 3`
-**List**       | `list`
-**Help**       | `help`
