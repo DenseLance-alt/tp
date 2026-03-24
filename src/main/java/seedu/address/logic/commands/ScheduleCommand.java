@@ -50,7 +50,7 @@ public class ScheduleCommand extends Command {
     private final Delivery toSchedule;
 
     /**
-     * Creates a Schedulecommand to add the specified {@code Delivery}
+     * Creates a ScheduleCommand to add the specified {@code Delivery}
      * to the Person object found at the specified index of the address book.
      */
     public ScheduleCommand(Index targetIndex, Delivery delivery) {
