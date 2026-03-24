@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -22,7 +23,7 @@ public class Delivery {
     // Data fields
     private final StartDate startDate;
     private final EndDate endDate;
-    private final Set<DeliveryDay> deliveryDays = new HashSet<>();
+    private final Set<DeliveryDay> deliveryDays = new LinkedHashSet<>();
     private final DeliveryTime deliveryTime;
     private final Set<SkippedDate> skippedDates = new HashSet<>();
 
