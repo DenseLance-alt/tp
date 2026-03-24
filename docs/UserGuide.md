@@ -215,7 +215,8 @@ Format: `expired bf/DATE`
 * Customers without a delivery will not be displayed.
 
 Example:
-* `expired bf/2026-12-21` displays all customers whose deliveries have ended before 21 December 2026. 
+* `expired bf/2026-12-21` displays all customers whose deliveries have ended before 21 December 2026.
+  ![result for 'expired bf/2026-12-21'](images/findExpiredDelivery.png)
 
 ### Scheduling a delivery : `schedule`
 
@@ -246,7 +247,7 @@ Format: `unschedule INDEX`
 
 Examples:
 * `list` followed by `unschedule 2` deletes the delivery for the 2nd customer on the list.
-* `find n/Betsy` followed by `unschedule 1` deletes the delivery for the 1st customer in the results of the `find` command.
+* `find n/Alex` followed by `unschedule 1` deletes the delivery for the 1st customer in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
