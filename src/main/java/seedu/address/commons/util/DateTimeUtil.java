@@ -20,7 +20,7 @@ public class DateTimeUtil {
      * where yyyy is the 4-digit year, MM is the 2-digit month number,
      * and dd is the 2-digit date number.
      */
-    private static final DateTimeFormatter DATE_FORMATTER =
+    public static final DateTimeFormatter DATE_FORMATTER =
             DateTimeFormatter.ofPattern("uuuu-MM-dd").withResolverStyle(ResolverStyle.STRICT);
 
     /**
@@ -31,7 +31,7 @@ public class DateTimeUtil {
      * The formatter will only successfully parse numbers in the range 1-7.
      *
      */
-    private static final DateTimeFormatter DAY_NUMBER_FORMATTER =
+    public static final DateTimeFormatter DAY_NUMBER_FORMATTER =
             DateTimeFormatter.ofPattern("e", Locale.UK).withResolverStyle(ResolverStyle.STRICT);
 
     /**
@@ -43,8 +43,9 @@ public class DateTimeUtil {
      * Examples of valid input from the user
      * (after capitalization and lowercasing of some letters): monday, TUESDAY, WEDnesDay.
      */
-    private static final DateTimeFormatter DAY_WORD_FORMATTER =
+    public static final DateTimeFormatter DAY_WORD_FORMATTER =
             DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH).withResolverStyle(ResolverStyle.STRICT);
+
     /**
      * The time must follow the format HH:mm
      * where HH is the hour value in the 24-hour format
