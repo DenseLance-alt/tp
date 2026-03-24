@@ -2,63 +2,72 @@ package seedu.address.model.delivery;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.DateTimeUtil.isValidDeliveryDayWord;
+import static seedu.address.commons.util.DateTimeUtil.parseDeliveryDayWord;
 
 import java.time.DayOfWeek;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.time.format.TextStyle;
-import java.util.Locale;
 
 /**
  * Represents a Delivery's day in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidDeliveryDay(String)}
+ * Guarantees: immutable;
+ * is valid as declared in {@link #isValidDeliveryDay(String)}
  */
-public class DeliveryDay {
+public enum DeliveryDay {
+    MONDAY("Monday"),
+    TUESDAY("Tuesday"),
+    WEDNESDAY("Wednesday"),
+    THURSDAY("Thursday"),
+    FRIDAY("Friday"),
+    SATURDAY("Saturday"),
+    SUNDAY("Sunday");
+
     public static final String MESSAGE_CONSTRAINTS =
             "day should be of the valid delivery day format";
 
+    private DayOfWeek day;
+
     /**
-     * Message to be shown for invalid day number format.
-     * TODO: Remove or move after refactoring DeliveryDay class.
+     * Private constructor for enum to store DayOfWeek value.
      */
-    public static final String NUMBER_MESSAGE_CONSTRAINTS =
-            "day number should be within the range 1-7";
+    DeliveryDay(String day) {
+        this.day = parseDeliveryDayWord(day);
+    }
 
     /**
-     * The day input that uses this formatter must follow the format of
-     * having the number representing the day of the week.
-     *
-     * Examples of day number inputs accepted by the formatter: 1, 2.
-     * The formatter will only successfully parse numbers in the range 1-7.
-     *
-     * TODO: Move the usage of this formatter.
-     */
-    public static final DateTimeFormatter NUMBER_FORMATTER = DateTimeFormatter.ofPattern("e", Locale.UK);
-
-    /**
-     * The day must follow the format of
-     * having the complete day of the week word.
-     *
-     * Examples of day inputs accepted by the formatter: Monday, Tuesday.
-     *
-     * Examples of valid input from the user
-     * (after capitalization and lowercasing of some letters): monday, TUESDAY, WEDnesDay.
-     */
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH);
-
-    public final DayOfWeek day;
-
-    /**
-     * Constructs a {@code DeliveryDay}
+     * Returns a {@code DeliveryDay}
      *
      * @param day A valid day string in the valid format.
      */
-    public DeliveryDay(String day) {
+    public static DeliveryDay toDeliveryDay(String day) {
         requireNonNull(day);
         checkArgument(isValidDeliveryDay(day), MESSAGE_CONSTRAINTS);
-        String dayWithCorrectFormat = day.substring(0, 1).toUpperCase()
-                + day.substring(1).toLowerCase();
-        this.day = DayOfWeek.from(FORMATTER.parse(dayWithCorrectFormat));
+        DayOfWeek dayValue = parseDeliveryDayWord(day);
+
+        for (DeliveryDay deliveryDay : DeliveryDay.values()) {
+            if (deliveryDay.day.equals(dayValue)) {
+                return deliveryDay;
+            }
+        }
+
+        String exceptionMessage = "Value " + day
+                + " is not one of the DeliveryDay enum values but is valid based on isValidDeliveryDay";
+
+        throw new IllegalArgumentException(exceptionMessage);
+    }
+
+    /**
+     * Returns the corresponding DayOfWeek object.
+     */
+    public DayOfWeek getDay() {
+        return day;
+    }
+
+    /**
+     * Returns true if the day passed as the argument has the same value
+     * as the day stored in the enum value.
+     */
+    public boolean isSameDay(DayOfWeek otherDay) {
+        return day.equals(otherDay);
     }
 
     /**
@@ -66,80 +75,11 @@ public class DeliveryDay {
      * day of the week in the valid format.
      */
     public static boolean isValidDeliveryDay(String test) {
-        try {
-            // To prevent out of bounds access.
-            if (test.isEmpty()) {
-                return false;
-            }
-
-            String testWithCorrectFormat = test.substring(0, 1).toUpperCase()
-                    + test.substring(1).toLowerCase();
-            DayOfWeek.from(FORMATTER.parse(testWithCorrectFormat));
-            return true;
-        } catch (DateTimeParseException e) {
-            return false;
-        }
-    }
-
-    /**
-     * Returns true if a given string is a valid
-     * number representing the day of the week.
-     * It should only accept numbers 1-7.
-     *
-     * TODO: Refactor or remove this method as part of refactoring DeliveryDay class.
-     */
-    public static boolean isValidDeliveryDayNumber(String test) {
-        try {
-            // To prevent out of bounds access.
-            if (test.isEmpty()) {
-                return false;
-            }
-
-            DayOfWeek.from(NUMBER_FORMATTER.parse(test));
-            return true;
-        } catch (DateTimeParseException e) {
-            return false;
-        }
-    }
-
-    /**
-     * Returns the word that represents
-     * the day of week obtained from the day number.
-     * Output examples: Monday, Tuesday, Thursday.
-     *
-     * @param number The number representing the day of the week as a string.
-     * @return The full word that represents the day of the week.
-     */
-    public static String convertDayNumberToDayWord(String number) {
-        // TODO: Refactor or remove this method as part of refactoring DeliveryDay class.
-        requireNonNull(number);
-        checkArgument(isValidDeliveryDayNumber(number), NUMBER_MESSAGE_CONSTRAINTS);
-        DayOfWeek day = DayOfWeek.from(NUMBER_FORMATTER.parse(number));
-        return day.getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+        return isValidDeliveryDayWord(test);
     }
 
     @Override
     public String toString() {
         return day.toString();
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof DeliveryDay)) {
-            return false;
-        }
-
-        DeliveryDay otherDay = (DeliveryDay) other;
-        return day.equals(otherDay.day);
-    }
-
-    @Override
-    public int hashCode() {
-        return day.hashCode();
     }
 }

@@ -2,7 +2,9 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.util.DateTimeUtil.convertDayNumberToDayWord;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.model.delivery.DeliveryDay.toDeliveryDay;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -14,6 +16,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.DeliveryDay;
 import seedu.address.model.delivery.DeliveryTime;
@@ -348,8 +351,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseDeliveryDayNumber_validValue_returnsDeliveryDay() throws ParseException {
-        String dayWord = DeliveryDay.convertDayNumberToDayWord(VALID_DAY_NUMBER_1);
-        DeliveryDay expectedDeliveryDay = new DeliveryDay(dayWord);
+        String dayWord = convertDayNumberToDayWord(VALID_DAY_NUMBER_1);
+        DeliveryDay expectedDeliveryDay = toDeliveryDay(dayWord);
         assertEquals(expectedDeliveryDay, ParserUtil.parseDeliveryDayNumber(VALID_DAY_NUMBER_1));
     }
 
@@ -369,8 +372,8 @@ public class ParserUtilTest {
         Set<DeliveryDay> actualDeliveryDaySet =
                 ParserUtil.parseDeliveryDays(String.join("", deliveryDayNumbers));
         Set<DeliveryDay> expectedDeliverySet = Arrays.stream(deliveryDayNumbers)
-                .map(DeliveryDay::convertDayNumberToDayWord)
-                .map(DeliveryDay::new)
+                .map(DateTimeUtil::convertDayNumberToDayWord)
+                .map(DeliveryDay::toDeliveryDay)
                 .collect(Collectors.toSet());
 
         assertEquals(expectedDeliverySet, actualDeliveryDaySet);
@@ -381,8 +384,8 @@ public class ParserUtilTest {
         String[] deliveryDayNumbers = {VALID_DAY_NUMBER_1, VALID_DAY_NUMBER_2, VALID_DAY_NUMBER_3, VALID_DAY_NUMBER_4};
         String deliveryDayNumbersWithWhitespace = WHITESPACE + String.join("", deliveryDayNumbers) + WHITESPACE;
         Set<DeliveryDay> expectedDeliverySet = Arrays.stream(deliveryDayNumbers)
-                .map(DeliveryDay::convertDayNumberToDayWord)
-                .map(DeliveryDay::new)
+                .map(DateTimeUtil::convertDayNumberToDayWord)
+                .map(DeliveryDay::toDeliveryDay)
                 .collect(Collectors.toSet());
 
         assertEquals(expectedDeliverySet, ParserUtil.parseDeliveryDays(deliveryDayNumbersWithWhitespace));

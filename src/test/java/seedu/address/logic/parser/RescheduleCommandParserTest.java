@@ -24,6 +24,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_DAY_NUMBER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.RescheduleCommand;
 import seedu.address.logic.commands.RescheduleCommand.RescheduleDeliveryDescriptor;
-import seedu.address.model.delivery.DeliveryDay;
 import seedu.address.model.delivery.DeliveryTime;
 import seedu.address.model.delivery.EndDate;
 import seedu.address.model.delivery.StartDate;
@@ -80,7 +80,7 @@ public class RescheduleCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_START_DATE_DESC, StartDate.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + INVALID_END_DATE_DESC, EndDate.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + INVALID_TIME_DESC, DeliveryTime.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + INVALID_DAYS_DESC, DeliveryDay.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_DAYS_DESC, MESSAGE_INVALID_DAY_NUMBER);
 
         // invalid start date followed by valid end date
         assertParseFailure(parser, "1" + INVALID_START_DATE_DESC + VALID_END_DATE_AMY,

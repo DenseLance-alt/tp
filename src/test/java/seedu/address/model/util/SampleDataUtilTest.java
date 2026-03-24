@@ -3,6 +3,7 @@ package seedu.address.model.util;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HALAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_VEGETARIAN;
+import static seedu.address.model.delivery.DeliveryDay.toDeliveryDay;
 import static seedu.address.model.util.SampleDataUtil.getDeliveryDaySet;
 import static seedu.address.model.util.SampleDataUtil.getSkippedDateSet;
 import static seedu.address.model.util.SampleDataUtil.getTagSet;
@@ -57,8 +58,8 @@ public class SampleDataUtilTest {
         // non-empty set
         String mondayString = "Monday";
         String tuesdayString = "TueSDAy";
-        DeliveryDay monday = new DeliveryDay(mondayString);
-        DeliveryDay tuesday = new DeliveryDay(tuesdayString);
+        DeliveryDay monday = toDeliveryDay(mondayString);
+        DeliveryDay tuesday = toDeliveryDay(tuesdayString);
         assertEquals(Set.of(monday, tuesday),
                 getDeliveryDaySet(mondayString, tuesdayString));
 

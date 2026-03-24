@@ -69,7 +69,9 @@ public class RescheduleDeliveryDescriptorBuilder {
      * @return {@code RescheduleDeliveryDescriptorBuilder} with the delivery days set.
      */
     public RescheduleDeliveryDescriptorBuilder withDeliveryDays(String... deliveryDays) {
-        Set<DeliveryDay> deliveryDaysSet = Stream.of(deliveryDays).map(DeliveryDay::new).collect(Collectors.toSet());
+        Set<DeliveryDay> deliveryDaysSet = Stream.of(deliveryDays)
+                .map(DeliveryDay::toDeliveryDay)
+                .collect(Collectors.toSet());
         descriptor.setDeliveryDays(deliveryDaysSet);
         return this;
     }

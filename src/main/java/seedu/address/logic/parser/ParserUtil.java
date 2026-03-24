@@ -1,9 +1,13 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.DateTimeUtil.convertDayNumberToDayWord;
+import static seedu.address.commons.util.DateTimeUtil.isValidDeliveryDate;
+import static seedu.address.commons.util.DateTimeUtil.isValidDeliveryDayNumber;
+import static seedu.address.commons.util.DateTimeUtil.parseDeliveryDate;
+import static seedu.address.model.delivery.DeliveryDay.toDeliveryDay;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -30,6 +34,8 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_DATE = "Date is not valid. It should be in the format yyyy-MM-dd.";
+    public static final String MESSAGE_INVALID_DAY_NUMBER =
+            "Day number is not valid. It can only be a whole number within 1 to 7 inclusive.";
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
@@ -136,11 +142,11 @@ public class ParserUtil {
     public static LocalDate parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        try {
-            return LocalDate.parse(trimmedDate);
-        } catch (DateTimeParseException e) {
+        if (!isValidDeliveryDate(trimmedDate)) {
             throw new ParseException(MESSAGE_INVALID_DATE);
         }
+
+        return parseDeliveryDate(trimmedDate);
     }
 
     /**
@@ -240,12 +246,12 @@ public class ParserUtil {
      */
     public static DeliveryDay parseDeliveryDayNumber(String deliveryDayNumber) throws ParseException {
         requireNonNull(deliveryDayNumber);
-        if (!DeliveryDay.isValidDeliveryDayNumber(deliveryDayNumber)) {
-            throw new ParseException(DeliveryDay.MESSAGE_CONSTRAINTS);
+        if (!isValidDeliveryDayNumber(deliveryDayNumber)) {
+            throw new ParseException(MESSAGE_INVALID_DAY_NUMBER);
         }
-        // TODO: Refactor after the refactoring of the DeliveryDay.
-        String deliveryDayWord = DeliveryDay.convertDayNumberToDayWord(deliveryDayNumber);
-        return new DeliveryDay(deliveryDayWord);
+
+        String deliveryDayWord = convertDayNumberToDayWord(deliveryDayNumber);
+        return toDeliveryDay(deliveryDayWord);
     }
 
     /**

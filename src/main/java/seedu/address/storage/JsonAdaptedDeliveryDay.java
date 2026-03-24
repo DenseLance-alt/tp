@@ -42,6 +42,6 @@ public class JsonAdaptedDeliveryDay {
         if (!DeliveryDay.isValidDeliveryDay(dayOfWeek)) {
             throw new IllegalValueException(DeliveryDay.MESSAGE_CONSTRAINTS);
         }
-        return new DeliveryDay(dayOfWeek);
+        return DeliveryDay.toDeliveryDay(dayOfWeek);
     }
 }

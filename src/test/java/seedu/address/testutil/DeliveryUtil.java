@@ -1,11 +1,11 @@
 package seedu.address.testutil;
 
+import static seedu.address.commons.util.DateTimeUtil.DAY_NUMBER_FORMATTER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAYS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NUMBER_OF_DAYS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
-import static seedu.address.model.delivery.DeliveryDay.NUMBER_FORMATTER;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -57,7 +57,7 @@ public class DeliveryUtil {
      */
     private static String getDeliveryDaysArgument(Set<DeliveryDay> deliveryDaysSet) {
         return deliveryDaysSet.stream()
-                .map(deliveryDay -> NUMBER_FORMATTER.format(deliveryDay.day))
+                .map(deliveryDay -> DAY_NUMBER_FORMATTER.format(deliveryDay.getDay()))
                 .collect(Collectors.joining(""));
     }
 }

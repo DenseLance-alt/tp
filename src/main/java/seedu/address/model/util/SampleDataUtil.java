@@ -90,7 +90,7 @@ public class SampleDataUtil {
      */
     public static Set<DeliveryDay> getDeliveryDaySet(String... strings) {
         return Arrays.stream(strings)
-                .map(DeliveryDay::new)
+                .map(DeliveryDay::toDeliveryDay)
                 .collect(Collectors.toSet());
     }
 

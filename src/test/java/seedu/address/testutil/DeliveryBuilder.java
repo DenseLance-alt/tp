@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import static seedu.address.model.delivery.DeliveryDay.toDeliveryDay;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,7 +36,7 @@ public class DeliveryBuilder {
         startDate = new StartDate(DEFAULT_START_DATE);
         endDate = new EndDate(DEFAULT_END_DATE);
         deliveryDays = new HashSet<>();
-        deliveryDays.add(new DeliveryDay(DEFAULT_DAY));
+        deliveryDays.add(toDeliveryDay(DEFAULT_DAY));
         deliveryTime = new DeliveryTime(DEFAULT_TIME);
         skippedDates = new HashSet<>();
     }

@@ -40,7 +40,7 @@ public class DeliveryDatePredicate implements Predicate<Person> {
         DayOfWeek targetDay = targetDate.getDayOfWeek();
 
         if (delivery.getDeliveryDays().stream()
-                .noneMatch(deliveryDay -> deliveryDay.day.equals(targetDay))) {
+                .noneMatch(deliveryDay -> deliveryDay.isSameDay(targetDay))) {
             return false;
         }
 

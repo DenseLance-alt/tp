@@ -2,10 +2,11 @@ package seedu.address.model.delivery;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.DateTimeUtil.isValidDeliveryDate;
+import static seedu.address.commons.util.DateTimeUtil.parseDeliveryDate;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Delivery's end date in the address book.
@@ -32,20 +33,15 @@ public class EndDate {
     public EndDate(String date) {
         requireNonNull(date);
         checkArgument(isValidEndDate(date), MESSAGE_CONSTRAINTS);
-        this.date = LocalDate.parse(date, FORMATTER);
+        this.date = parseDeliveryDate(date);
     }
 
     /**
-     * Returns true if a given string is a valid end
-     * date in the valid format.
+     * Returns true if a given string is a valid
+     * end date in the valid format.
      */
     public static boolean isValidEndDate(String test) {
-        try {
-            LocalDate.parse(test, FORMATTER);
-            return true;
-        } catch (DateTimeParseException e) {
-            return false;
-        }
+        return isValidDeliveryDate(test);
     }
 
     @Override

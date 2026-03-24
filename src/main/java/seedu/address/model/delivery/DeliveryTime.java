@@ -2,10 +2,12 @@ package seedu.address.model.delivery;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.DateTimeUtil.parseDeliveryTime;
 
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+
+import seedu.address.commons.util.DateTimeUtil;
+
 /**
  * Represents a Delivery's time in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDeliveryTime(String)}
@@ -13,13 +15,6 @@ import java.time.format.DateTimeParseException;
 public class DeliveryTime {
     public static final String MESSAGE_CONSTRAINTS =
             "Time should be of the valid delivery time format";
-
-    /**
-     * The time must follow the format HH:mm
-     * where HH is the hour value in the 24-hour format
-     * and mm is the minute value.
-     */
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
     public final LocalTime time;
 
@@ -31,7 +26,7 @@ public class DeliveryTime {
     public DeliveryTime(String time) {
         requireNonNull(time);
         checkArgument(isValidDeliveryTime(time), MESSAGE_CONSTRAINTS);
-        this.time = LocalTime.parse(time, FORMATTER);
+        this.time = parseDeliveryTime(time);
     }
 
     /**
@@ -39,12 +34,7 @@ public class DeliveryTime {
      * in the valid format.
      */
     public static boolean isValidDeliveryTime(String test) {
-        try {
-            LocalTime.parse(test, FORMATTER);
-            return true;
-        } catch (DateTimeParseException e) {
-            return false;
-        }
+        return DateTimeUtil.isValidDeliveryTime(test);
     }
 
     @Override
