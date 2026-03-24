@@ -46,23 +46,18 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "South";
 
     private static final String INVALID_START_DATE = "12-11-2012";
-    private static final String INVALID_NUMBER_OF_DAYS = "-12";
     private static final String INVALID_END_DATE = "12-13-2012";
     private static final String INVALID_TIME = "25:67";
     private static final String INVALID_DAY_NUMBER = "0";
     private static final String INVALID_DAYS = "579";
 
     private static final String VALID_START_DATE = "2021-12-11";
-    private static final String VALID_NUMBER_OF_DAYS = "2";
     private static final String VALID_END_DATE = "2021-12-13";
     private static final String VALID_TIME = "23:23";
     private static final String VALID_DAY_NUMBER_1 = "1";
     private static final String VALID_DAY_NUMBER_2 = "4";
     private static final String VALID_DAY_NUMBER_3 = "6";
     private static final String VALID_DAY_NUMBER_4 = "7";
-
-    // The resulting end date of adding VALID_NUMBER_OF_DAYS days to VALID_START_DATE
-    private static final String RESULTING_END_DATE = "2021-12-12";
 
     private static final String WHITESPACE = " \t\r\n";
 

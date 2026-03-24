@@ -7,7 +7,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_DAY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_TIME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_TIME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SKIPPED_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_BOB;
 import static seedu.address.model.delivery.DeliveryDay.toDeliveryDay;

@@ -10,8 +10,7 @@
       "startDate": "2025-10-19",
       "endDate": "2025-10-30",
       "deliveryDays": [ "Monday", "Tuesday" ],
-      "deliveryTime": "12:00",
-      "skippedDates": [ "2025-10-21", "2025-10-22" ]
+      "deliveryTime": "12:00"
     }
   }, {
     "name" : "Benson Meier",
@@ -29,8 +28,7 @@
       "startDate": "2025-10-19",
       "endDate": "2025-10-30",
       "deliveryDays": [ "Monday", "Tuesday", "Thursday" ],
-      "deliveryTime": "14:14",
-      "skippedDates": [ "2025-10-21", "2025-10-24" ]
+      "deliveryTime": "14:14"
     }
   }, {
     "name" : "Daniel Meier",
@@ -42,8 +40,7 @@
       "startDate": "2024-10-21",
       "endDate": "2024-10-29",
       "deliveryDays": [ "Tuesday", "Wednesday", "Thursday" ],
-      "deliveryTime": "15:15",
-      "skippedDates": [ "2024-10-24" ]
+      "deliveryTime": "15:15"
     }
   }, {
     "name" : "Elle Meyer",
@@ -55,8 +52,7 @@
       "startDate": "2019-03-19",
       "endDate": "2019-03-27",
       "deliveryDays": [ "Wednesday", "Friday" ],
-      "deliveryTime": "12:00",
-      "skippedDates": [ ]
+      "deliveryTime": "12:00"
     }
   }, {
     "name" : "Fiona Kunz",
@@ -68,8 +64,7 @@
       "startDate": "2019-05-21",
       "endDate": "2019-06-29",
       "deliveryDays": [ "Monday", "Thursday" ],
-      "deliveryTime": "11:11",
-      "skippedDates": [ "2019-05-28" ]
+      "deliveryTime": "11:11"
     }
   }, {
     "name" : "George Best",

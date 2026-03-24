@@ -15,7 +15,6 @@ public class CliSyntax {
     /* Prefix definitions for Delivery objects */
     public static final Prefix PREFIX_START_DATE = new Prefix("st/");
     public static final Prefix PREFIX_END_DATE = new Prefix("ed/");
-    public static final Prefix PREFIX_NUMBER_OF_DAYS = new Prefix("n/");
     public static final Prefix PREFIX_TIME = new Prefix("tm/");
     public static final Prefix PREFIX_DAYS = new Prefix("d/");
 }

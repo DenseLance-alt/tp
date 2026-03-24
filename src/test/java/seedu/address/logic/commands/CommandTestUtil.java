@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DAYS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NUMBER_OF_DAYS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -52,12 +51,9 @@ public class CommandTestUtil {
     public static final String VALID_DELIVERY_DAY = "Monday";
     public static final String VALID_DELIVERY_DAY_AMY = "Monday";
     public static final String VALID_DELIVERY_DAY_BOB = "Wednesday";
-    public static final String VALID_SKIPPED_DATE = "2020-02-10";
 
     public static final String UNSORTED_DAYS = "4231";
 
-    public static final String VALID_NUMBER_OF_DAYS_AMY = "61";
-    public static final String VALID_NUMBER_OF_DAYS_BOB = "14";
     public static final String VALID_DAYS_AMY = "1";
     public static final String VALID_DAYS_BOB = "3";
 
@@ -91,8 +87,6 @@ public class CommandTestUtil {
             " " + PREFIX_START_DATE + "2020*20*20"; // '*' not allowed in start dates
     public static final String INVALID_END_DATE_DESC =
             " " + PREFIX_END_DATE + "2020*20*20"; // '*' not allowed in end dates
-    public static final String INVALID_NUMBER_OF_DAYS_DESC =
-            " " + PREFIX_NUMBER_OF_DAYS + "11&"; // '&' not allowed in number of days
     public static final String INVALID_TIME_DESC = " " + PREFIX_TIME + "1112"; // missing ':' symbol
     public static final String INVALID_DAYS_DESC = " " + PREFIX_DAYS; // empty string not allowed for delivery days
 

@@ -9,8 +9,7 @@
       "startDate" : "2026-10-21",
       "endDate" : "2026-12-21",
       "deliveryDays" : [ "WEDNESDAY", "SUNDAY", "MONDAY", "TUESDAY", "FRIDAY" ],
-      "deliveryTime" : "16:00",
-      "skippedDates" : [ "2026-11-20", "2026-11-19" ]
+      "deliveryTime" : "16:00"
     }
   }, {
     "name" : "Bernice Yu",
@@ -22,8 +21,7 @@
       "startDate" : "2026-10-09",
       "endDate" : "2026-12-21",
       "deliveryDays" : [ "WEDNESDAY", "MONDAY", "FRIDAY" ],
-      "deliveryTime" : "16:00",
-      "skippedDates" : [ "2026-11-21", "2026-10-17" ]
+      "deliveryTime" : "16:00"
     }
   }, {
     "name" : "Charlotte Oliveiro",
