@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -93,7 +94,7 @@ public class JsonAdaptedDelivery {
                     DeliveryDay.class.getSimpleName()));
         }
 
-        final Set<DeliveryDay> modelDeliveryDays = new HashSet<>(deliveryDays);
+        final Set<DeliveryDay> modelDeliveryDays = new LinkedHashSet<>(deliveryDays);
 
         if (deliveryTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
