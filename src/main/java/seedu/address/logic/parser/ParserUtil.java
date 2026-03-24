@@ -22,7 +22,6 @@ import seedu.address.model.delivery.DeliveryDay;
 import seedu.address.model.delivery.DeliveryTime;
 import seedu.address.model.delivery.EndDate;
 import seedu.address.model.delivery.StartDate;
-import seedu.address.model.delivery.fields.NumberOfDays;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -193,22 +192,6 @@ public class ParserUtil {
             throw new ParseException(EndDate.MESSAGE_CONSTRAINTS);
         }
         return new EndDate(trimmedEndDate);
-    }
-
-    /**
-     * Returns the {@code EndDate} object when
-     * given the {@code startDate} and {@code numberOfDays}.
-     *
-     * @param startDate The StartDate object representing the start date.
-     * @param numberOfDays The NumberOfDays object representing the number of days
-     *                     that should be added to the startDate.
-     * @return The EndDate object which represents the end date computed.
-     */
-    public static EndDate getEndDate(StartDate startDate, NumberOfDays numberOfDays) {
-        requireNonNull(startDate);
-        requireNonNull(numberOfDays);
-        LocalDate endDate = startDate.date.plusDays(numberOfDays.days - 1);
-        return new EndDate(endDate.format(EndDate.FORMATTER));
     }
 
     /**

@@ -25,7 +25,6 @@ import seedu.address.model.delivery.DeliveryDay;
 import seedu.address.model.delivery.DeliveryTime;
 import seedu.address.model.delivery.EndDate;
 import seedu.address.model.delivery.StartDate;
-import seedu.address.model.delivery.fields.NumberOfDays;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -269,31 +268,6 @@ public class ParserUtilTest {
         String endDateWithWhitespace = WHITESPACE + VALID_END_DATE + WHITESPACE;
         EndDate expectedEndDate = new EndDate(VALID_END_DATE);
         assertEquals(expectedEndDate, ParserUtil.parseEndDate(endDateWithWhitespace));
-    }
-
-    @Test
-    public void getEndDate_bothNull_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.getEndDate(null, null));
-    }
-
-    @Test
-    public void getEndDate_nullStartDate_throwsNullPointerException() {
-        NumberOfDays numberOfDays = new NumberOfDays(VALID_NUMBER_OF_DAYS);
-        assertThrows(NullPointerException.class, () -> ParserUtil.getEndDate(null, numberOfDays));
-    }
-
-    @Test
-    public void getEndDate_nullNumberOfDays_throwsNullPointerException() {
-        StartDate startDate = new StartDate(VALID_START_DATE);
-        assertThrows(NullPointerException.class, () -> ParserUtil.getEndDate(startDate, null));
-    }
-
-    @Test
-    public void getEndDate_validValues_returnsEndDate() {
-        StartDate startDate = new StartDate(VALID_START_DATE);
-        NumberOfDays numberOfDays = new NumberOfDays(VALID_NUMBER_OF_DAYS);
-        EndDate expectedEndDate = new EndDate(RESULTING_END_DATE);
-        assertEquals(expectedEndDate, ParserUtil.getEndDate(startDate, numberOfDays));
     }
 
     @Test
