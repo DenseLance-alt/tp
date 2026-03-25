@@ -67,7 +67,7 @@ Action | Command Format (with Examples)
 **Find customers with delivery on date** | `find-delivery dt/DATE`<br><br>Example:<br>`find-delivery dt/2026-10-22`
 **Find customers with delivery within date range** | `find-delivery st/START_DATE ed/END_DATE`<br><br>Example:<br>`find-delivery st/2026-10-27 ed/2026-11-10`
 **Find customers with expired delivery** | `expired bf/DATE`<br><br>Example:<br>`expired bf/2026-12-22`
-**Schedule delivery** | `schedule INDEX st/START_DATE ed/END_DATE tm/DELIVERY_TIME d/DELIVERY_DAYS`<br><br>Example:<br>`schedule 3 st/2026-04-09 ed/2026-04-21 t/16:00 days/12367`
+**Schedule delivery** | `schedule INDEX st/START_DATE ed/END_DATE tm/DELIVERY_TIME d/DELIVERY_DAYS`<br><br>Example:<br>`schedule 3 st/2026-04-09 ed/2026-04-21 t/16:00 d/12367`
 **Unschedule delivery** | `unschedule INDEX`<br><br>Example:<br>`unschedule 3`
 **Clear all entries** | `clear`
 **Exit program** | `exit`
