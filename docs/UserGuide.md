@@ -188,21 +188,20 @@ Examples:
 
 ### Finding deliveries on a given date: `find-delivery`
 
-Finds customers who have a delivery scheduled on the given date.
+Finds customers who have a delivery scheduled on the given date or within the given date range.
 
-Format: `find-delivery DATE`
+Format: `find-delivery dt/DATE` or `find-delivery st/START_DATE ed/END_DATE`
 
-* `DATE` is in the format `yyyy-MM-dd` (e.g., 2026-04-09).
-* A customer is shown only if all of the following are true:
+* All dates must be in the format `yyyy-MM-dd`, where `yyyy` is the 4-digit year, `MM` is the 2-digit month, and `dd` is the 2-digit day. e.g. `2026-04-01`
+* `dt/` searches for an exact date. `st/` and `ed/` must be used together to search within a date range.
+* A customer is shown only if all of the following criteria are met:
   * They have a delivery assigned.
-  * The given date falls within their delivery's start and end dates (inclusive).
-  * The day of week of the given date matches one of their scheduled delivery days.
-  * The given date has not been marked as a skipped date.
+  * The customer has a scheduled delivery that falls on the given date or within the date range specified (including the start and end dates itself).
 * If no customers match, an empty list is shown.
 
 Examples:
-* `find-delivery 2026-04-01` returns all customers with a delivery on Wednesday, 1 April 2026.
-* `find-delivery 2026-12-25` returns all customers with a delivery on Friday, 25 December 2026.
+* `find-delivery dt/2026-04-01` returns all customers with a delivery on Wednesday, 1 April 2026.
+* `find-delivery st/2026-04-01 ed/2026-04-30` returns all customers with a delivery scheduled within April 2026.
 
 ### Finding customers with expired delivery: `expired`
 
@@ -315,3 +314,17 @@ Furthermore, certain edits can cause the ServeMate to behave in unexpected ways 
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Command summary
+
+Action         | Format, Examples
+---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Vegan t/West`
+**Clear**      | `clear`
+**Delete**     | `delete INDEX`<br> e.g., `delete 3`
+**Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**       | `find [n/NAME_KEYWORDS...] [a/ADDRESS_KEYWORDS...] [t/TAG_KEYWORDS...]`<br> e.g., `find n/James Jake a/Jurong`
+**Find Delivery** | `find-delivery dt/DATE` or `find-delivery st/START_DATE ed/END_DATE`<br> e.g., `find-delivery dt/2026-04-01` or `find-delivery st/2026-04-01 ed/2026-04-30`
+**Unschedule** | `unschedule INDEX`<br> e.g., `unschedule 3`
+**List**       | `list`
+**Help**       | `help`
