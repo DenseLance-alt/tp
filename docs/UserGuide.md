@@ -159,13 +159,13 @@ Format: `find-delivery dt/DATE` or `find-delivery st/START_DATE ed/END_DATE`
 * `dt/` searches for an exact date. `st/` and `ed/` must be used together to search within a date range (inclusive).
 * A customer is shown only if all of the following are true:
   * They have a delivery assigned.
-  * The given date (or date range) overlaps with their delivery's start and end dates.
+  * The given date (or date range) overlaps with their delivery's start and end dates. The date range specified by `st/` and `ed/` is inclusive of both boundary dates.
   * At least one of their scheduled delivery days falls within the overlapping period.
 * If no customers match, an empty list is shown.
 
 Examples:
 * `find-delivery dt/2026-04-01` returns all customers with a delivery on Wednesday, 1 April 2026.
-* `find-delivery st/2026-04-01 ed/2026-04-30` returns all customers with at least one delivery in April 2026.
+* `find-delivery st/2026-04-01 ed/2026-04-30` returns all customers with a delivery scheduled within April 2026.
 
 ### Deleting a customer : `delete`
 
