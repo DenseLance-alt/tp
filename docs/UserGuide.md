@@ -247,7 +247,8 @@ Format: `unschedule INDEX`
 
 Examples:
 * `list` followed by `unschedule 2` deletes the delivery for the 2nd customer on the list.
-* `find n/Alex` followed by `unschedule 1` deletes the delivery for the 1st customer in the results of the `find` command.
+* `find n/Bernice` followed by `unschedule 1` deletes the delivery for the 1st customer in the results of the `find` command.
+  ![result for 'unschedule 1' after `find n/Bernice`](images/unscheduleBernice.png)
 
 ### Clearing all entries : `clear`
 
