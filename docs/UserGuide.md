@@ -312,19 +312,3 @@ Furthermore, certain edits can cause the ServeMate to behave in unexpected ways 
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Command summary
-
-Action         | Format, Examples
----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Vegan t/West`
-**Clear**      | `clear`
-**Delete**     | `delete INDEX`<br> e.g., `delete 3`
-**Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**       | `find [n/NAME_KEYWORDS...] [a/ADDRESS_KEYWORDS...] [t/TAG_KEYWORDS...]`<br> e.g., `find n/James Jake a/Jurong`
-**Find Delivery** | `find-delivery dt/DATE` or `find-delivery st/START_DATE ed/END_DATE`<br> e.g., `find-delivery dt/2026-04-01` or `find-delivery st/2026-04-01 ed/2026-04-30`
-**Unschedule** | `unschedule INDEX`<br> e.g., `unschedule 3`
-**List**       | `list`
-**Help**       | `help`
