@@ -24,16 +24,7 @@ Class Delivery
 Class StartDate
 Class EndDate
 Class DeliveryTime
-
-Class "<<enumeration>>\nDeliveryDay" as DeliveryDay {
-    MONDAY
-    TUESDAY
-    WEDNESDAY
-    THURSDAY
-    FRIDAY
-    SATURDAY
-    SUNDAY
-}
+Class "<<enumeration>>\nDeliveryDay" as DeliveryDay
 
 Class I #FFFFFF
 }
