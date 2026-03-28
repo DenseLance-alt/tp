@@ -8,11 +8,12 @@ import java.time.LocalTime;
 
 import seedu.address.commons.util.DateTimeUtil;
 
+//@@author BenedTj
 /**
  * Represents a Delivery's time in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDeliveryTime(String)}
  */
-public class DeliveryTime {
+public class DeliveryTime implements Comparable<DeliveryTime> {
     public static final String MESSAGE_CONSTRAINTS =
             "Time should be of the valid delivery time format";
 
@@ -37,6 +38,22 @@ public class DeliveryTime {
         return DateTimeUtil.isValidDeliveryTime(test);
     }
 
+    //@@author elijah-ng
+    /**
+     * Compares this {@code DeliveryTime} to another {@code DeliveryTime} based on their time.
+     * The comparison is based on the time-line position of the local times within a day.
+     *
+     * @param otherDeliveryTime The other {@code DeliveryTime} to compare to, not null.
+     * @return The comparator value, negative if less, zero if equals, positive if greater.
+     */
+    @Override
+    public int compareTo(DeliveryTime otherDeliveryTime) {
+        assert otherDeliveryTime != null;
+
+        return time.compareTo(otherDeliveryTime.time);
+    }
+
+    //@@author BenedTj
     @Override
     public String toString() {
         return time.toString();
