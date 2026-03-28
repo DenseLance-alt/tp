@@ -1,11 +1,13 @@
 package seedu.address.model.delivery;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+//@@author BenedTj
 public class DeliveryTimeTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -35,6 +37,32 @@ public class DeliveryTimeTest {
         assertTrue(DeliveryTime.isValidDeliveryTime("12:59")); // correct time format
     }
 
+    //@@author elijah-ng
+    // EP: Smaller time
+    @Test
+    public void compareTo_deliveryTimeSmaller_returnsNegative() {
+        DeliveryTime earlierDeliveryTime = new DeliveryTime("00:00"); // Boundary value
+        DeliveryTime laterDeliveryTime = new DeliveryTime("23:59"); // Boundary value
+        assertTrue(earlierDeliveryTime.compareTo(laterDeliveryTime) < 0);
+    }
+
+    // EP: Same time
+    @Test
+    public void compareTo_deliveryTimeEquals_returnsZero() {
+        DeliveryTime firstDeliveryTime = new DeliveryTime("12:00");
+        DeliveryTime secondDeliveryTime = new DeliveryTime("12:00");
+        assertEquals(0, firstDeliveryTime.compareTo(secondDeliveryTime));
+    }
+
+    // EP: Larger time
+    @Test
+    public void compareTo_deliveryTimeLarger_returnsPositive() {
+        DeliveryTime earlierDeliveryTime = new DeliveryTime("00:00"); // Boundary value
+        DeliveryTime laterDeliveryTime = new DeliveryTime("23:59"); // Boundary value
+        assertTrue(laterDeliveryTime.compareTo(earlierDeliveryTime) > 0);
+    }
+
+    //@@author BenedTj
     @Test
     public void equals() {
         DeliveryTime time = new DeliveryTime("12:59");
