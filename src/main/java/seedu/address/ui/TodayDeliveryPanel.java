@@ -32,13 +32,17 @@ public class TodayDeliveryPanel extends UiPart<Region> {
     /**
      * Creates a {@code TodayDeliveryPanel} with the given {@code ObservableList}.
      *
-     * @param sortedPersonWithTodayDeliveryList List of {@code Person} with delivery scheduled today,
-     *                                          sorted by ascending order of delivery time.
-     * @param today The current local date.
+     * @param sortedPersonWithTodayDeliveryList List of {@code Person} with delivery scheduled today
+     *                                          sorted by ascending order of delivery time, not null.
+     * @param today The current local date, not null.
      */
     public TodayDeliveryPanel(ObservableList<Person> sortedPersonWithTodayDeliveryList, LocalDate today) {
         super(FXML);
 
+        assert sortedPersonWithTodayDeliveryList != null;
+        assert today != null;
+
+        logger.info("Initializing with date: " + today);
         // Solution below inspired by Claude AI
         todayPanelTitle.setText("Today's Deliveries - " + today.format(HEADER_DATE_FORMAT));
 
@@ -53,8 +57,6 @@ public class TodayDeliveryPanel extends UiPart<Region> {
 
         todayDeliveryListView.setItems(sortedPersonWithTodayDeliveryList);
         todayDeliveryListView.setCellFactory(listView -> new TodayDeliveryListViewCell());
-
-        logger.info("TodayDeliveryPanel initialised for date: " + today);
     }
 
     /**
@@ -69,7 +71,8 @@ public class TodayDeliveryPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TodayDeliveryCard(person).getRoot());
+                TodayDeliveryCard deliveryCard = new TodayDeliveryCard(person);
+                setGraphic(deliveryCard.getRoot());
             }
         }
     }
