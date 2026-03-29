@@ -235,6 +235,23 @@ Examples:
 * `schedule 1 st/2026-02-01 ed/2026-02-02 tm/13:00 d/12` adds a delivery for the 1st customer on the list. The delivery starts on 1 February 2026, ends on 2 February 2026 and occurs at 1 PM on Mondays and Tuesdays.
 * `schedule 4 st/2026-03-11 ed/2026-04-01 tm/15:30 d/246` adds a delivery for the 4th customer on the list. The delivery starts on 11 March 2026, ends on 1 April 2026 and occurs at 3:30 PM on Tuesday, Thursdays and Saturdays.
 
+### Editing a delivery : `reschedule`
+
+Edits the delivery associated with the specified customer.
+
+Format: `reschedule INDEX [st/START_DATE] [ed/END_DATE] [tm/DELIVERY_TIME] [d/DELIVERY_DAYS]`
+
+* Parameters `st/`, `ed/`, `tm/` and `d/` are optional, but at least one of them must be provided.
+* Existing values will be updated to the input values. Edits the delivery associated with the customer at the specified `INDEX`.
+* The specified customer must have an existing delivery.
+* The index refers to the index number shown in the displayed customer panel.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `reschedule 1 ed/2026-02-02 tm/12:45` Edits the delivery end date and delivery time for the 1st customer to be `2026-02-02` and `12:45` respectively.
+* `reschedule 2 d/25` Edits the delivery days for the 2nd customer to be `25` (Tuesday and Friday).
+  ![result for 'reschedule 2 d/25'](images/rescheduleBernice.png)
+
 ### Unscheduling a delivery : `unschedule`
 
 Deletes the delivery associated with the specified customer.
@@ -250,22 +267,6 @@ Examples:
 * `list` followed by `unschedule 2` deletes the delivery for the 2nd customer on the list.
 * `find n/Bernice` followed by `unschedule 1` deletes the delivery for the 1st customer in the results of the `find` command.
   ![result for 'unschedule 1' after `find n/Bernice`](images/unscheduleBernice.png)
-
-### Editing a delivery : `reschedule`
-
-Edits the delivery associated with the specified customer.
-
-Format: `reschedule INDEX [st/START_DATE] [ed/END_DATE] [tm/DELIVERY_TIME] [d/DELIVERY_DAYS]`
-
-* Parameters `st/`, `ed/`, `tm/` and `d/` are optional, but at least one of them must be provided.
-* Existing values will be updated to the input values.Edits the delivery associated with the customer at the specified `INDEX`.
-* The specified customer must have an existing delivery.
-* The index refers to the index number shown in the displayed customer panel.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `reschedule 1 ed/2026-02-02 tm/12:59` Edits the delivery end date and delivery time for the 1st customer to be `2026-02-02` and `12:59` respectively.
-* `reschedule 4 d/25` Edits the delivery days for the 4th customer to be `25` (Tuesday and Friday).
 
 ### Clearing all entries : `clear`
 

@@ -1,0 +1,74 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":RescheduleCommandParser" as RescheduleCommandParser LOGIC_COLOR
+participant "rc:RescheduleCommand" as RescheduleCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("reschedule 1 tm/14:00")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("reschedule 1 tm/14:00")
+activate AddressBookParser
+
+create RescheduleCommandParser
+AddressBookParser -> RescheduleCommandParser
+activate RescheduleCommandParser
+
+RescheduleCommandParser --> AddressBookParser
+deactivate RescheduleCommandParser
+
+AddressBookParser -> RescheduleCommandParser : parse("1 tm/14:00")
+activate RescheduleCommandParser
+
+create RescheduleCommand
+RescheduleCommandParser -> RescheduleCommand
+activate RescheduleCommand
+
+RescheduleCommand --> RescheduleCommandParser :
+deactivate RescheduleCommand
+
+RescheduleCommandParser --> AddressBookParser : rc
+deactivate RescheduleCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+RescheduleCommandParser -[hidden]-> AddressBookParser
+destroy RescheduleCommandParser
+
+AddressBookParser --> LogicManager : rc
+deactivate AddressBookParser
+
+LogicManager -> RescheduleCommand : execute(m)
+
+activate RescheduleCommand
+note right of RescheduleCommand
+  target: customer with delivery to reschedule
+  updated: copy of target with rescheduled delivery
+end note
+RescheduleCommand -> Model : setPerson(target, updated)
+activate Model
+
+Model --> RescheduleCommand
+deactivate Model
+
+create CommandResult
+RescheduleCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> RescheduleCommand
+deactivate CommandResult
+
+RescheduleCommand --> LogicManager : r
+deactivate RescheduleCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
