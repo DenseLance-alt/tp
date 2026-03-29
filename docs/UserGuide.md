@@ -36,6 +36,13 @@ If Java is not installed, follow the installation guide for your operating syste
    ```
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
+* The customer panel on the left allows you to view customer information, including their full delivery details.
+* The delivery panel on the right allows you to view Today's Deliveries. It provides a quick reference to see deliveries schedule for the current day, from earliest to latest delivery time.
+
+<box type="info" seamless>
+
+**Note:** The date shown on the delivery panel is based on your computer's date setting. If you find today's date is incorrectly reflected, check that your computer's date is correct, then close and relaunch ServeMate.
+</box>
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
