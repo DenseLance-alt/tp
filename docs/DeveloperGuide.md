@@ -173,7 +173,23 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Find customer by attribute
+### Today's deliveries panel
+
+The sequence diagram below illustrates the interactions between the `Ui`, `Logic` and `Model` components, to create the `TodayDeliveryPanel` when the application is launched.
+
+<puml src="diagrams/TodayDeliveryPanelSequenceDiagram.puml" alt="Interactions between the `Ui`, `Logic` and `Model` components, to create the `TodayDeliveryPanel` when the application is launched" />
+
+How the `TodayDeliveryPanel` is created:
+
+1. When `MainWindow` is called upon to fill its inner parts, it gets the list of persons with deliveries scheduled for the current day from the `LogicManager`. 
+2. The `LogicManager` in turn calls `ModelManager`, which retrieves and returns the sorted list of today's deliveries. This list is sorted in ascending order of delivery time.
+3. `MainWindow` then gets the current date from the `LogicManager`, which in turn calls `ModelManager` to retrieve and return the current date.
+4. Next, `MainWindow` instantiates a `TodayDeliveryPanel` object using the sorted list of today's deliveries and the current date.  
+   Note that although `fillInnerParts()` is shown only instantiating a `TodayDeliveryPanel` object in the diagram above (for simplicity), in the code `fillInnerParts()` also instantiates other parts of the `Ui` (e.g. `PersonListPanel`).
+5. Finally, the newly created `TodayDeliveryPanel` object is used by `MainWindow` to fill the panel's placeholder, displaying the current date and the sorted list of today's deliveries.<br>
+   Note that this step is omitted in the diagram above (for simplicity).
+
+<br>
 
 ### Find delivery by date
 
