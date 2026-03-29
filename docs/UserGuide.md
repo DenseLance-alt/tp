@@ -10,7 +10,7 @@
 Managing customer records and delivery schedules for a Tingkat catering business can quickly become overwhelming when information is scattered across spreadsheets, notebooks and chat messages.
 This is where **ServeMate** comes in.
 
-**ServeMate** is a desktop application designed to help administrative staff organize customer contacts and delivery details. Optimized for fast typing through a Command Line Interface (CLI), **ServeMate** allows you to quickly add, update, and retrieve customer records without navigating through complicated menus.
+**ServeMate** is a desktop application designed to help administrative staff of a single plan Tingkat caterer organize customer contacts and delivery details. Optimized for fast typing through a Command Line Interface (CLI), **ServeMate** allows you to quickly add, update, and retrieve customer records without navigating through complicated menus.
 
 <!-- * Table of Contents -->
 <page-nav-print />

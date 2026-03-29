@@ -241,7 +241,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 #### Target user profile
 
-* handle the **planning and administration of deliveries** for tingkat caterers
+* handle the **planning and administration of deliveries** for administrative staff of a single plan Tingkat caterer
 * has a need to **manage a significant number** of customers
 * prefer **desktop apps** over other types
 * can **type fast**
