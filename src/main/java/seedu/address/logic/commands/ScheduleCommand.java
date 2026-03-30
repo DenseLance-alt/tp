@@ -9,9 +9,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Logger;
 
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -48,8 +46,6 @@ public class ScheduleCommand extends Command {
 
     public static final String MESSAGE_SCHEDULE_DELIVERY_SUCCESS = "Scheduled Delivery for Person: %1$s";
     public static final String MESSAGE_PERSON_HAS_SCHEDULE = "Person already has Delivery: %1$s";
-
-    private static final Logger logger = LogsCenter.getLogger(ScheduleCommand.class);
 
     private final Index targetIndex;
     private final Delivery toSchedule;
