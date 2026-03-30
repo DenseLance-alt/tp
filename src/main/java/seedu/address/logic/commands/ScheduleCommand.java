@@ -31,8 +31,6 @@ import seedu.address.model.tag.Tag;
  */
 public class ScheduleCommand extends Command {
 
-    private static final Logger logger = LogsCenter.getLogger(ScheduleCommand.class);
-
     public static final String COMMAND_WORD = "schedule";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -50,6 +48,8 @@ public class ScheduleCommand extends Command {
 
     public static final String MESSAGE_SCHEDULE_DELIVERY_SUCCESS = "Scheduled Delivery for Person: %1$s";
     public static final String MESSAGE_PERSON_HAS_SCHEDULE = "Person already has Delivery: %1$s";
+
+    private static final Logger logger = LogsCenter.getLogger(ScheduleCommand.class);
 
     private final Index targetIndex;
     private final Delivery toSchedule;
