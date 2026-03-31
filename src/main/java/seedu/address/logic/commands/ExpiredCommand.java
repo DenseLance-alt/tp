@@ -29,7 +29,7 @@ public class ExpiredCommand extends Command {
     /**
      * Creates an ExpiredCommand to filter based on the specified {@code PersonHasExpiredDeliveryPredicate}.
      *
-     * @param predicate Predicate used to filter persons with expired deliveries.
+     * @param predicate Predicate used to filter persons with expired deliveries. Must not be null.
      */
     public ExpiredCommand(PersonHasExpiredDeliveryPredicate predicate) {
         requireNonNull(predicate);

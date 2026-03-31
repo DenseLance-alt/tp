@@ -20,7 +20,7 @@ public class PersonHasExpiredDeliveryPredicate implements Predicate<Person> {
     /**
      * Creates a PersonHasExpiredDeliveryPredicate with the specified date.
      *
-     * @param beforeDate Date to compare against.
+     * @param beforeDate Date to compare against. Must not be null.
      */
     public PersonHasExpiredDeliveryPredicate(LocalDate beforeDate) {
         requireNonNull(beforeDate);
