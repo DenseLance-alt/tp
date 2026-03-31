@@ -5,6 +5,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
@@ -12,7 +15,7 @@ import seedu.address.model.person.PersonMatchesFilterPredicate;
 
 /**
  * Finds and lists all persons in address book whose attributes (fields) match all the filters.
- * Keyword matching is case insensitive. Full word match is required.
+ * Keyword matching is case-insensitive. Full word match is required.
  */
 public class FindCommand extends Command {
 
@@ -42,13 +45,19 @@ public class FindCommand extends Command {
     public static final String MESSAGE_INVALID_PREFIX = "Invalid prefix provided. Only supports: "
             + PREFIX_NAME + ", " + PREFIX_ADDRESS + ", " + PREFIX_TAG + ".";
 
+    private static final Logger logger = LogsCenter.getLogger(FindCommand.class);
+
     private final PersonMatchesFilterPredicate predicate;
 
     /**
-     * Creates a FindCommand to filter based on the specified {@code PersonMatchesFilterPredicate}
+     * Creates a FindCommand to filter based on the specified {@code PersonMatchesFilterPredicate}.
+     *
+     * @param predicate The {@code PersonMatchesFilterPredicate} used to filter, not null.
      */
     public FindCommand(PersonMatchesFilterPredicate predicate) {
         requireNonNull(predicate); // defensive programming
+
+        logger.fine("Initializing with predicate: " + predicate);
         this.predicate = predicate;
     }
 
