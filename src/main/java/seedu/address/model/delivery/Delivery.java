@@ -136,10 +136,10 @@ public class Delivery {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("start date", startDate)
-                .add("end date", endDate)
-                .add("delivery days", deliveryDays)
-                .add("delivery time", deliveryTime)
+                .add("startDate", startDate)
+                .add("endDate", endDate)
+                .add("deliveryDays", deliveryDays)
+                .add("deliveryTime", deliveryTime)
                 .toString();
     }
 }

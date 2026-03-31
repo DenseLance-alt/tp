@@ -70,27 +70,22 @@ public class ScheduleCommandTest {
     }
 
     @Test
-    public void execute_personAlreadyWithDeliveryUnfilteredList_overwriteDelivery() {
+    public void execute_personAlreadyWithDeliveryUnfilteredList_failure() {
         Delivery delivery = new DeliveryBuilder().build();
         Person personToSchedule = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         // ensures that person does have delivery
         assertTrue(personToSchedule.hasDelivery());
 
-        Person personWithNewDelivery = new PersonBuilder(personToSchedule).withDelivery(delivery).build();
         ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_PERSON, delivery);
 
-        String expectedMessage = String.format(ScheduleCommand.MESSAGE_SCHEDULE_DELIVERY_SUCCESS,
-                Messages.formatDeliveryFromPerson(personWithNewDelivery));
-
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        String expectedMessage = String.format(ScheduleCommand.MESSAGE_PERSON_HAS_SCHEDULE,
+                Messages.formatDeliveryFromPerson(personToSchedule));
 
         // ensures that personToSchedule is in the correct index
         assertTrue(model.getFilteredPersonList().get(0).equals(personToSchedule));
 
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), personWithNewDelivery);
-
-        assertCommandSuccess(scheduleCommand, model, expectedMessage, expectedModel);
+        assertCommandFailure(scheduleCommand, model, expectedMessage);
     }
 
     @Test
@@ -120,7 +115,7 @@ public class ScheduleCommandTest {
     }
 
     @Test
-    public void execute_personAlreadyWithDeliveryFilteredList_overwriteDelivery() {
+    public void execute_personAlreadyWithDeliveryFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Delivery delivery = new DeliveryBuilder().build();
@@ -129,20 +124,15 @@ public class ScheduleCommandTest {
         // ensures that person does have delivery
         assertTrue(personToSchedule.hasDelivery());
 
-        Person personWithNewDelivery = new PersonBuilder(personToSchedule).withDelivery(delivery).build();
         ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_PERSON, delivery);
 
-        String expectedMessage = String.format(ScheduleCommand.MESSAGE_SCHEDULE_DELIVERY_SUCCESS,
-                                               Messages.formatDeliveryFromPerson(personWithNewDelivery));
-
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        String expectedMessage = String.format(ScheduleCommand.MESSAGE_PERSON_HAS_SCHEDULE,
+                                               Messages.formatDeliveryFromPerson(personToSchedule));
 
         // ensures that personToSchedule is in the correct index
         assertTrue(model.getFilteredPersonList().get(0).equals(personToSchedule));
 
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), personWithNewDelivery);
-
-        assertCommandSuccess(scheduleCommand, model, expectedMessage, expectedModel);
+        assertCommandFailure(scheduleCommand, model, expectedMessage);
     }
 
     @Test

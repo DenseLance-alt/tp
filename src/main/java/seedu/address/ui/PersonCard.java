@@ -88,6 +88,12 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        // Solution below inspired by GitHub Copilot
+        name.setWrapText(true);
+        phone.setWrapText(true);
+        address.setWrapText(true);
+        email.setWrapText(true);
     }
 
     //Solution below inspired by

@@ -9,7 +9,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
 
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -23,6 +25,7 @@ import seedu.address.model.delivery.StartDate;
  * Parses input arguments and creates a new ScheduleCommand object
  */
 public class ScheduleCommandParser implements Parser<ScheduleCommand> {
+    private static final Logger logger = LogsCenter.getLogger(ScheduleCommandParser.class);
 
     /**
      * Parses the given {@code String} of arguments in the context of the ScheduleCommand
@@ -40,6 +43,7 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_TIME, PREFIX_DAYS)
                 || argMultimap.getPreamble().isEmpty()) {
+            logger.info("Arguments of the schedule command does not include a necessary prefix: " + args);
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
         }
 

@@ -37,3 +37,4 @@ ServeMate helps tingkat caterers to:
 ### AI Generated Work
 * Gemini was used to generate the ServeMate icon for the application and Graphical User Interface (GUI) window.
   * **Prompt Used:** `Logo design for address book app created for administrative staff of tingkat caterers to manage their customer contacts`.
+* GitHub Copilot was used to aid with the GUI programming.

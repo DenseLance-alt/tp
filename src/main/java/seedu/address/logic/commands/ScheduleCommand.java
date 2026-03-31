@@ -45,6 +45,7 @@ public class ScheduleCommand extends Command {
             + PREFIX_DAYS + "124";
 
     public static final String MESSAGE_SCHEDULE_DELIVERY_SUCCESS = "Scheduled Delivery for Person: %1$s";
+    public static final String MESSAGE_PERSON_HAS_SCHEDULE = "Person already has Delivery: %1$s";
 
     private final Index targetIndex;
     private final Delivery toSchedule;
@@ -69,6 +70,12 @@ public class ScheduleCommand extends Command {
         }
 
         Person personToSchedule = lastShownList.get(targetIndex.getZeroBased());
+
+        if (personToSchedule.hasDelivery()) {
+            throw new CommandException(String.format(MESSAGE_PERSON_HAS_SCHEDULE,
+                    Messages.formatDeliveryFromPerson(personToSchedule)));
+        }
+
         Person personWithDelivery = addDeliveryToPerson(personToSchedule, toSchedule);
 
         assert personWithDelivery.hasDelivery();

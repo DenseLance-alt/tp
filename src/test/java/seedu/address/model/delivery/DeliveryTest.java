@@ -102,9 +102,9 @@ public class DeliveryTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Delivery.class.getCanonicalName() + "{start date=" + DELIVERY_ALICE.getStartDate()
-                + ", end date=" + DELIVERY_ALICE.getEndDate() + ", delivery days=" + DELIVERY_ALICE.getDeliveryDays()
-                + ", delivery time=" + DELIVERY_ALICE.getDeliveryTime() + "}";
+        String expected = Delivery.class.getCanonicalName() + "{startDate=" + DELIVERY_ALICE.getStartDate()
+                + ", endDate=" + DELIVERY_ALICE.getEndDate() + ", deliveryDays=" + DELIVERY_ALICE.getDeliveryDays()
+                + ", deliveryTime=" + DELIVERY_ALICE.getDeliveryTime() + "}";
         assertEquals(expected, DELIVERY_ALICE.toString());
     }
 }
