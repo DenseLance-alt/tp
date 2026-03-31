@@ -341,7 +341,7 @@ Furthermore, certain edits can cause the ServeMate to behave in unexpected ways 
 ## FAQ
 
 **Question**: How do I transfer my data to another computer?<br>
-**Answer**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ServeMate home folder.
+**Answer**: Install the ServeMate application on your second computer by following the instructions in the "Quick Start" section. On your original computer, locate the `[JAR file location]/data` folder which should contain the `addressbook.json` data file. Copy the `data` folder to your second computer, and place it in the ServeMate application folder located at `[JAR file location]` (if the `data` folder already exists, overwrite it). Run the ServeMate application on your second computer. You should be able to see the data you have transferred.
 <br>
 
 **Question**: Why does the delivery panel not automatically update today's date and deliveries when the time passes 12 midnight?<br>
