@@ -36,7 +36,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## Design
 
-<box type="info" seamless>
+<box type="info" light>
 
 **Note:** All references of a person in this design section represent a customer.
 </box>
@@ -110,7 +110,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
-<box type="info" seamless>
+<box type="info" light>
 
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
@@ -144,7 +144,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<box type="info" seamless>
+<box type="info" light>
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
@@ -187,7 +187,7 @@ This section describes some noteworthy details on how certain features are imple
 #### Implementation details
 The following sequence diagram illustrates the interactions within the `Logic` component for rescheduling a delivery:
 
-<box type="info" seamless>
+<box type="info" light>
 
 **Note:** The lifeline for `RescheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
@@ -225,7 +225,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 #### Implementation details
 The following sequence diagram illustrates the interactions within the `Logic` component for unscheduling a delivery:
 
-<box type="info" seamless>
+<box type="info" light>
 
 **Note:** The lifeline for `UnscheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
@@ -305,7 +305,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user          | edit customer's data                                    | correct any mistakes or changes to customer data to keep information accuracy                                  |
 | `* *`    | user          | schedule a delivery                                     | track deliveries that need to be made                                                                          |
 | `* *`    | user          | reschedule a delivery                                   | correct any mistakes or changes to delivery data belongs to a particular customer to keep information accuracy |
-| `* *`    | user          | unschedule a delivery                                   | remove cancelled delivery                                                                                      |
+| `* *`    | user          | unschedule a delivery                                   | remove inactive delivery                                                                                       |
+| `* *`    | user          | find customers with expired deliveries                  | identify and follow up with customers to renew their subscription                                              |
 | `* *`    | familiar user | display all upcoming deliveries                         | inform delivery drivers on their delivery points and plan production                                           |
 | `* *`    | familiar user | create a delivery route                                 | inform delivery drivers on their delivery route                                                                |
 | `* *`    | familiar user | reorder stops within a delivery route                   | ensures deliveries follow an efficient sequence                                                                |
@@ -313,7 +314,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | busy user     | search for a customer by name, phone number, or address | quickly locate customer details when handling customer enquiries                                               |
 | `*`      | expert user   | set estimated time of delivery for a customer           | ensure all customers have their food delivered on time                                                         |
 | `*`      | expert user   | set delivery status for a customer                      | keep track of deliveries that have been made and cancelled                                                     |
-| `*`      | expert user   | track customers' subscription expiry date               | check how many customers have their subscription close to the expiration date and gently remind them           |
 | `*`      | expert user   | track customers' subscription payment                   | know when I received their payements                                                                           |
 | `*`      | expert user   | tag each customer by their food preference              | inform the cooks to prepare food that aligns with the customers' food preference                               |
 | `*`      | expert user   | mass copy emails and contact numbers to clipboard       | mass email and message customer about upcoming promotions                                                      |
@@ -322,8 +322,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | expert user   | track number of days subscribed by a customer so far    | know who are my loyal customers                                                                                |
 | `*`      | expert user   | back up customer and route data                         | ensure that delivery operations are not disrupted by data loss                                                 |
 | `*`      | expert user   | archive customers data                                  | see only the relevant data for currently subscribed customers                                                  |
-
-
 
 
 ### Use cases
@@ -696,7 +694,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<box type="info" seamless>
+<box type="info" light>
 
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
