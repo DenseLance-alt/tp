@@ -296,8 +296,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​       | I want to …​                                            | So that I can…​                                                                                                |
 |----------|---------------|---------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
-| `* * *`  | beginner user | add a customer                                          | keep track of customers                                                                                        |
-| `* * *`  | beginner user | view a list of all customers                            | have an overview of my operations                                                                              |
+| `* * *`  | beginner user | add a customer                                          | store their contact information                                                                                |
+| `* * *`  | beginner user | view a list of all customers                            | get a complete overview of my contact base                                                                     |
+| `* * *`  | beginner user | view the delivery for each customer                     | ensure that food is delivered on the correct days                                                              |
 | `* * *`  | beginner user | exit from the app easily                                | avoid cluttering my desktop screen once I have finished using the app                                          |
 | `* * *`  | beginner user | delete a customer                                       | get rid of customer records that I no longer need to track                                                     |
 | `* *`    | beginner user | see a message explaining how to access the help page    | learn what each operation does                                                                                 |
@@ -306,7 +307,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user          | schedule a delivery                                     | track deliveries that need to be made                                                                          |
 | `* *`    | user          | reschedule a delivery                                   | correct any mistakes or changes to delivery data belongs to a particular customer to keep information accuracy |
 | `* *`    | user          | unschedule a delivery                                   | remove inactive delivery                                                                                       |
-| `* *`    | user          | find customers with expired deliveries                  | identify and follow up with customers to renew their subscription                                              |
+| `* *`    | user          | find customers with expired subscriptions               | identify and follow up with customers to renew their subscription                                              |
 | `* *`    | familiar user | display all upcoming deliveries                         | inform delivery drivers on their delivery points and plan production                                           |
 | `* *`    | familiar user | create a delivery route                                 | inform delivery drivers on their delivery route                                                                |
 | `* *`    | familiar user | reorder stops within a delivery route                   | ensures deliveries follow an efficient sequence                                                                |
