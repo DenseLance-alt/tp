@@ -88,7 +88,7 @@ Action | Command Format (with Examples)
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/Halal` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/Vegetarian`, `t/Vegetarian t/East` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/Vegetarian`, `t/Vegetarian t/NoEgg`, etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -98,6 +98,12 @@ Action | Command Format (with Examples)
 
 * Dates are in `yyyy-MM-dd` format, where `yyyy` is the 4-digit year, `MM` is the 2-digit month, and `dd` is the 2-digit day.<br>
   e.g. 9th March 2026 can be written has `2026-03-09`.
+
+* Tags (`t/[TAG]`) are intended for use in placing delivery notes for a particular customer.
+  * Tags should only consist of alphanumerical values without whitespaces.
+  * Suggested usages:
+    * Dietary restrictions of the customer (i.e. `t/Vegetarian`).
+    * The region where the customer lives (i.e. `t/West`).
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
