@@ -26,7 +26,7 @@ create UnscheduleCommandParser
 AddressBookParser -> UnscheduleCommandParser
 activate UnscheduleCommandParser
 
-UnscheduleCommandParser -[hidden]-> AddressBookParser
+UnscheduleCommandParser --> AddressBookParser
 deactivate UnscheduleCommandParser
 
 AddressBookParser -> UnscheduleCommandParser : parse("2")
@@ -36,7 +36,7 @@ create UnscheduleCommand
 UnscheduleCommandParser -> UnscheduleCommand
 activate UnscheduleCommand
 
-UnscheduleCommand -[hidden]-> UnscheduleCommandParser
+UnscheduleCommand --> UnscheduleCommandParser
 deactivate UnscheduleCommand
 
 UnscheduleCommandParser --> AddressBookParser : u
@@ -58,7 +58,7 @@ create UpdatedPerson
 TargetPerson -> UpdatedPerson
 activate UpdatedPerson
 
-UpdatedPerson -[hidden]-> TargetPerson
+UpdatedPerson --> TargetPerson
 deactivate UpdatedPerson
 
 TargetPerson --> UnscheduleCommand : updated
@@ -67,12 +67,14 @@ deactivate TargetPerson
 UnscheduleCommand -> Model : setPerson(target, updated)
 activate Model
 
+'Removed return value for readability
 Model -[hidden]-> UnscheduleCommand
 deactivate Model
 
 UnscheduleCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
 activate Model
 
+'Removed return value for readability
 Model -[hidden]-> UnscheduleCommand
 deactivate Model
 
@@ -80,7 +82,7 @@ create CommandResult
 UnscheduleCommand -> CommandResult
 activate CommandResult
 
-CommandResult -[hidden]-> UnscheduleCommand
+CommandResult --> UnscheduleCommand
 deactivate CommandResult
 
 UnscheduleCommand --> LogicManager : r

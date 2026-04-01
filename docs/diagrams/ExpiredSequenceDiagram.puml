@@ -25,7 +25,7 @@ create ExpiredCommandParser
 AddressBookParser -> ExpiredCommandParser
 activate ExpiredCommandParser
 
-ExpiredCommandParser -[hidden]-> AddressBookParser
+ExpiredCommandParser --> AddressBookParser
 deactivate ExpiredCommandParser
 
 'Extra space needed before prefix to denote empty preamble
@@ -33,17 +33,17 @@ AddressBookParser -> ExpiredCommandParser : parse(" bf/2026-02-01")
 activate ExpiredCommandParser
 
 create Predicate
-ExpiredCommandParser -> Predicate : PersonHasExpiredDeliveryPredicate(date)
+ExpiredCommandParser -> Predicate : PersonHasExpiredDeliveryPredicate("2026-02-01")
 activate Predicate
 
-Predicate -[hidden]-> ExpiredCommandParser
+Predicate --> ExpiredCommandParser
 deactivate Predicate
 
 create ExpiredCommand
 ExpiredCommandParser -> ExpiredCommand : ExpiredCommand(p)
 activate ExpiredCommand
 
-ExpiredCommand -[hidden]-> ExpiredCommandParser
+ExpiredCommand --> ExpiredCommandParser
 deactivate ExpiredCommand
 
 ExpiredCommandParser --> AddressBookParser : e
@@ -56,18 +56,19 @@ AddressBookParser --> LogicManager : e
 deactivate AddressBookParser
 
 LogicManager -> ExpiredCommand : execute(m)
+activate ExpiredCommand
 
 ExpiredCommand -> Model : updateFilteredPersonList(p)
 activate Model
 
-Model -[hidden]-> ExpiredCommand
+Model --> ExpiredCommand
 deactivate Model
 
 create CommandResult
 ExpiredCommand -> CommandResult
 activate CommandResult
 
-CommandResult -[hidden]-> ExpiredCommand
+CommandResult --> ExpiredCommand
 deactivate CommandResult
 
 ExpiredCommand --> LogicManager : r
