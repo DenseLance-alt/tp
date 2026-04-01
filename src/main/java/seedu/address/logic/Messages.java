@@ -36,7 +36,7 @@ public class Messages {
     /**
      * Formats the given {@code person} for display to the user.
      * The person's delivery, if any, is not returned.
-     * <p> Assumes that the person to format is not null.
+     * <p>Assumes that the person to format is not null.
      *
      * @param person The person to format.
      * @return String representation of the person's information.
@@ -61,7 +61,7 @@ public class Messages {
      * Formats the {@code person}'s delivery for display to the user.
      * If the person has no delivery, only the person's name is returned.
      * Otherwise, both the person's name and delivery are returned.
-     * <p> Assumes that the person whose delivery is to be formatted
+     * <p>Assumes that the person whose delivery is to be formatted
      * is not null.
      *
      * @param person The person whose delivery is to be formatted.
