@@ -378,7 +378,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user          | edit customer's data                                    | correct any mistakes or changes to customer data to keep information accuracy                                  |
 | `* *`    | user          | schedule a delivery                                     | track deliveries that need to be made                                                                          |
 | `* *`    | user          | reschedule a delivery                                   | correct any mistakes or changes to delivery data belongs to a particular customer to keep information accuracy |
-| `* *`    | user          | unschedule a delivery                                   | remove inactive delivery                                                                                       |
+| `* *`    | user          | unschedule a delivery                                   | remove an inactive delivery                                                                                    |
 | `* *`    | user          | find customers with expired subscriptions               | identify and follow up with customers to renew their subscription                                              |
 | `* *`    | familiar user | display all upcoming deliveries                         | inform delivery drivers on their delivery points and plan production                                           |
 | `* *`    | familiar user | create a delivery route                                 | inform delivery drivers on their delivery route                                                                |
