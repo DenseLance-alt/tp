@@ -137,8 +137,7 @@ public class DateTimeUtil {
     /**
      * Parses {@code day} into a {@code DayOfWeek} and returns it.
      *
-     * @param day The string attempted
-     *            to be parsed into DayOfWeek.
+     * @param day The string to be parsed into DayOfWeek.
      * @return DayOfWeek object representing
      *         the parsed day word value.
      * @throws NullPointerException If the argument passed is null.
