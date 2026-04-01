@@ -179,6 +179,38 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Find delivery by date
 
+**Objective:** Allows administrative staff to filter the customer list to show only customers with deliveries scheduled on a specified date, or within a specified date range.
+
+#### Implementation details
+The following sequence diagram illustrates the interactions within the `Logic` component for finding deliveries by date:
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `FindDeliveryCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
+
+<puml src="diagrams/FindDeliverySequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `find-delivery dt/2026-04-01` Command" />
+
+**Execution flow:**
+1. The user enters the `find-delivery` command with either a single date (`dt/`) or a date range (`st/` and `ed/`).
+2. `LogicManager` receives the input string and passes it to `AddressBookParser`.
+3. `AddressBookParser` creates a `FindDeliveryCommandParser` to parse the command arguments.
+4. `FindDeliveryCommandParser` parses the date prefix(es) and constructs a `DeliveryDatePredicate` that encapsulates the search criteria.
+5. `FindDeliveryCommandParser` creates a `FindDeliveryCommand` with the predicate and returns it.
+6. `LogicManager` executes the `FindDeliveryCommand`.
+7. `FindDeliveryCommand` calls `Model#updateFilteredPersonList(predicate)` to filter the customer list.
+8. `FindDeliveryCommand` completes and returns a `CommandResult` indicating how many customers were listed.
+
+#### Design considerations
+
+1. How `find-delivery` accepts date input.
+    * **Chosen:** Support both a single date (`dt/`) and a date range (`st/` and `ed/`), but not both at the same time.
+        * Pros: Flexible; covers the common case of checking a single day as well as planning for a longer window.
+        * Cons: Parser must validate that the two modes are mutually exclusive, adding some complexity.
+    * **Alternative:** Accept only a single date.
+        * Pros: Simpler parsing logic.
+        * Cons: Less useful for staff who need to view deliveries over a multi-day period.
+
 ### Schedule delivery
 
 ### Reschedule delivery

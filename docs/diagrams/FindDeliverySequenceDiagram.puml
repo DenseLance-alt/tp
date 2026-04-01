@@ -1,0 +1,76 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindDeliveryCommandParser" as FindDeliveryCommandParser LOGIC_COLOR
+participant "fdc:FindDeliveryCommand" as FindDeliveryCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("find-delivery dt/2026-04-01")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("find-delivery dt/2026-04-01")
+activate AddressBookParser
+
+create FindDeliveryCommandParser
+AddressBookParser -> FindDeliveryCommandParser
+activate FindDeliveryCommandParser
+
+FindDeliveryCommandParser --> AddressBookParser
+deactivate FindDeliveryCommandParser
+
+AddressBookParser -> FindDeliveryCommandParser : parse("dt/2026-04-01")
+activate FindDeliveryCommandParser
+
+create FindDeliveryCommand
+FindDeliveryCommandParser -> FindDeliveryCommand
+activate FindDeliveryCommand
+
+note right of FindDeliveryCommandParser
+  Creates a DeliveryDatePredicate
+  from the parsed date(s),
+  then wraps it in FindDeliveryCommand
+end note
+
+FindDeliveryCommand --> FindDeliveryCommandParser :
+deactivate FindDeliveryCommand
+
+FindDeliveryCommandParser --> AddressBookParser : fdc
+deactivate FindDeliveryCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindDeliveryCommandParser -[hidden]-> AddressBookParser
+destroy FindDeliveryCommandParser
+
+AddressBookParser --> LogicManager : fdc
+deactivate AddressBookParser
+
+LogicManager -> FindDeliveryCommand : execute(m)
+activate FindDeliveryCommand
+
+FindDeliveryCommand -> Model : updateFilteredPersonList(predicate)
+activate Model
+
+Model --> FindDeliveryCommand
+deactivate Model
+
+create CommandResult
+FindDeliveryCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindDeliveryCommand
+deactivate CommandResult
+
+FindDeliveryCommand --> LogicManager : r
+deactivate FindDeliveryCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
