@@ -33,8 +33,8 @@ public class RescheduleCommand extends Command {
 
     public static final String COMMAND_WORD = "reschedule";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of a delivery assigned to "
-            + "a particular person identified "
-            + "by the index number used in the displayed person list."
+            + "a particular customer identified "
+            + "by the index number used in the displayed customer list."
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer)"
             + "[" + PREFIX_START_DATE + "START DATE] "
@@ -48,7 +48,7 @@ public class RescheduleCommand extends Command {
 
     public static final String MESSAGE_EDIT_DELIVERY_SUCCESS = "Edited Delivery: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_NON_EXISTENT_DELIVERY = "This person does not have an existing delivery";
+    public static final String MESSAGE_NON_EXISTENT_DELIVERY = "This customer does not have an existing delivery";
 
     private final Index targetIndex;
     private final RescheduleDeliveryDescriptor rescheduleDeliveryDescriptor;

@@ -36,6 +36,14 @@ If Java is not installed, follow the installation guide for your operating syste
    ```
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
+* The customer panel on the left allows you to view customer information, including their full delivery details.
+* The delivery panel on the right allows you to view today's deliveries. It provides a quick reference to view deliveries scheduled for the current day, from earliest to latest delivery time.
+* You can adjust the width of the panels by left-clicking and dragging the divider between them.
+
+<box type="info" seamless>
+
+**Note:** The date shown on the delivery panel is based on your computer's date setting. If you find today's date is incorrectly reflected, check that your computer's date is correct, then close and relaunch ServeMate.
+</box>
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -99,6 +107,12 @@ Action | Command Format (with Examples)
 * Dates are in `yyyy-MM-dd` format, where `yyyy` is the 4-digit year, `MM` is the 2-digit month, and `dd` is the 2-digit day.<br>
   e.g. 9th March 2026 can be written has `2026-03-09`.
 
+* Tags (`t/[TAG]`) are intended for use in placing delivery notes for a particular customer.
+  * Tags should only consist of alphanumerical values without whitespaces.
+  * Suggested usages:
+    * Dietary restrictions of the customer (i.e. `t/Vegetarian`).
+    * The region where the customer lives (i.e. `t/West`).
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
@@ -110,6 +124,7 @@ Displays a help message with a link to access ServeMate's User Guide.
 
 Format: `help`
 
+<br>
 
 ### Adding a customer: `add`
 
@@ -127,11 +142,15 @@ Examples:
 * `add n/Betsy Crowe t/LactoseIntolerant e/betsycrowe@example.com a/Newton Rd p/1234567 t/Vegetarian`
   ![result for 'add n/Betsy Crowe t/LactoseIntolerant e/betsycrowe@example.com a/Newton Rd p/1234567 t/Vegetarian'](images/AddCommand.png)
 
+<br>
+
 ### Listing all customers: `list`
 
 Displays basic information of all customers.
 
 Format: `list`
+
+<br>
 
 ### Editing a customer: `edit`
 
@@ -151,6 +170,8 @@ Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd customer to be `Betsy Crower` and clears all existing tags.
   ![result for 'edit 2 n/Betsy Crower t/'](images/EditCommand.png)
 
+<br>
+
 ### Deleting a customer : `delete`
 
 Deletes the specified customer and the delivery associated with them.
@@ -164,6 +185,8 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd customer on the list.
 * `find n/Betsy` followed by `delete 1` deletes the 1st customer in the results of the `find` command.
+
+<br>
 
 ### Finding customers by attributes: `find`
 
@@ -187,7 +210,9 @@ Examples:
 * `find n/Alex t/Vegetarian` displays customers whose name is `Alex` *and* tagged with dietary restriction `Vegetarian`.
 * `find n/Bernice a/Yishun Jurong` displays customers whose name is `Bernice` *and* with address containing `Yishun` or `Jurong`.
 * `find n/Alex Bernice a/Yishun t/Vegetarian` displays customers whose name is `Alex` or `Bernice`, with address containing `Yishun` *and* tagged with dietary restriction `Vegetarian`.<br>
-  ![result for 'find n/Alex Bernice a/Yishun t/Vegetarian'](images/findAlexBerniceResult.png)
+  <img src="images/findAlexBerniceResult.png" alt="result for 'find n/Alex Bernice a/Yishun t/Vegetarian'" width="500"/>
+
+<br>
 
 ### Finding deliveries on a given date: `find-delivery`
 
@@ -206,6 +231,8 @@ Examples:
 * `find-delivery dt/2026-04-01` returns all customers with a delivery on Wednesday, 1 April 2026.
 * `find-delivery st/2026-04-01 ed/2026-04-30` returns all customers with a delivery scheduled within April 2026.
 
+<br>
+
 ### Finding customers with expired delivery: `expired`
 
 Finds all customers with deliveries that have expired before the given date.
@@ -219,6 +246,8 @@ Format: `expired bf/DATE`
 Examples:
 * `expired bf/2026-12-21` displays all customers whose deliveries have ended before 21 December 2026.
   ![result for 'expired bf/2026-12-21'](images/ExpiredCommand.png)
+
+<br>
 
 ### Scheduling a delivery : `schedule`
 
@@ -237,6 +266,8 @@ Examples:
 * `schedule 1 st/2026-02-01 ed/2026-02-02 tm/13:00 d/12` adds a delivery for the 1st customer on the list. The delivery starts on 1 February 2026, ends on 2 February 2026 and occurs at 1 PM on Mondays and Tuesdays.
 * `schedule 4 st/2026-03-11 ed/2026-04-01 tm/15:30 d/246` adds a delivery for the 4th customer on the list. The delivery starts on 11 March 2026, ends on 1 April 2026 and occurs at 3:30 PM on Tuesday, Thursdays and Saturdays.
 
+<br>
+
 ### Editing a delivery : `reschedule`
 
 Edits the delivery associated with the specified customer.
@@ -254,6 +285,8 @@ Examples:
 * `reschedule 2 d/25` Edits the delivery days for the 2nd customer to be `25` (Tuesday and Friday).
   ![result for 'reschedule 2 d/25'](images/rescheduleBernice.png)
 
+<br>
+
 ### Unscheduling a delivery : `unschedule`
 
 Deletes the delivery associated with the specified customer.
@@ -270,6 +303,8 @@ Examples:
 * `find n/Bernice` followed by `unschedule 1` deletes the delivery for the 1st customer in the results of the `find` command.
   ![result for 'unschedule 1' after `find n/Bernice`](images/UnscheduleCommand.png)
 
+<br>
+
 ### Clearing all entries : `clear`
 
 Deletes **all** customer records and their delivery details (if any). This operation **cannot be undone** and **data cannot be recovered**.
@@ -282,15 +317,21 @@ This action is permanent and cannot be undone. Ensure that you have thoroughly r
 
 Format: `clear`
 
+<br>
+
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
+<br>
+
 ### Saving the data
 
 ServeMate data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+<br>
 
 ### Editing the data file
 
@@ -307,12 +348,44 @@ Furthermore, certain edits can cause the ServeMate to behave in unexpected ways 
 
 ## FAQ
 
-**Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ServeMate home folder.
+**Question**: How do I transfer my data to another computer?<br>
+**Answer**: Install the ServeMate application on your second computer by following the instructions in the "Quick Start" section. On your original computer, locate the `[JAR file location]/data` folder which should contain the `addressbook.json` data file. Copy the `data` folder to your second computer, and place it in the ServeMate application folder located at `[JAR file location]` (if the `data` folder already exists, replace it). Run the ServeMate application on your second computer. You should be able to see the data you have transferred.
+<br>
+
+**Question**: Why does the delivery panel not automatically update today's date and deliveries when the time passes 12 midnight?<br>
+**Answer**: ServeMate currently does not support automatically refreshing the date on the delivery panel if the time passes 12 midnight, in case you are still referring to the previous day's deliveries. To refresh the date on the panel, simply close and relaunch ServeMate.
+<br>
+
+**Question**: Why can't I use the delivery panel to view deliveries on other dates?<br>
+**Answer**: ServeMate currently does not support viewing deliveries on other dates in the delivery panel. The delivery panel is intended as a quick reference to view deliveries scheduled on the current day for your operations. If you need to view deliveries on other dates, you can use the `find-delivery` command.
+<br>
+
+**Question**: Why is the delivery panel wider than the customer panel when I make the ServeMate application window narrower?<br>
+**Answer**: When the ServeMate application window is narrow, the delivery panel is given a larger width to provide a quick reference to deliveries scheduled on the current day. If you need to view more information in the customer panel, you can resize the application window and expand the customer panel for a better viewing experience.
+<br>
+
+**Question**: Why does the `find` command only return customers that matches all filters?<br>
+**Answer**: ServeMate's `find` command is designed to match all filters so you can easily narrow down to the most relevant results to find the customer that you are looking for (e.g. `find n/John a/Clementi` finds all customers named `John` with an address containing `Clementi`). <br>
+If you like to find customers matching any of the filters (e.g. find all customers with name `Richard` or address `Jurong`), you may issue separate commands (e.g. `find n/Richard` and `find a/Jurong`).
+<br>
+
+**Question**: Why does the `find` command use full word matching for keywords?<br>
+**Answer**: ServeMate's `find` command does not support partial word matching, to reduce the number of irrelevant results returned so that you can find customers quickly. In the event that you might not remember exactly the full word to search for (e.g. `Richard` or `Richards`), you may specify multiple keywords within a filter (e.g. `find n/Richard Richards`) to find customers matching any 1 keyword.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+<box type="warning" light>
+
+**Warning:**
+The `preferences.json` file saves configuration settings used by ServeMate. We recommend that you do not edit the file directly as certain edits can cause ServeMate to behave in unexpected ways. Therefore, edit the file only if you are confident that you can update it correctly.
+</box>
+
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+
+------------------------------------------------------------------------------------------------------------------
+## Coming soon
+1. **Integrated `find` command:** Finding specific deliveries will be easier and more convenient! We plan to combine the `find-delivery` and `find` commands, so that you can search for both delivery details (e.g. dates) and customer details (e.g. address) all at once.
+2. **Refresh delivery panel:** Currently, you need to relaunch ServeMate to view deliveries scheduled for the new day. Soon, you will be able to refresh the delivery panel whenever needed to view deliveries scheduled on the current day without relaunching ServeMate.

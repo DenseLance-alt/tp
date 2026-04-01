@@ -1,11 +1,12 @@
 package seedu.address.logic;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
-import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Person;
 
 /**
@@ -16,8 +17,8 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command.\n"
             + "Type 'help' to view the user guide for a list of available commands.";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid!";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The customer index provided is invalid!";
+    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d customers listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
@@ -36,14 +37,15 @@ public class Messages {
     /**
      * Formats the given {@code person} for display to the user.
      * The person's delivery, if any, is not returned.
+     * <p>Assumes that the person to format is not null.
      *
-     * @param person The person to format.
+     * @param person The person to format. Must not be null.
      * @return String representation of the person's information.
      */
     public static String formatPerson(Person person) {
-        assert person != null;
+        requireNonNull(person);
 
-        final StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
                 .append("; Phone: ")
                 .append(person.getPhone())
@@ -60,41 +62,32 @@ public class Messages {
      * Formats the {@code person}'s delivery for display to the user.
      * If the person has no delivery, only the person's name is returned.
      * Otherwise, both the person's name and delivery are returned.
+     * <p>Assumes that the person whose delivery is to be formatted
+     * is not null.
      *
-     * @param person The person whose delivery is to be formatted.
+     * @param person The person whose delivery is to be formatted. Must not be null.
      * @return String representation of the person's name and, if
      *         present, information about their delivery.
      */
     public static String formatDeliveryFromPerson(Person person) {
+        requireNonNull(person);
+
+        StringBuilder builder = new StringBuilder();
+        builder.append(person.getName());
+
         if (!person.hasDelivery()) {
-            return person.getName().toString();
+            return builder.toString();
         }
 
-        final StringBuilder builder = new StringBuilder();
-        final Delivery delivery = person.getDelivery();
-        return builder.append(person.getName())
-                .append(formatDelivery(delivery))
-                .toString();
-    }
-
-    /**
-     * Formats the {@code delivery} for display to the user.
-     *
-     * @param delivery The delivery to format.
-     * @return String representation of the delivery's information.
-     */
-    private static String formatDelivery(Delivery delivery) {
-        assert delivery != null;
-
-        final StringBuilder builder = new StringBuilder();
         return builder.append("; Start Date: ")
-                .append(delivery.getStartDate())
+                .append(person.getDeliveryStartDate())
                 .append("; End Date: ")
-                .append(delivery.getEndDate())
+                .append(person.getDeliveryEndDate())
                 .append("; Delivery Days: ")
-                .append(delivery.getDeliveryDays())
+                .append(person.getDeliveryDays())
                 .append("; Delivery Time: ")
-                .append(delivery.getDeliveryTime())
+                .append(person.getDeliveryTime())
                 .toString();
     }
+
 }

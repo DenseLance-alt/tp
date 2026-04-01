@@ -21,13 +21,13 @@ public class UnscheduleCommand extends Command {
     public static final String COMMAND_WORD = "unschedule";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person's delivery identified by the index number used in the displayed person list.\n"
+            + ": Deletes the customer's delivery identified by the index number used in the displayed customer list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_DELIVERY_SUCCESS = "Deleted Delivery for Person: %1$s";
+    public static final String MESSAGE_DELETE_DELIVERY_SUCCESS = "Deleted Delivery for Customer: %1$s";
     public static final String MESSAGE_MISSING_DELIVERY =
-            "This person does not have an existing delivery in the address book.";
+            "This customer does not have an existing delivery in the address book.";
 
     private final Index targetIndex;
 

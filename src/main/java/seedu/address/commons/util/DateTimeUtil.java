@@ -6,22 +6,32 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.time.format.TextStyle;
+import java.time.temporal.ChronoField;
 import java.util.Locale;
 
 /**
  * Helper functions for handling dates, days and times.
  */
 public class DateTimeUtil {
+    // FORMATTER_DATE implementation below written by ChatGPT
     /**
      * The date must follow the format yyyy-MM-dd
      * where yyyy is the 4-digit year, MM is the 2-digit month number,
      * and dd is the 2-digit date number.
      */
     public static final DateTimeFormatter FORMATTER_DATE =
-            DateTimeFormatter.ofPattern("uuuu-MM-dd").withResolverStyle(ResolverStyle.STRICT);
+            new DateTimeFormatterBuilder()
+                    .appendValue(ChronoField.YEAR, 4)
+                    .appendLiteral('-')
+                    .appendValue(ChronoField.MONTH_OF_YEAR, 2)
+                    .appendLiteral('-')
+                    .appendValue(ChronoField.DAY_OF_MONTH, 2)
+                    .toFormatter()
+                    .withResolverStyle(ResolverStyle.STRICT);
 
     /**
      * The day input that uses this formatter must follow the format of

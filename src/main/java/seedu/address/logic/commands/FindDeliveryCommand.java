@@ -15,7 +15,7 @@ public class FindDeliveryCommand extends Command {
     public static final String COMMAND_WORD = "find-delivery";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Finds all persons who require delivery on the specified date or within the specified date range.\n"
+            + ": Finds all customers who require delivery on the specified date or within the specified date range.\n"
             + "Parameters: dt/DATE or st/START_DATE ed/END_DATE (dates in yyyy-MM-dd)\n"
             + "Example: " + COMMAND_WORD + " dt/2026-04-01\n"
             + "Example: " + COMMAND_WORD + " st/2026-04-01 ed/2026-04-30";

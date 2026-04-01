@@ -24,6 +24,7 @@
 
 ### AI Generated Work
 * Gemini was used to generate the ServeMate icon for the application and GUI window.
+* ChatGPT was used to generate code implementation for custom date formatter `FORMATTER_DATE`.
 * GitHub Copilot was used to aid with the GUI programming.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -139,14 +140,14 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object) and the `Delivery` objects contained within these `Person` objects.
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` and `Delivery` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects. Similarly, only one `Delivery` object would be required per unique delivery, instead of each `Person` needing their own `Delivery` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -164,6 +165,9 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+Note on parsing address book data:
+* Although commands from the user accept days of the week in the form of numbers (i.e. `123`), they are stored as capitalized alphabet-only strings (i.e. "MONDAY", "TUESDAY", etc.) in the JSON file. This is to enable better readability by advanced users who would like to edit the JSON file since speed of inputting is not a concern for this use case.
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
@@ -177,6 +181,38 @@ This section describes some noteworthy details on how certain features are imple
 ### Find customer by attribute
 
 ### Find delivery by date
+
+**Objective:** Allows administrative staff to filter the customer list to show only customers with deliveries scheduled on a specified date, or within a specified date range.
+
+#### Implementation details
+The following sequence diagram illustrates the interactions within the `Logic` component for finding deliveries by date:
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `FindDeliveryCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
+
+<puml src="diagrams/FindDeliverySequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `find-delivery dt/2026-04-01` Command" />
+
+**Execution flow:**
+1. The user enters the `find-delivery` command with either a single date (`dt/`) or a date range (`st/` and `ed/`).
+2. `LogicManager` receives the input string and passes it to `AddressBookParser`.
+3. `AddressBookParser` creates a `FindDeliveryCommandParser` to parse the command arguments.
+4. `FindDeliveryCommandParser` parses the date prefix(es) and constructs a `DeliveryDatePredicate` that encapsulates the search criteria.
+5. `FindDeliveryCommandParser` creates a `FindDeliveryCommand` with the predicate and returns it.
+6. `LogicManager` executes the `FindDeliveryCommand`.
+7. `FindDeliveryCommand` calls `Model#updateFilteredPersonList(predicate)` to filter the customer list.
+8. `FindDeliveryCommand` completes and returns a `CommandResult` indicating how many customers were listed.
+
+#### Design considerations
+
+1. How `find-delivery` accepts date input.
+    * **Chosen:** Support both a single date (`dt/`) and a date range (`st/` and `ed/`), but not both at the same time.
+        * Pros: Flexible; covers the common case of checking a single day as well as planning for a longer window.
+        * Cons: Parser must validate that the two modes are mutually exclusive, adding some complexity.
+    * **Alternative:** Accept only a single date.
+        * Pros: Simpler parsing logic.
+        * Cons: Less useful for staff who need to view deliveries over a multi-day period.
 
 ### Schedule delivery
 
@@ -294,33 +330,34 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​       | I want to …​                                            | So that I can…​                                                                                      |
-|----------|---------------|---------------------------------------------------------|------------------------------------------------------------------------------------------------------|
-| `* * *`  | beginner user | add a customer                                          | keep track of customers                                                                              |
-| `* * *`  | beginner user | view a list of all customers                            | have an overview of my operations                                                                    |
-| `* * *`  | beginner user | exit from the app easily                                | avoid cluttering my desktop screen once I have finished using the app                                |
-| `* * *`  | beginner user | delete a customer                                       | get rid of customer records that I no longer need to track                                           |
-| `* *`    | beginner user | see a message explaining how to access the help page    | learn what each operation does                                                                       |
-| `* *`    | user          | import customer data in bulk                            | conveniently transition into the app                                                                 |
-| `* *`    | user          | edit customer's data                                    | correct any mistakes or changes to customer data to keep information accuracy                        |
-| `* *`    | user          | schedule a delivery                                     | track deliveries that need to be made                                                                |
-| `* *`    | user          | unschedule a delivery                                   | remove cancelled delivery                                                                            |
-| `* *`    | familiar user | display all upcoming deliveries                         | inform delivery drivers on their delivery points and plan production                                 |
-| `* *`    | familiar user | create a delivery route                                 | inform delivery drivers on their delivery route                                                      |
-| `* *`    | familiar user | reorder stops within a delivery route                   | ensures deliveries follow an efficient sequence                                                      |
-| `* *`    | familiar user | tag each customer with delivery notes                   | inform drivers about specific instructions with regards to delivery                                  |
-| `* *`    | busy user     | search for a customer by name, phone number, or address | quickly locate customer details when handling customer enquiries                                     |
-| `*`      | expert user   | set estimated time of delivery for a customer           | ensure all customers have their food delivered on time                                               |
-| `*`      | expert user   | set delivery status for a customer                      | keep track of deliveries that have been made and cancelled                                           |
-| `*`      | expert user   | track customers' subscription expiry date               | check how many customers have their subscription close to the expiration date and gently remind them |
-| `*`      | expert user   | track customers' subscription payment                   | know when I received their payements                                                                 |
-| `*`      | expert user   | tag each customer by their food preference              | inform the cooks to prepare food that aligns with the customers' food preference                     |
-| `*`      | expert user   | mass copy emails and contact numbers to clipboard       | mass email and message customer about upcoming promotions                                            |
-| `*`      | expert user   | view free time slots                                    | schedule new deliveries for new customers                                                            |
-| `*`      | expert user   | track the total revenue from a customer                 | know how much I have earned from a customer                                                          |
-| `*`      | expert user   | track number of days subscribed by a customer so far    | know who are my loyal customers                                                                      |
-| `*`      | expert user   | back up customer and route data                         | ensure that delivery operations are not disrupted by data loss                                       |
-| `*`      | expert user   | archive customers data                                  | see only the relevant data for currently subscribed customers                                        |
+| Priority | As a …​       | I want to …​                                            | So that I can…​                                                                                                |
+|----------|---------------|---------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| `* * *`  | beginner user | add a customer                                          | keep track of customers                                                                                        |
+| `* * *`  | beginner user | view a list of all customers                            | have an overview of my operations                                                                              |
+| `* * *`  | beginner user | exit from the app easily                                | avoid cluttering my desktop screen once I have finished using the app                                          |
+| `* * *`  | beginner user | delete a customer                                       | get rid of customer records that I no longer need to track                                                     |
+| `* *`    | beginner user | see a message explaining how to access the help page    | learn what each operation does                                                                                 |
+| `* *`    | user          | import customer data in bulk                            | conveniently transition into the app                                                                           |
+| `* *`    | user          | edit customer's data                                    | correct any mistakes or changes to customer data to keep information accuracy                                  |
+| `* *`    | user          | schedule a delivery                                     | track deliveries that need to be made                                                                          |
+| `* *`    | user          | reschedule a delivery                                   | correct any mistakes or changes to delivery data belongs to a particular customer to keep information accuracy |
+| `* *`    | user          | unschedule a delivery                                   | remove cancelled delivery                                                                                      |
+| `* *`    | familiar user | display all upcoming deliveries                         | inform delivery drivers on their delivery points and plan production                                           |
+| `* *`    | familiar user | create a delivery route                                 | inform delivery drivers on their delivery route                                                                |
+| `* *`    | familiar user | reorder stops within a delivery route                   | ensures deliveries follow an efficient sequence                                                                |
+| `* *`    | familiar user | tag each customer with delivery notes                   | inform drivers about specific instructions with regards to delivery                                            |
+| `* *`    | busy user     | search for a customer by name, phone number, or address | quickly locate customer details when handling customer enquiries                                               |
+| `*`      | expert user   | set estimated time of delivery for a customer           | ensure all customers have their food delivered on time                                                         |
+| `*`      | expert user   | set delivery status for a customer                      | keep track of deliveries that have been made and cancelled                                                     |
+| `*`      | expert user   | track customers' subscription expiry date               | check how many customers have their subscription close to the expiration date and gently remind them           |
+| `*`      | expert user   | track customers' subscription payment                   | know when I received their payements                                                                           |
+| `*`      | expert user   | tag each customer by their food preference              | inform the cooks to prepare food that aligns with the customers' food preference                               |
+| `*`      | expert user   | mass copy emails and contact numbers to clipboard       | mass email and message customer about upcoming promotions                                                      |
+| `*`      | expert user   | view free time slots                                    | schedule new deliveries for new customers                                                                      |
+| `*`      | expert user   | track the total revenue from a customer                 | know how much I have earned from a customer                                                                    |
+| `*`      | expert user   | track number of days subscribed by a customer so far    | know who are my loyal customers                                                                                |
+| `*`      | expert user   | back up customer and route data                         | ensure that delivery operations are not disrupted by data loss                                                 |
+| `*`      | expert user   | archive customers data                                  | see only the relevant data for currently subscribed customers                                                  |
 
 
 
@@ -471,8 +508,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to view all upcoming deliveries for the day
-2. ServeMate shows a list of all upcoming deliveries for the day
+1. User requests to view all upcoming deliveries for the day.
+2. ServeMate shows a list of all upcoming deliveries for the day.
 
    Use case ends.
 
@@ -488,11 +525,59 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list customers
-2. ServeMate shows a list of customers
-3. User requests to add a new upcoming delivery for a customer with required fields
-4. ServeMate adds the upcoming delivery to the customer's details
-5. ServeMate shows a success message with the added upcoming delivery's details
+1. User requests to list customers.
+2. ServeMate shows a list of customers.
+3. User requests to add a new upcoming delivery for a customer with required fields.
+4. ServeMate adds the upcoming delivery to the customer's details.
+5. ServeMate shows a success message with the added upcoming delivery's details.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 3a. ServeMate detects that the given index is not a positive integer.
+
+    * 3a1. ServeMate shows an error message describing the correct command format.
+
+      Use case resumes at step 3.
+
+* 3b. ServeMate detects that the given index is out of range.
+
+    * 3b1. ServeMate shows an error message indicating that the provided index is invalid.
+
+      Use case resumes at step 3.
+
+* 3c. ServeMate detects that there is a required field is missing.
+
+    * 3c1. ServeMate shows an error message describing the correct command format.
+
+      Use case resumes from step 3.
+
+* 3d. ServeMate detects that a parameter value is invalid.
+
+    * 3d1. ServeMate shows an error message describing the violated constraint.
+
+      Use case resumes from step 3.
+
+* 3e. ServeMate detects that a delivery to the same customer already exists.
+
+    * 3e1. ServeMate shows an error message describing that the customer already has a delivery scheduled.
+
+      Use case resumes from step 3.
+
+**Use case 7: Edit delivery details belonging to a customer**
+
+**MSS**
+
+1. User requests to list customers.
+2. ServeMate shows a list of customers.
+3. User requests to edit the delivery details of a customer in the list.
+4. ServeMate updates the customer's delivery details.
+5. ServeMate shows a success message with the updated customer’s delivery details.
 
    Use case ends.
 
@@ -504,43 +589,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is not a positive integer.
 
-    * 3a1. ServeMate shows an error message describing the correct command format and requests for a new command from the user.
+    * 3a1. ServeMate shows an error message describing the correct command format.
 
       Use case resumes at step 3.
 
 * 3b. The given index is out of range.
 
-    * 3b1. ServeMate shows an error message indicating that the provided index is invalid and requests for a new command from the user.
+    * 3b1. ServeMate shows an error message indicating that the provided index is invalid.
 
       Use case resumes at step 3.
 
-* 3c. Any required field is missing.
+* 3c. No fields are specified for editing.
 
-    * 3c1. ServeMate shows an error message describing the correct command format and requests for a new command from the user.
+    * 3c1. ServeMate shows an error message indicating that at least one field must be provided for editing.
 
-      Use case resumes from step 3.
+      Use case resumes at step 3.
 
-* 3d. Any parameter value is invalid.
+* 3d. Any provided field value is invalid.
 
-    * 3d1. ServeMate shows an error message describing the violated constraint and requests for a new command from the user.
+    * 3d1. ServeMate shows an error message describing the violated constraint.
 
-      Use case resumes from step 3.
+      Use case resumes at step 3.
 
-* 3e. A delivery to the same customer already exists.
 
-    * 3e1. ServeMate removes the delivery already added to the customer from the customer's details.
-
-      Use case resumes from step 4.
-
-**Use case 7: Delete a delivery associated with a customer**
+**Use case 8: Delete a delivery associated with a customer**
 
 **MSS**
 
-1. User requests to list customers
-2. ServeMate shows a list of customers
-3. User requests to delete a customer's delivery
-4. ServeMate deletes the delivery associated with the specified customer
-5. ServeMate shows a confirmation message that includes the customer's name and details of the deleted delivery
+1. User requests to list customers.
+2. ServeMate shows a list of customers.
+3. User requests to delete a customer's delivery.
+4. ServeMate deletes the delivery associated with the specified customer.
+5. ServeMate shows a success message that includes the customer's name and details of the deleted delivery.
    Use case ends.
 
 **Extensions**
@@ -549,33 +629,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is not a positive integer.
+* 3a. ServeMate detects that the given index is not a positive integer.
 
   * 3a1. ServeMate shows an error message describing the correct command format.
 
     Use case resumes at step 3.
 
-* 3b. The given index is out of range.
+* 3b. ServeMate detects that the given index is out of range.
 
   * 3b1. ServeMate shows an error message describing that the index provided is invalid.
 
     Use case resumes at step 3.
 
-* 3c. The customer at the given index does not have a delivery.
+* 3c. ServeMate detects that the customer at the given index does not have a delivery.
 
   * 3c1. ServeMate shows an error message describing that the specified customer does not have an existing delivery.
 
     Use case ends.
 
-**Use case 8: Tag customer with delivery note**
+**Use case 9: Tag customer with delivery note**
 
 **MSS**
 
-1. User requests to list customers
-2. ServeMate shows a list of customers
-3. User requests to tag a customer in the list with a delivery note
-4. ServeMate tags the customer in the customer record with the delivery note
-5. ServeMate shows a success message with the updated customer's details including the delivery note
+1. User requests to list customers.
+2. ServeMate shows a list of customers.
+3. User requests to tag a customer in the list with a delivery note.
+4. ServeMate tags the customer in the customer record with the delivery note.
+5. ServeMate shows a success message with the updated customer's details including the delivery note.
 
 **Extensions**
 
@@ -583,21 +663,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is not a positive integer.
+* 3a. ServeMate detects that the given index is not a positive integer.
 
-    * 3a1. ServeMate shows an error message describing the correct command format and requests for a new command from the user.
-
-      Use case resumes at step 3.
-
-* 3b. The given index is out of range.
-
-    * 3b1. ServeMate shows an error message describing that the index value given is invalid and requests for a new command from the user.
+    * 3a1. ServeMate shows an error message describing the correct command format.
 
       Use case resumes at step 3.
 
-* 3c. The given delivery note is empty.
+* 3b. ServeMate detects that the given index is out of range.
 
-    * 3c1. ServeMate shows an error message describing that the delivery note is missing and requests for a new command from the user.
+    * 3b1. ServeMate shows an error message describing that the index value given is invalid.
+
+      Use case resumes at step 3.
+
+* 3c. ServeMate detects that the given delivery note is empty.
+
+    * 3c1. ServeMate shows an error message describing that the delivery note is missing.
   
       Use case resumes at step 3.
 

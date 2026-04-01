@@ -46,6 +46,7 @@ public class EndDate {
 
     /**
      * Checks if this end date is before the specified date.
+     * <p>Assumes that the specified date is not null.
      *
      * @param other Date to compare against.
      * @return {@code true} if end date occurs before the specified date,
@@ -53,6 +54,7 @@ public class EndDate {
      */
     public boolean isBefore(LocalDate other) {
         assert other != null;
+
         return date.isBefore(other);
     }
 

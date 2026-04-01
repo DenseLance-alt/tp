@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.formatDeliveryFromPerson;
 import static seedu.address.logic.Messages.formatPerson;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalDeliveries.DELIVERY_ALICE;
 import static seedu.address.testutil.TypicalDeliveries.DELIVERY_CARL;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -65,6 +66,11 @@ public class MessagesTest {
     }
 
     @Test
+    void formatPerson_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> Messages.formatPerson((Person) null));
+    }
+
+    @Test
     void formatDeliveryFromPerson_sameDeliveryMessage() {
         // ensures that Alice has delivery and Benson has no delivery
         assertTrue(ALICE.hasDelivery());
@@ -105,6 +111,11 @@ public class MessagesTest {
         // same person and only one delivery is null -> different delivery message displayed -> returns true
         editedAlice = new PersonBuilder(ALICE).withDelivery(null).build();
         assertNotEquals(formatDeliveryFromPerson(ALICE), formatDeliveryFromPerson(editedAlice));
+    }
+
+    @Test
+    void formatDeliveryFromPerson_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> Messages.formatDeliveryFromPerson((Person) null));
     }
 
 }
