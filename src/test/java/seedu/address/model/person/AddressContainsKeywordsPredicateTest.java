@@ -54,7 +54,11 @@ public class AddressContainsKeywordsPredicateTest {
         predicate = new AddressContainsKeywordsPredicate(Arrays.asList("clementi", "ave"));
         assertTrue(predicate.test(new PersonBuilder().withAddress("311, Clementi Ave 2, #02-25").build()));
 
-        // Only one matching keyword
+        // Duplicate keywords, all match.
+        predicate = new AddressContainsKeywordsPredicate(Arrays.asList("clementi", "clementi"));
+        assertTrue(predicate.test(new PersonBuilder().withAddress("311, Clementi Ave 2, #02-25").build()));
+
+        // Multiple keywords, only one matching keyword.
         predicate = new AddressContainsKeywordsPredicate(Arrays.asList("clementi", "jurong"));
         assertTrue(predicate.test(new PersonBuilder().withAddress("311, Clementi Ave 2, #02-25").build()));
 
