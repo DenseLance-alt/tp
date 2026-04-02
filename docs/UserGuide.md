@@ -34,13 +34,13 @@ If Java is not installed, follow the installation guide for your operating syste
    cd [home-folder]
    java -jar ServeMate.jar
    ```
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   <img src="images/Ui.png" alt="UI" width="500"/>
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+   <br>![UI](images/Ui.png)
 * The customer panel on the left allows you to view customer information, including their full delivery details.
 * The delivery panel on the right allows you to view today's deliveries. It provides a quick reference to view deliveries scheduled for the current day, from earliest to latest delivery time.
 * You can adjust the width of the panels by left-clicking and dragging the divider between them.
 
-<box type="info" seamless>
+<box type="info" light>
 
 **Note:** The date shown on the delivery panel is based on your computer's date setting. If you find today's date is incorrectly reflected, check that your computer's date is correct, then close and relaunch ServeMate.
 </box>
@@ -119,8 +119,7 @@ Action | Command Format (with Examples)
 ### Getting help: `help`
 
 Displays a help message with a link to access ServeMate's User Guide.
-
-<img src="images/HelpCommand.png" alt="help message" width="500"/>
+<br>![Help Message](images/HelpCommand.png)
 
 Format: `help`
 
@@ -140,7 +139,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/LactoseIntolerant e/betsycrowe@example.com a/Newton Rd p/1234567 t/Vegetarian`
-  <img src="images/AddCommand.png" alt="add n/Betsy Crowe t/LactoseIntolerant e/betsycrowe@example.com a/Newton Rd p/1234567 t/Vegetarian'" width="500"/>
+  <br>![result for 'add n/Betsy Crowe t/LactoseIntolerant e/betsycrowe@example.com a/Newton Rd p/1234567 t/Vegetarian'](images/AddCommand.png)
 
 <br>
 
@@ -168,7 +167,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st customer to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd customer to be `Betsy Crower` and clears all existing tags.
-  <img src="images/EditCommand.png" alt="result for 'edit 2 n/Betsy Crower t/'" width="500"/>
+  <br>![result for 'edit 2 n/Betsy Crower t/'](images/EditCommand.png)
 
 <br>
 
@@ -245,7 +244,7 @@ Format: `expired bf/DATE`
 
 Examples:
 * `expired bf/2026-12-21` displays all customers whose deliveries have ended before 21 December 2026.
-  <img src="images/ExpiredCommand.png" alt="result for 'expired bf/2026-12-21'" width="500"/>
+  <br>![result for 'expired bf/2026-12-21'](images/ExpiredCommand.png)
 
 <br>
 
@@ -283,7 +282,7 @@ Format: `reschedule INDEX [st/START_DATE] [ed/END_DATE] [tm/DELIVERY_TIME] [d/DE
 Examples:
 * `reschedule 1 ed/2026-02-02 tm/12:45` Edits the delivery end date and delivery time for the 1st customer to be `2026-02-02` and `12:45` respectively.
 * `reschedule 2 d/25` Edits the delivery days for the 2nd customer to be `25` (Tuesday and Friday).
-  <img src="images/rescheduleBernice.png" alt="result for 'reschedule 2 d/25'" width="500"/>
+  <br>![result for 'reschedule 2 d/25'](images/rescheduleBernice.png)
 
 <br>
 
@@ -301,7 +300,7 @@ Format: `unschedule INDEX`
 Examples:
 * `list` followed by `unschedule 2` deletes the delivery for the 2nd customer on the list.
 * `find n/Bernice` followed by `unschedule 1` deletes the delivery for the 1st customer in the results of the `find` command.
-  <img src="images/UnscheduleCommand.png" alt="result for 'unschedule 1' after 'find n/Bernice'" width="500"/>
+<br>![result for 'unschedule 1' after 'find n/Bernice'](images/UnscheduleCommand.png)
 
 <br>
 
