@@ -168,3 +168,37 @@ h5,
 h6 {
   color: #e46c0a;
 }
+
+@media print {
+  .page-nav-print {
+    column-count: 2;
+    column-gap: 30px;
+    column-rule: 1px solid #ddd;
+    line-height: 1.8;
+    font-size: 11pt;
+  }
+
+  .page-nav-print ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+
+  .page-nav-print li {
+    margin-bottom: 12px;
+    page-break-inside: avoid;
+  }
+
+  .page-nav-print a {
+    text-decoration: none;
+    color: #0066cc;
+  }
+}
+
+.toc-container {
+  columns: 2;
+  column-gap: 40px;
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 4px;
+  page-break-inside: avoid;
+}
