@@ -63,35 +63,23 @@ public class PersonMatchesFilterPredicateTest {
         assertFalse(firstPredicate.equals(fourthPredicate));
     }
 
+    // EP: No attribute filters
     @Test
-    public void test_personMatchesFilters_returnsTrue() {
+    public void test_personMatchesWithNoFilter_returnsTrue() {
         // No keyword, any person will match
         PersonMatchesFilterPredicate predicate = new PersonMatchesFilterPredicate(Collections.emptyList(),
                 Collections.emptyList(), Collections.emptyList());
         assertTrue(predicate.test(new PersonBuilder().withAddress("311, Clementi Ave 2, #02-25").build()));
+    }
 
-        // If tag filter not specified, person with no tags will still match.
-        predicate = new PersonMatchesFilterPredicate(Arrays.asList("alice"), Collections.emptyList(),
-                Collections.emptyList());
-        assertTrue(predicate.test(new PersonBuilder()
-                .withName("Alice Tan")
-                .withAddress("311, Clementi Ave 2, #02-25").build()));
+    // Each valid input (name, address and tag filter) at least once in a positive test case
 
-        predicate = new PersonMatchesFilterPredicate(Collections.emptyList(), Arrays.asList("clementi"),
-                Collections.emptyList());
-        assertTrue(predicate.test(new PersonBuilder()
-                .withName("Alice Tan")
-                .withAddress("311, Clementi Ave 2, #02-25").build()));
-
-        predicate = new PersonMatchesFilterPredicate(Arrays.asList("alice"), Arrays.asList("clementi"),
-                Collections.emptyList());
-        assertTrue(predicate.test(new PersonBuilder()
-                .withName("Alice Tan")
-                .withAddress("311, Clementi Ave 2, #02-25").build()));
-
+    // EP: One attribute filter, with a matching keyword.
+    @Test
+    public void test_personMatchesWithOneFilter_returnsTrue() {
         // One name filter. For each filter, keyword match.
-        predicate = new PersonMatchesFilterPredicate(Arrays.asList("tan"), Collections.emptyList(),
-                Collections.emptyList());
+        PersonMatchesFilterPredicate predicate = new PersonMatchesFilterPredicate(Arrays.asList("tan"),
+                Collections.emptyList(), Collections.emptyList());
         assertTrue(predicate.test(new PersonBuilder()
                 .withName("Alice Tan")
                 .withAddress("311, Clementi Ave 2, #02-25")
@@ -113,9 +101,34 @@ public class PersonMatchesFilterPredicateTest {
                 .withAddress("311, Clementi Ave 2, #02-25")
                 .withTags("West").build()));
 
-        // Two filters. For each filter, keyword match.
-        predicate = new PersonMatchesFilterPredicate(Arrays.asList("tan"), Arrays.asList("clementi"),
+        // Boundary cases: If tag filter not specified, person with no tags will still match.
+        predicate = new PersonMatchesFilterPredicate(Arrays.asList("alice"), Collections.emptyList(),
                 Collections.emptyList());
+        assertTrue(predicate.test(new PersonBuilder()
+                .withName("Alice Tan")
+                .withAddress("311, Clementi Ave 2, #02-25").build()));
+
+        predicate = new PersonMatchesFilterPredicate(Collections.emptyList(), Arrays.asList("clementi"),
+                Collections.emptyList());
+        assertTrue(predicate.test(new PersonBuilder()
+                .withName("Alice Tan")
+                .withAddress("311, Clementi Ave 2, #02-25").build()));
+
+        // One filter. For each filter, at least 1 keyword match.
+        predicate = new PersonMatchesFilterPredicate(Arrays.asList("tan", "lin"), Collections.emptyList(),
+                Collections.emptyList());
+        assertTrue(predicate.test(new PersonBuilder()
+                .withName("Alice Tan")
+                .withAddress("311, Clementi Ave 2, #02-25")
+                .withTags("West").build()));
+    }
+
+    // EP: Two attribute filters, each filter has a matching keyword.
+    @Test
+    public void test_personMatchesWithTwoFilters_returnsTrue() {
+        // Two filters. For each filter, keyword match.
+        PersonMatchesFilterPredicate predicate = new PersonMatchesFilterPredicate(Arrays.asList("tan"),
+                Arrays.asList("clementi"), Collections.emptyList());
         assertTrue(predicate.test(new PersonBuilder()
                 .withName("Alice Tan")
                 .withAddress("311, Clementi Ave 2, #02-25")
@@ -135,25 +148,28 @@ public class PersonMatchesFilterPredicateTest {
                 .withAddress("311, Clementi Ave 2, #02-25")
                 .withTags("West").build()));
 
-        // Three filters. For each filter, keyword match.
-        predicate = new PersonMatchesFilterPredicate(Arrays.asList("tan"), Arrays.asList("clementi"),
-                Arrays.asList("west"));
-        assertTrue(predicate.test(new PersonBuilder()
-                .withName("Alice Tan")
-                .withAddress("311, Clementi Ave 2, #02-25")
-                .withTags("West").build()));
-
-        // One filter. For each filter, at least 1 keyword match.
-        predicate = new PersonMatchesFilterPredicate(Arrays.asList("tan", "lin"), Collections.emptyList(),
+        // Boundary case: If tag filter not specified, person with no tags will still match.
+        predicate = new PersonMatchesFilterPredicate(Arrays.asList("alice"), Arrays.asList("clementi"),
                 Collections.emptyList());
         assertTrue(predicate.test(new PersonBuilder()
                 .withName("Alice Tan")
-                .withAddress("311, Clementi Ave 2, #02-25")
-                .withTags("West").build()));
+                .withAddress("311, Clementi Ave 2, #02-25").build()));
 
         // Two filters. For each filter, at least 1 keyword match.
         predicate = new PersonMatchesFilterPredicate(Arrays.asList("tan", "lin"), Arrays.asList("clementi", "orchard"),
                 Collections.emptyList());
+        assertTrue(predicate.test(new PersonBuilder()
+                .withName("Alice Tan")
+                .withAddress("311, Clementi Ave 2, #02-25")
+                .withTags("West").build()));
+    }
+
+    // EP: Three attribute filters, each filter has a matching keyword.
+    @Test
+    public void test_personMatchesWithThreeFilters_returnsTrue() {
+        // Three filters. For each filter, keyword match.
+        PersonMatchesFilterPredicate predicate = new PersonMatchesFilterPredicate(Arrays.asList("tan"),
+                Arrays.asList("clementi"), Arrays.asList("west"));
         assertTrue(predicate.test(new PersonBuilder()
                 .withName("Alice Tan")
                 .withAddress("311, Clementi Ave 2, #02-25")
@@ -168,30 +184,12 @@ public class PersonMatchesFilterPredicateTest {
                 .withTags("West").build()));
     }
 
+    // EP: One attribute filter, with no matching keyword.
     @Test
-    public void test_personDoesNotMatchFilters_returnsFalse() {
-        // If tag filter specified, person with no tags does not match.
-        PersonMatchesFilterPredicate predicate = new PersonMatchesFilterPredicate(Arrays.asList("alice"),
-                Collections.emptyList(), Arrays.asList("west"));
-        assertFalse(predicate.test(new PersonBuilder()
-                .withName("Alice Tan")
-                .withAddress("311, Clementi Ave 2, #02-25").build()));
-
-        predicate = new PersonMatchesFilterPredicate(Collections.emptyList(), Arrays.asList("clementi"),
-                Arrays.asList("west"));
-        assertFalse(predicate.test(new PersonBuilder()
-                .withName("Alice Tan")
-                .withAddress("311, Clementi Ave 2, #02-25").build()));
-
-        predicate = new PersonMatchesFilterPredicate(Arrays.asList("alice"), Arrays.asList("clementi"),
-                Arrays.asList("west"));
-        assertFalse(predicate.test(new PersonBuilder()
-                .withName("Alice Tan")
-                .withAddress("311, Clementi Ave 2, #02-25").build()));
-
+    public void test_personDoesNotMatchWithOneFilter_returnsFalse() {
         // One name filter. For each filter, no keyword match.
-        predicate = new PersonMatchesFilterPredicate(Arrays.asList("lack"), Collections.emptyList(),
-                Collections.emptyList());
+        PersonMatchesFilterPredicate predicate = new PersonMatchesFilterPredicate(Arrays.asList("lack"),
+                Collections.emptyList(), Collections.emptyList());
         assertFalse(predicate.test(new PersonBuilder()
                 .withName("Alice Tan")
                 .withAddress("311, Clementi Ave 2, #02-25")
@@ -233,10 +231,15 @@ public class PersonMatchesFilterPredicateTest {
                 .withName("Alice Tan")
                 .withAddress("311, Clementi Ave 2, #02-25")
                 .withTags("West").build()));
+    }
 
+    // EP: Two attribute filters, at least one filter has no matching keyword.
+    // Test inputs causing predicate.test() to return false individually, before combining them.
+    @Test
+    public void test_personDoesNotMatchOneOfTwoFilters_returnsFalse() {
         // Two filters. Does not match one filter (no keyword in that filter match)
-        predicate = new PersonMatchesFilterPredicate(Arrays.asList("lack"), Arrays.asList("clementi"),
-                Collections.emptyList());
+        PersonMatchesFilterPredicate predicate = new PersonMatchesFilterPredicate(Arrays.asList("lack"),
+                Arrays.asList("clementi"), Collections.emptyList());
         assertFalse(predicate.test(new PersonBuilder()
                 .withName("Alice Tan")
                 .withAddress("311, Clementi Ave 2, #02-25")
@@ -277,9 +280,25 @@ public class PersonMatchesFilterPredicateTest {
                 .withAddress("311, Clementi Ave 2, #02-25")
                 .withTags("West").build()));
 
+        // Boundary cases: If tag filter specified, person with no tags does not match.
+        predicate = new PersonMatchesFilterPredicate(Arrays.asList("alice"),
+                Collections.emptyList(), Arrays.asList("west"));
+        assertFalse(predicate.test(new PersonBuilder()
+                .withName("Alice Tan")
+                .withAddress("311, Clementi Ave 2, #02-25").build()));
+
+        predicate = new PersonMatchesFilterPredicate(Collections.emptyList(), Arrays.asList("clementi"),
+                Arrays.asList("west"));
+        assertFalse(predicate.test(new PersonBuilder()
+                .withName("Alice Tan")
+                .withAddress("311, Clementi Ave 2, #02-25").build()));
+    }
+
+    @Test
+    public void test_personDoesNotMatchAllTwoFilters_returnsFalse() {
         // Two filters. Does not match both filters
-        predicate = new PersonMatchesFilterPredicate(Arrays.asList("lack"), Arrays.asList("jurong"),
-                Collections.emptyList());
+        PersonMatchesFilterPredicate predicate = new PersonMatchesFilterPredicate(Arrays.asList("lack"),
+                Arrays.asList("jurong"), Collections.emptyList());
         assertFalse(predicate.test(new PersonBuilder()
                 .withName("Alice Tan")
                 .withAddress("311, Clementi Ave 2, #02-25")
@@ -319,10 +338,15 @@ public class PersonMatchesFilterPredicateTest {
                 .withName("Alice Tan")
                 .withAddress("311, Clementi Ave 2, #02-25")
                 .withTags("West").build()));
+    }
 
+    // EP: Three attribute filters, at least one filter has no matching keyword.
+    // Test inputs causing predicate.test() to return false individually, before combining them.
+    @Test
+    public void test_personDoesNotMatchOneOfThreeFilters_returnsFalse() {
         // Three filters. Does not match 1 filter
-        predicate = new PersonMatchesFilterPredicate(Arrays.asList("lack"), Arrays.asList("clementi"),
-                Arrays.asList("west"));
+        PersonMatchesFilterPredicate predicate = new PersonMatchesFilterPredicate(Arrays.asList("lack"),
+                Arrays.asList("clementi"), Arrays.asList("west"));
         assertFalse(predicate.test(new PersonBuilder()
                 .withName("Alice Tan")
                 .withAddress("311, Clementi Ave 2, #02-25")
@@ -363,9 +387,19 @@ public class PersonMatchesFilterPredicateTest {
                 .withAddress("311, Clementi Ave 2, #02-25")
                 .withTags("West").build()));
 
-        // Three filters. Does not match 2 filters
-        predicate = new PersonMatchesFilterPredicate(Arrays.asList("lack"), Arrays.asList("jurong"),
+        // Boundary case: If tag filter specified, person with no tags does not match.
+        predicate = new PersonMatchesFilterPredicate(Arrays.asList("alice"), Arrays.asList("clementi"),
                 Arrays.asList("west"));
+        assertFalse(predicate.test(new PersonBuilder()
+                .withName("Alice Tan")
+                .withAddress("311, Clementi Ave 2, #02-25").build()));
+    }
+
+    @Test
+    public void test_personDoesNotMatchTwoOfThreeFilters_returnsFalse() {
+        // Three filters. Does not match 2 filters
+        PersonMatchesFilterPredicate predicate = new PersonMatchesFilterPredicate(Arrays.asList("lack"),
+                Arrays.asList("jurong"), Arrays.asList("west"));
         assertFalse(predicate.test(new PersonBuilder()
                 .withName("Alice Tan")
                 .withAddress("311, Clementi Ave 2, #02-25")
@@ -405,10 +439,13 @@ public class PersonMatchesFilterPredicateTest {
                 .withName("Alice Tan")
                 .withAddress("311, Clementi Ave 2, #02-25")
                 .withTags("West").build()));
+    }
 
+    @Test
+    public void test_personDoesNotMatchAllThreeFilters_returnsFalse() {
         // Three filters. Does not match all filters.
-        predicate = new PersonMatchesFilterPredicate(Arrays.asList("lack"), Arrays.asList("jurong"),
-                Arrays.asList("central"));
+        PersonMatchesFilterPredicate predicate = new PersonMatchesFilterPredicate(Arrays.asList("lack"),
+                Arrays.asList("jurong"), Arrays.asList("central"));
         assertFalse(predicate.test(new PersonBuilder()
                 .withName("Alice Tan")
                 .withAddress("311, Clementi Ave 2, #02-25")
