@@ -226,7 +226,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 **Note:** The lifeline for `ScheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of the diagram. Additionally, another limitation of PlantUML is that a dotted line cannot be shown from the UML note.
 </box>
 
-<puml src="diagrams/ScheduleSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `schedule 1 st/2026-01-01 ed/2026-02-01 tm/14:00 d/123` Command">
+<puml src="diagrams/ScheduleSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `schedule 1 st/2026-01-01 ed/2026-02-01 tm/14:00 d/123` Command" />
 
 **Execution flows:**
 1. The user enters the `schedule` command as an input string.
@@ -366,34 +366,33 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​       | I want to …​                                            | So that I can…​                                                                                                |
-|----------|---------------|---------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
-| `* * *`  | beginner user | add a customer                                          | keep track of customers                                                                                        |
-| `* * *`  | beginner user | view a list of all customers                            | have an overview of my operations                                                                              |
-| `* * *`  | beginner user | exit from the app easily                                | avoid cluttering my desktop screen once I have finished using the app                                          |
-| `* * *`  | beginner user | delete a customer                                       | get rid of customer records that I no longer need to track                                                     |
-| `* *`    | beginner user | see a message explaining how to access the help page    | learn what each operation does                                                                                 |
-| `* *`    | user          | import customer data in bulk                            | conveniently transition into the app                                                                           |
-| `* *`    | user          | edit customer's data                                    | correct any mistakes or changes to customer data to keep information accuracy                                  |
-| `* *`    | user          | schedule a delivery                                     | track deliveries that need to be made                                                                          |
-| `* *`    | user          | reschedule a delivery                                   | correct any mistakes or changes to delivery data belongs to a particular customer to keep information accuracy |
-| `* *`    | user          | unschedule a delivery                                   | remove cancelled delivery                                                                                      |
-| `* *`    | familiar user | display all upcoming deliveries                         | inform delivery drivers on their delivery points and plan production                                           |
-| `* *`    | familiar user | create a delivery route                                 | inform delivery drivers on their delivery route                                                                |
-| `* *`    | familiar user | reorder stops within a delivery route                   | ensures deliveries follow an efficient sequence                                                                |
-| `* *`    | familiar user | tag each customer with delivery notes                   | inform drivers about specific instructions with regards to delivery                                            |
-| `* *`    | busy user     | search for a customer by name, phone number, or address | quickly locate customer details when handling customer enquiries                                               |
-| `*`      | expert user   | set estimated time of delivery for a customer           | ensure all customers have their food delivered on time                                                         |
-| `*`      | expert user   | set delivery status for a customer                      | keep track of deliveries that have been made and cancelled                                                     |
-| `*`      | expert user   | track customers' subscription expiry date               | check how many customers have their subscription close to the expiration date and gently remind them           |
-| `*`      | expert user   | track customers' subscription payment                   | know when I received their payements                                                                           |
-| `*`      | expert user   | tag each customer by their food preference              | inform the cooks to prepare food that aligns with the customers' food preference                               |
-| `*`      | expert user   | mass copy emails and contact numbers to clipboard       | mass email and message customer about upcoming promotions                                                      |
-| `*`      | expert user   | view free time slots                                    | schedule new deliveries for new customers                                                                      |
-| `*`      | expert user   | track the total revenue from a customer                 | know how much I have earned from a customer                                                                    |
-| `*`      | expert user   | track number of days subscribed by a customer so far    | know who are my loyal customers                                                                                |
-| `*`      | expert user   | back up customer and route data                         | ensure that delivery operations are not disrupted by data loss                                                 |
-| `*`      | expert user   | archive customers data                                  | see only the relevant data for currently subscribed customers                                                  |
+| Priority | As a …​       | I want to …​                                         | So that I can…​                                                                                                |
+|----------|---------------|------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| `* * *`  | beginner user | add a customer                                       | keep track of customers                                                                                        |
+| `* * *`  | beginner user | view a list of all customers                         | have an overview of my operations                                                                              |
+| `* * *`  | beginner user | exit from the app easily                             | avoid cluttering my desktop screen once I have finished using the app                                          |
+| `* * *`  | beginner user | delete a customer                                    | get rid of customer records that I no longer need to track                                                     |
+| `* *`    | beginner user | see a message explaining how to access the help page | learn what each operation does                                                                                 |
+| `* *`    | user          | edit customer's data                                 | correct any mistakes or changes to customer data to keep information accuracy                                  |
+| `* *`    | user          | schedule a delivery                                  | track deliveries that need to be made                                                                          |
+| `* *`    | user          | reschedule a delivery                                | correct any mistakes or changes to delivery data belongs to a particular customer to keep information accuracy |
+| `* *`    | user          | unschedule a delivery                                | remove cancelled delivery                                                                                      |
+| `* *`    | familiar user | display all upcoming deliveries                      | inform delivery drivers on their delivery points and plan production                                           |
+| `* *`    | familiar user | track customers' subscription expiry date            | check how many customers have their subscription close to the expiration date and gently remind them           |
+| `* *`    | familiar user | tag each customer by their food preference           | inform the cooks to prepare food that aligns with the customers' food preference                               |
+| `*`      | familiar user | create a delivery route                              | inform delivery drivers on their delivery route                                                                |
+| `*`      | busy user     | search for a customer by name, address, or tag       | quickly locate customer details when handling customer enquiries                                               |
+| `*`      | expert user   | reorder stops within a delivery route                | ensures deliveries follow an efficient sequence                                                                |
+| `*`      | expert user   | import customer data in bulk                         | conveniently transition into the app                                                                           |
+| `*`      | expert user   | set estimated time of delivery for a customer        | ensure all customers have their food delivered on time                                                         |
+| `*`      | expert user   | set delivery status for a customer                   | keep track of deliveries that have been made and cancelled                                                     |
+| `*`      | expert user   | track customers' subscription payment                | know when I received their payements                                                                           |
+| `*`      | expert user   | mass copy emails and contact numbers to clipboard    | mass email and message customer about upcoming promotions                                                      |
+| `*`      | expert user   | view free time slots                                 | schedule new deliveries for new customers                                                                      |
+| `*`      | expert user   | track the total revenue from a customer              | know how much I have earned from a customer                                                                    |
+| `*`      | expert user   | track number of days subscribed by a customer so far | know who are my loyal customers                                                                                |
+| `*`      | expert user   | back up customer and route data                      | ensure that delivery operations are not disrupted by data loss                                                 |
+| `*`      | expert user   | archive customers data                               | see only the relevant data for currently subscribed customers                                                  |
 
 
 

@@ -103,20 +103,20 @@ public class ExpiredCommandTest {
         ExpiredCommand firstCommand = new ExpiredCommand(firstPredicate);
         ExpiredCommand secondCommand = new ExpiredCommand(secondPredicate);
 
-        // same object -> returns true
+        // EP: same object -> returns true
         assertTrue(firstCommand.equals(firstCommand));
 
-        // same values -> returns true
+        // EP: same values -> returns true
         ExpiredCommand firstCommandCopy = new ExpiredCommand(firstPredicate);
         assertTrue(firstCommand.equals(firstCommandCopy));
 
-        // different types -> returns false
+        // EP: different types -> returns false
         assertFalse(firstCommand.equals(1));
 
-        // null -> returns false
+        // EP: null -> returns false
         assertFalse(firstCommand.equals(null));
 
-        // different expired command -> returns false
+        // EP: different expired command -> returns false
         assertFalse(firstCommand.equals(secondCommand));
     }
 

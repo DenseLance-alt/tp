@@ -17,7 +17,7 @@ import static seedu.address.testutil.TypicalDeliveries.DELIVERY_ALICE;
 import static seedu.address.testutil.TypicalDeliveries.DELIVERY_CARL;
 
 import java.time.LocalDate;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -30,7 +30,7 @@ public class DeliveryTest {
         StartDate startDate = new StartDate(VALID_START_DATE_BOB);
         EndDate endDate = generateEndDate(startDate, -5);
         DeliveryTime deliveryTime = new DeliveryTime(VALID_DELIVERY_TIME_BOB);
-        Set<DeliveryDay> deliveryDaySet = new HashSet<>();
+        Set<DeliveryDay> deliveryDaySet = new LinkedHashSet<>();
         deliveryDaySet.add(toDeliveryDay(VALID_DELIVERY_DAY));
         assertThrows(IllegalArgumentException.class, () ->
                 new Delivery(startDate, endDate, deliveryDaySet, deliveryTime));
@@ -107,40 +107,42 @@ public class DeliveryTest {
         assertFalse(delivery.hasExpired(beforeDate));
     }
 
+    //@@author BenedTj
     @Test
     public void equals() {
-        // same values -> returns true
+        // EP: same values -> returns true
         Delivery deliveryOneCopy = new DeliveryBuilder(DELIVERY_ALICE).build();
         assertTrue(DELIVERY_ALICE.equals(deliveryOneCopy));
 
-        // same object -> returns true
+        // EP: same object -> returns true
         assertTrue(DELIVERY_ALICE.equals(DELIVERY_ALICE));
 
-        // null -> returns false
+        // EP: null -> returns false
         assertFalse(DELIVERY_ALICE.equals(null));
 
-        // different type -> returns false
+        // EP: different type -> returns false
         assertFalse(DELIVERY_ALICE.equals(5));
 
-        // different delivery -> returns false
+        // EP: different delivery -> returns false
         assertFalse(DELIVERY_ALICE.equals(DELIVERY_CARL));
 
-        // different start date -> returns false
+        // EP: different start date -> returns false
         Delivery editedDeliveryOne = new DeliveryBuilder(DELIVERY_ALICE).withStartDate(VALID_START_DATE_AMY).build();
         assertFalse(DELIVERY_ALICE.equals(editedDeliveryOne));
 
-        // different end date -> returns false
+        // EP: different end date -> returns false
         Delivery editedDeliveryTwo = new DeliveryBuilder(DELIVERY_CARL).withEndDate(VALID_END_DATE_AMY).build();
         assertFalse(DELIVERY_CARL.equals(editedDeliveryTwo));
 
-        // different delivery time -> returns false
+        // EP: different delivery time -> returns false
         editedDeliveryTwo = new DeliveryBuilder(DELIVERY_CARL).withDeliveryTime(VALID_DELIVERY_TIME_AMY).build();
         assertFalse(DELIVERY_CARL.equals(editedDeliveryTwo));
 
-        // different delivery days -> returns false
+        // EP: different delivery days -> returns false
         editedDeliveryOne = new DeliveryBuilder(DELIVERY_ALICE).withDeliveryDays(VALID_DELIVERY_DAY).build();
         assertFalse(DELIVERY_ALICE.equals(editedDeliveryOne));
     }
+    //@@author
 
     @Test
     public void toStringMethod() {

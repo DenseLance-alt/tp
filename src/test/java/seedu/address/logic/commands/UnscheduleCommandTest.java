@@ -94,20 +94,20 @@ public class UnscheduleCommandTest {
         UnscheduleCommand unscheduleFirstCommand = new UnscheduleCommand(INDEX_FIRST_PERSON);
         UnscheduleCommand unscheduleSecondCommand = new UnscheduleCommand(INDEX_SECOND_PERSON);
 
-        // same object -> returns true
+        // EP: same object -> returns true
         assertTrue(unscheduleFirstCommand.equals(unscheduleFirstCommand));
 
-        // same values -> returns true
+        // EP: same values -> returns true
         UnscheduleCommand unscheduleFirstCommandCopy = new UnscheduleCommand(INDEX_FIRST_PERSON);
         assertTrue(unscheduleFirstCommand.equals(unscheduleFirstCommandCopy));
 
-        // different types -> returns false
+        // EP: different types -> returns false
         assertFalse(unscheduleFirstCommand.equals(1));
 
-        // null -> returns false
+        // EP: null -> returns false
         assertFalse(unscheduleFirstCommand.equals(null));
 
-        // different objects -> returns false
+        // EP: different objects -> returns false
         assertFalse(unscheduleFirstCommand.equals(unscheduleSecondCommand));
     }
 

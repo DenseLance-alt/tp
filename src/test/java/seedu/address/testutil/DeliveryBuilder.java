@@ -2,7 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.model.delivery.DeliveryDay.toDeliveryDay;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import seedu.address.model.delivery.Delivery;
@@ -33,7 +33,7 @@ public class DeliveryBuilder {
     public DeliveryBuilder() {
         startDate = new StartDate(DEFAULT_START_DATE);
         endDate = new EndDate(DEFAULT_END_DATE);
-        deliveryDays = new HashSet<>();
+        deliveryDays = new LinkedHashSet<>();
         deliveryDays.add(toDeliveryDay(DEFAULT_DAY));
         deliveryTime = new DeliveryTime(DEFAULT_TIME);
     }
@@ -44,7 +44,7 @@ public class DeliveryBuilder {
     public DeliveryBuilder(Delivery deliveryToCopy) {
         startDate = deliveryToCopy.getStartDate();
         endDate = deliveryToCopy.getEndDate();
-        deliveryDays = new HashSet<>(deliveryToCopy.getDeliveryDays());
+        deliveryDays = new LinkedHashSet<>(deliveryToCopy.getDeliveryDays());
         deliveryTime = deliveryToCopy.getDeliveryTime();
     }
 

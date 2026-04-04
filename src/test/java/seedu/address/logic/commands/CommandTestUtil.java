@@ -53,6 +53,7 @@ public class CommandTestUtil {
     public static final String VALID_DELIVERY_DAY_BOB = "Wednesday";
 
     public static final String UNSORTED_DAYS = "4231";
+    public static final String[] UNSORTED_DAYS_WORDS = {"THURSDAY", "TUESDAY", "WEDNESDAY", "MONDAY"};
 
     public static final String VALID_DAYS_AMY = "1";
     public static final String VALID_DAYS_BOB = "3";

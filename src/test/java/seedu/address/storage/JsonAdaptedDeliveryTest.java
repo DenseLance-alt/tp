@@ -2,9 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.commons.util.DateTimeUtil.FORMATTER_DAY_NUMBER;
-import static seedu.address.commons.util.DateTimeUtil.FORMATTER_DAY_WORD;
-import static seedu.address.logic.commands.CommandTestUtil.UNSORTED_DAYS;
+import static seedu.address.logic.commands.CommandTestUtil.UNSORTED_DAYS_WORDS;
 import static seedu.address.storage.JsonAdaptedDelivery.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalDeliveries.DELIVERY_ALICE;
@@ -20,7 +18,6 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryDay;
 import seedu.address.model.delivery.DeliveryTime;
@@ -119,9 +116,7 @@ public class JsonAdaptedDeliveryTest {
     @Test
     public void toModelType_unsortedDeliveryDays_returnsDeliveryWithSortedDeliveryDays() throws IllegalValueException {
         List<JsonAdaptedDeliveryDay> unsortedJsonAdaptedDeliveryDays =
-                Arrays.stream(UNSORTED_DAYS.split(""))
-                        .map(day -> FORMATTER_DAY_NUMBER.parse(day))
-                        .map(day -> FORMATTER_DAY_WORD.format(day))
+                Arrays.stream(UNSORTED_DAYS_WORDS)
                         .map(DeliveryDay::toDeliveryDay)
                         .map(JsonAdaptedDeliveryDay::new)
                         .toList();
@@ -130,12 +125,10 @@ public class JsonAdaptedDeliveryTest {
                                                                unsortedJsonAdaptedDeliveryDays, VALID_DELIVERY_TIME);
         Delivery parsedDelivery = delivery.toModelType();
         Set<DeliveryDay> actualDeliveryDays = parsedDelivery.getDeliveryDays();
-        Set<DeliveryDay> expectedDeliveryDays = Arrays.stream(UNSORTED_DAYS.split(""))
-                .sorted()
-                .map(DateTimeUtil::convertDayNumberToDayWord)
-                .map(DeliveryDay::toDeliveryDay)
-                .collect(Collectors.toCollection(LinkedHashSet::new));
+        DeliveryDay[] expectedDeliveryDays = {DeliveryDay.MONDAY, DeliveryDay.TUESDAY,
+                                              DeliveryDay.WEDNESDAY, DeliveryDay.THURSDAY};
+        Set<DeliveryDay> expectedDeliveryDaySet = new LinkedHashSet<>(Arrays.asList(expectedDeliveryDays));
 
-        assertArrayEquals(expectedDeliveryDays.toArray(), actualDeliveryDays.toArray());
+        assertArrayEquals(expectedDeliveryDaySet.toArray(), actualDeliveryDays.toArray());
     }
 }

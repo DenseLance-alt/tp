@@ -1,6 +1,7 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -100,6 +101,7 @@ public class SampleDataUtil {
     public static Set<DeliveryDay> getDeliveryDaySet(String... strings) {
         return Arrays.stream(strings)
                 .map(DeliveryDay::toDeliveryDay)
-                .collect(Collectors.toSet());
+                .sorted()
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 }

@@ -27,12 +27,12 @@ public class PersonHasExpiredDeliveryPredicateTest {
                 .withDelivery(delivery)
                 .build();
 
-        // Specified date is later than end date of person's delivery -> expired
+        // EP: specified date is later than end date of person's delivery -> expired
         LocalDate laterDate = LocalDate.of(2024, 12, 31);
         PersonHasExpiredDeliveryPredicate expiredPredicate = new PersonHasExpiredDeliveryPredicate(laterDate);
         assertTrue(expiredPredicate.test(person));
 
-        // Specified date is earlier than end date of person's delivery -> not expired
+        // EP: specified date is earlier than end date of person's delivery -> not expired
         LocalDate earlierDate = LocalDate.of(2024, 1, 1);
         PersonHasExpiredDeliveryPredicate notExpiredPredicate = new PersonHasExpiredDeliveryPredicate(earlierDate);
         assertFalse(notExpiredPredicate.test(person));
@@ -46,20 +46,20 @@ public class PersonHasExpiredDeliveryPredicateTest {
         PersonHasExpiredDeliveryPredicate firstPredicate = new PersonHasExpiredDeliveryPredicate(firstDate);
         PersonHasExpiredDeliveryPredicate secondPredicate = new PersonHasExpiredDeliveryPredicate(secondDate);
 
-        // same object -> returns true
+        // EP: same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
-        // same values -> returns true
+        // EP: same values -> returns true
         PersonHasExpiredDeliveryPredicate firstPredicateCopy = new PersonHasExpiredDeliveryPredicate(firstDate);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
-        // different types -> returns false
+        // EP: different types -> returns false
         assertFalse(firstPredicate.equals(1));
 
-        // null -> returns false
+        // EP: null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different date -> returns false
+        // EP: different date -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 

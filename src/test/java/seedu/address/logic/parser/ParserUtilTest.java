@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.util.DateTimeUtil.convertDayNumberToDayWord;
 import static seedu.address.logic.commands.CommandTestUtil.UNSORTED_DAYS;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
-import static seedu.address.model.delivery.DeliveryDay.toDeliveryDay;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -15,11 +14,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.DeliveryDay;
 import seedu.address.model.delivery.DeliveryTime;
@@ -43,7 +40,7 @@ public class ParserUtilTest {
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "Vegan";
-    private static final String VALID_TAG_2 = "South";
+    private static final String VALID_TAG_2 = "NoEgg";
 
     private static final String INVALID_START_DATE = "12-11-2012";
     private static final String INVALID_END_DATE = "12-13-2012";
@@ -301,7 +298,7 @@ public class ParserUtilTest {
     @Test
     public void parseDeliveryDayNumber_validValue_returnsDeliveryDay() throws ParseException {
         String dayWord = convertDayNumberToDayWord(VALID_DAY_NUMBER_1);
-        DeliveryDay expectedDeliveryDay = toDeliveryDay(dayWord);
+        DeliveryDay expectedDeliveryDay = DeliveryDay.MONDAY;
         assertEquals(expectedDeliveryDay, ParserUtil.parseDeliveryDayNumber(VALID_DAY_NUMBER_1));
     }
 
@@ -329,13 +326,11 @@ public class ParserUtilTest {
     @Test
     public void parseDeliveryDays_unsortedValue_returnsSortedDeliveryDaySet() throws Exception {
         Set<DeliveryDay> actualDeliveryDaySet = ParserUtil.parseDeliveryDays(UNSORTED_DAYS);
-        Set<DeliveryDay> expectedDeliverySet = Arrays.stream(UNSORTED_DAYS.split(""))
-                .sorted()
-                .map(DateTimeUtil::convertDayNumberToDayWord)
-                .map(DeliveryDay::toDeliveryDay)
-                .collect(Collectors.toCollection(LinkedHashSet::new));
+        DeliveryDay[] expectedDeliveryDays = {DeliveryDay.MONDAY, DeliveryDay.TUESDAY,
+                                              DeliveryDay.WEDNESDAY, DeliveryDay.THURSDAY};
+        Set<DeliveryDay> expectedDeliveryDaySet = new LinkedHashSet<>(Arrays.asList(expectedDeliveryDays));
 
-        assertArrayEquals(expectedDeliverySet.toArray(), actualDeliveryDaySet.toArray());
+        assertArrayEquals(expectedDeliveryDaySet.toArray(), actualDeliveryDaySet.toArray());
     }
 
     @Test
@@ -343,23 +338,21 @@ public class ParserUtilTest {
         String[] deliveryDayNumbers = {VALID_DAY_NUMBER_1, VALID_DAY_NUMBER_2, VALID_DAY_NUMBER_3, VALID_DAY_NUMBER_4};
         Set<DeliveryDay> actualDeliveryDaySet =
                 ParserUtil.parseDeliveryDays(String.join("", deliveryDayNumbers));
-        Set<DeliveryDay> expectedDeliverySet = Arrays.stream(deliveryDayNumbers)
-                .map(DateTimeUtil::convertDayNumberToDayWord)
-                .map(DeliveryDay::toDeliveryDay)
-                .collect(Collectors.toSet());
+        DeliveryDay[] expectedDeliveryDays = {DeliveryDay.MONDAY, DeliveryDay.THURSDAY,
+                                              DeliveryDay.SATURDAY, DeliveryDay.SUNDAY};
+        Set<DeliveryDay> expectedDeliveryDaySet = new LinkedHashSet<>(Arrays.asList(expectedDeliveryDays));
 
-        assertEquals(expectedDeliverySet, actualDeliveryDaySet);
+        assertEquals(expectedDeliveryDaySet, actualDeliveryDaySet);
     }
 
     @Test
     public void parseDeliveryDays_validValueWithWhiteSpace_returnsTrimmedDeliveryDaySet() throws Exception {
         String[] deliveryDayNumbers = {VALID_DAY_NUMBER_1, VALID_DAY_NUMBER_2, VALID_DAY_NUMBER_3, VALID_DAY_NUMBER_4};
         String deliveryDayNumbersWithWhitespace = WHITESPACE + String.join("", deliveryDayNumbers) + WHITESPACE;
-        Set<DeliveryDay> expectedDeliverySet = Arrays.stream(deliveryDayNumbers)
-                .map(DateTimeUtil::convertDayNumberToDayWord)
-                .map(DeliveryDay::toDeliveryDay)
-                .collect(Collectors.toSet());
+        DeliveryDay[] expectedDeliveryDays = {DeliveryDay.MONDAY, DeliveryDay.THURSDAY,
+                                              DeliveryDay.SATURDAY, DeliveryDay.SUNDAY};
+        Set<DeliveryDay> expectedDeliveryDaySet = new LinkedHashSet<>(Arrays.asList(expectedDeliveryDays));
 
-        assertEquals(expectedDeliverySet, ParserUtil.parseDeliveryDays(deliveryDayNumbersWithWhitespace));
+        assertEquals(expectedDeliveryDaySet, ParserUtil.parseDeliveryDays(deliveryDayNumbersWithWhitespace));
     }
 }
