@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.OverrunStyle;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -87,7 +88,12 @@ public class PersonCard extends UiPart<Region> {
         showDeliveryInfo();
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> {
+                    Label tagLabel = new Label(tag.tagName);
+                    tagLabel.setMaxWidth(300);
+                    tagLabel.setTextOverrun(OverrunStyle.ELLIPSIS);
+                    tags.getChildren().add(tagLabel);
+                });
 
         // Solution below inspired by GitHub Copilot
         name.setWrapText(true);

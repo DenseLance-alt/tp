@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.OverrunStyle;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -87,6 +88,11 @@ public class TodayDeliveryCard extends UiPart<Region> {
 
         tags.stream()
             .sorted(Comparator.comparing(tag -> tag.tagName))
-            .forEach(tag -> todayCardTags.getChildren().add(new Label(tag.tagName)));
+            .forEach(tag -> {
+                Label tagLabel = new Label(tag.tagName);
+                tagLabel.setMaxWidth(300);
+                tagLabel.setTextOverrun(OverrunStyle.ELLIPSIS);
+                todayCardTags.getChildren().add(tagLabel);
+            });
     }
 }
