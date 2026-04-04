@@ -1,0 +1,74 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ScheduleCommandParser" as ScheduleCommandParser LOGIC_COLOR
+participant "sc:ScheduleCommand" as ScheduleCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("schedule 1 st/2026-01-01...")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("schedule 1 st/2026-01-01...")
+activate AddressBookParser
+
+create ScheduleCommandParser
+AddressBookParser -> ScheduleCommandParser
+activate ScheduleCommandParser
+
+ScheduleCommandParser --> AddressBookParser
+deactivate ScheduleCommandParser
+
+AddressBookParser -> ScheduleCommandParser : parse("1 st/2026-01-01...")
+activate ScheduleCommandParser
+
+create ScheduleCommand
+ScheduleCommandParser -> ScheduleCommand
+activate ScheduleCommand
+
+ScheduleCommand --> ScheduleCommandParser :
+deactivate ScheduleCommand
+
+ScheduleCommandParser --> AddressBookParser : sc
+deactivate ScheduleCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ScheduleCommandParser -[hidden]-> AddressBookParser
+destroy ScheduleCommandParser
+
+AddressBookParser --> LogicManager : sc
+deactivate AddressBookParser
+
+LogicManager -> ScheduleCommand : execute(m)
+
+activate ScheduleCommand
+note right of ScheduleCommand
+  target: customer with delivery to schedule
+  updated: copy of target with scheduled delivery added
+end note
+ScheduleCommand -> Model : setPerson(target, updated)
+activate Model
+
+Model --> ScheduleCommand
+deactivate Model
+
+create CommandResult
+ScheduleCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ScheduleCommand
+deactivate CommandResult
+
+ScheduleCommand --> LogicManager : r
+deactivate ScheduleCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

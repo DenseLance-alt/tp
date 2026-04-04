@@ -20,6 +20,12 @@ Class Name
 Class Phone
 Class Tag
 
+Class Delivery
+Class StartDate
+Class EndDate
+Class DeliveryTime
+Class "<<enumeration>>\nDeliveryDay" as DeliveryDay
+
 Class I #FFFFFF
 }
 
@@ -42,6 +48,12 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Person *--> "0..1"Delivery
+
+Delivery *--> StartDate
+Delivery *--> EndDate
+Delivery *--> DeliveryTime
+Delivery *--> "1..7"DeliveryDay
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

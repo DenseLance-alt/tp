@@ -6,13 +6,19 @@ skinparam classBackgroundColor MODEL_COLOR
 
 AddressBook *-right-> "1" UniquePersonList
 AddressBook *-right-> "1" UniqueTagList
+AddressBook *-right-> "1" UniqueDeliveryList
 UniqueTagList -[hidden]down- UniquePersonList
 UniqueTagList -[hidden]down- UniquePersonList
+UniqueDeliveryList -[hidden]up- UniquePersonList
+UniqueDeliveryList -[hidden]up- AddressBook
 
 UniqueTagList -right-> "*" Tag
+UniqueDeliveryList -right-> "*" Delivery
 UniquePersonList -right-> Person
+Delivery -[hidden]up- UniquePersonList
 
 Person -up-> "*" Tag
+Person "1" -up-> "0..1" Delivery
 
 Person *--> Name
 Person *--> Phone
