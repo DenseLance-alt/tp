@@ -12,7 +12,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -53,6 +55,8 @@ public class RescheduleCommand extends Command {
     private final Index targetIndex;
     private final RescheduleDeliveryDescriptor rescheduleDeliveryDescriptor;
 
+    private static final Logger logger = LogsCenter.getLogger(RescheduleCommand.class);
+
     /**
      * Creates a RescheduleCommand to edit the details of the delivery assigned to the specified person.
      *
@@ -63,6 +67,8 @@ public class RescheduleCommand extends Command {
         requireNonNull(targetIndex);
         requireNonNull(rescheduleDeliveryDescriptor);
 
+        logger.fine("RescheduleCommand called with targetIndex: " + targetIndex.getOneBased()
+                + " and rescheduleDeliveryDescriptor: " + rescheduleDeliveryDescriptor);
         this.targetIndex = targetIndex;
         this.rescheduleDeliveryDescriptor = rescheduleDeliveryDescriptor;
     }

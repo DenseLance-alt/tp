@@ -7,15 +7,20 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.RescheduleCommand;
 import seedu.address.logic.commands.RescheduleCommand.RescheduleDeliveryDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+import java.util.logging.Logger;
+
 /**
  * Parses input arguments and creates a new RescheduleCommand object
  */
 public class RescheduleCommandParser implements Parser<RescheduleCommand> {
+
+    private static final Logger logger = LogsCenter.getLogger(RescheduleCommandParser.class);
 
     /**
      * Parses the given {@code String} of arguments in the context of the RescheduleCommand
@@ -67,6 +72,8 @@ public class RescheduleCommandParser implements Parser<RescheduleCommand> {
         if (!rescheduleDeliveryDescriptor.isAnyFieldEdited()) {
             throw new ParseException(RescheduleCommand.MESSAGE_NOT_EDITED);
         }
+
+        logger.fine("RescheduleCommandParser: " + rescheduleDeliveryDescriptor);
 
         return new RescheduleCommand(index, rescheduleDeliveryDescriptor);
     }
