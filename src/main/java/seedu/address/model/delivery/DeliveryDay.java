@@ -66,8 +66,8 @@ public enum DeliveryDay {
     }
 
     /**
-     * Returns true if the day passed as the argument has the same value
-     * as the day stored in the enum value.
+     * Returns {@code true} if the day passed as the argument has the same value
+     * as the day stored in the enum value and {@code false} otherwise.
      *
      * @param otherDay The DayOfWeek object that this object
      *                 should be compared to.

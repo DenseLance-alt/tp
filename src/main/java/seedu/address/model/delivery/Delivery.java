@@ -52,8 +52,9 @@ public class Delivery {
     }
 
     /**
-     * Returns true if the given date range is valid
-     * ({@code startDate} is not after {@code endDate}).
+     * Returns {@code true} if the given date range is valid
+     * ({@code startDate} is not after {@code endDate})
+     * and {@code false} otherwise.
      *
      * @param startDate The StartDate object representing the start date.
      * @param endDate The EndDate object representing the end date.

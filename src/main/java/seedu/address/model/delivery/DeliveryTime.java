@@ -31,8 +31,8 @@ public class DeliveryTime implements Comparable<DeliveryTime> {
     }
 
     /**
-     * Returns true if a given string is a valid time
-     * in the valid format.
+     * Returns {@code true} if a given string is a valid time
+     * in the valid format and {@code false} otherwise.
      *
      * @param test The raw string
      */

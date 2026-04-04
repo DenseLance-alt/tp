@@ -37,8 +37,8 @@ public class EndDate {
     }
 
     /**
-     * Returns true if a given string is a valid
-     * end date in the valid format.
+     * Returns {@code true} if a given string is a valid
+     * end date in the valid format and {@code false} otherwise.
      *
      * @param test The raw string to be checked whether
      *             it is a valid end date.

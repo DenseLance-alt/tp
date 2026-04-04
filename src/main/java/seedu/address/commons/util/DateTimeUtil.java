@@ -64,8 +64,8 @@ public class DateTimeUtil {
             DateTimeFormatter.ofPattern("HH:mm").withResolverStyle(ResolverStyle.STRICT);
 
     /**
-     * Returns true if a given string is a valid delivery date
-     * in the valid format.
+     * Returns {@code true} if a given string is a valid delivery date
+     * in the valid format and {@code false} otherwise.
      *
      * @param test The given string to be verified
      *             whether it is a valid delivery date.
@@ -109,8 +109,8 @@ public class DateTimeUtil {
     }
 
     /**
-     * Returns true if a given string is a valid
-     * day of the week in the valid format.
+     * Returns {@code true} if a given string is a valid
+     * day of the week in the valid format and {@code false} otherwise.
      *
      * @param test The given string to be verified
      *             whether it is a valid delivery day word.
@@ -155,8 +155,8 @@ public class DateTimeUtil {
     }
 
     /**
-     * Returns true if a given string is a valid
-     * number representing the day of the week.
+     * Returns {@code true} if a given string is a valid number
+     * representing the day of the week and {@code false} otherwise.
      * It should only accept numbers 1-7.
      *
      * @param test The given string to be verified
@@ -204,8 +204,8 @@ public class DateTimeUtil {
     }
 
     /**
-     * Returns true if a given string is a valid time
-     * in the valid format.
+     * Returns {@code true} if a given string is a valid time
+     * in the valid format and {@code false} otherwise.
      *
      * @param test The given string to be verified
      *             whether it is a valid delivery time.
@@ -237,8 +237,9 @@ public class DateTimeUtil {
     }
 
     /**
-     * Returns true if the date range is valid
-     * ({@code startDate} is not after {@code endDate}).
+     * Returns {@code true} if the date range is valid
+     * ({@code startDate} is not after {@code endDate})
+     * and {@code false} otherwise.
      *
      * @param startDate The LocalDate object representing
      *                  the start date.

@@ -38,8 +38,8 @@ public class StartDate {
     }
 
     /**
-     * Returns true if a given string is a valid
-     * start date in the valid format.
+     * Returns {@code true} if a given string is a valid
+     * start date in the valid format and {@code false} otherwise.
      *
      * @param test The raw string to be checked whether
      *             it is a valid start date.
