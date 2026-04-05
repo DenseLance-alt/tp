@@ -11,6 +11,8 @@ participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
+participant "target:Person" as TargetPerson MODEL_COLOR
+participant "updated:Person" as UpdatedPerson MODEL_COLOR
 participant "m:Model" as Model MODEL_COLOR
 end box
 
@@ -34,7 +36,7 @@ create UnscheduleCommand
 UnscheduleCommandParser -> UnscheduleCommand
 activate UnscheduleCommand
 
-UnscheduleCommand --> UnscheduleCommandParser :
+UnscheduleCommand --> UnscheduleCommandParser
 deactivate UnscheduleCommand
 
 UnscheduleCommandParser --> AddressBookParser : u
@@ -49,14 +51,31 @@ deactivate AddressBookParser
 LogicManager -> UnscheduleCommand : execute(m)
 
 activate UnscheduleCommand
-note right of UnscheduleCommand
-  target: customer to unschedule
-  updated: copy of target without delivery
-end note
+UnscheduleCommand -> TargetPerson : withoutDelivery()
+activate TargetPerson
+
+create UpdatedPerson
+TargetPerson -> UpdatedPerson
+activate UpdatedPerson
+
+UpdatedPerson --> TargetPerson
+deactivate UpdatedPerson
+
+TargetPerson --> UnscheduleCommand : updated
+deactivate TargetPerson
+
 UnscheduleCommand -> Model : setPerson(target, updated)
 activate Model
 
-Model --> UnscheduleCommand
+'Removed return value for readability
+Model -[hidden]-> UnscheduleCommand
+deactivate Model
+
+UnscheduleCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+activate Model
+
+'Removed return value for readability
+Model -[hidden]-> UnscheduleCommand
 deactivate Model
 
 create CommandResult
