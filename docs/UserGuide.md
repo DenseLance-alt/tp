@@ -34,9 +34,11 @@ If Java is not installed, follow the installation guide for your operating syste
    cd [home-folder]
    java -jar ServeMate.jar
    ```
-<!-- @@author elijah-ng -->
+   
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
    <br>![UI](images/Ui.png)
+   <!-- @@author elijah-ng -->
+
    * The customer panel on the left allows you to view customer information, including their full delivery details.
    * The delivery panel on the right allows you to view today's deliveries. It provides a quick reference to view deliveries scheduled for the current day, from earliest to latest delivery time.
    * You can adjust the width of the panels by left-clicking and dragging the divider between them.
