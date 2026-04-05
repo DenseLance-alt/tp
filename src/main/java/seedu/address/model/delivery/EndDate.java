@@ -29,6 +29,7 @@ public class EndDate {
      * Constructs a {@code EndDate}.
      *
      * @param date A valid date string in the valid format.
+     *             It must not be null.
      */
     public EndDate(String date) {
         requireNonNull(date);

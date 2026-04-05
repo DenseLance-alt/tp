@@ -31,6 +31,7 @@ public enum DeliveryDay {
      *
      * @param day The raw string that represents
      *            the day of delivery and should be parsed.
+     *            It must not be null.
      */
     DeliveryDay(String day) {
         this.day = parseDeliveryDayWord(day);
@@ -40,6 +41,7 @@ public enum DeliveryDay {
      * Returns a {@code DeliveryDay}
      *
      * @param day A valid day string in the valid format.
+     *            It must not be null.
      */
     public static DeliveryDay toDeliveryDay(String day) {
         requireNonNull(day);

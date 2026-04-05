@@ -30,6 +30,7 @@ public class StartDate {
      * Constructs a {@code StartDate}.
      *
      * @param date A valid date string in the valid format.
+     *             It must not be null.
      */
     public StartDate(String date) {
         requireNonNull(date);

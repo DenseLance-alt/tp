@@ -23,6 +23,7 @@ public class DeliveryTime implements Comparable<DeliveryTime> {
      * Constructs a {@code DeliveryTime}.
      *
      * @param time A valid time string in the valid format.
+     *             It must not be null.
      */
     public DeliveryTime(String time) {
         requireNonNull(time);

@@ -174,6 +174,7 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      *
      * @param startDate The raw string to parse a start date from.
+     *                  It should not be null.
      * @return The StartDate object that represents the start date.
      * @throws ParseException If the given {@code startDate} is invalid.
      */
@@ -191,6 +192,7 @@ public class ParserUtil {
      * Parses {@code String endDate} into a {@code EndDate}.
      *
      * @param endDate The end date to be parsed.
+     *                It should not be null.
      * @return The EndDate object representing the end date.
      * @throws ParseException If the given {@code endDate} is invalid.
      */
@@ -209,6 +211,7 @@ public class ParserUtil {
      * Leading and trailing whitespaces are trimmed.
      *
      * @param deliveryTime The raw string to parse a delivery time from.
+     *                     It should not be null.
      * @return The DeliveryTime object that represents the delivery time.
      * @throws ParseException If the given {@code deliveryTime} is invalid.
      */
@@ -226,6 +229,7 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      *
      * @param deliveryDayNumber The raw string to parse a delivery day number from.
+     *                          It should not be null.
      * @return The DeliveryDay object that represents the delivery day number.
      * @throws ParseException If the given {@code deliveryDayNumber} is invalid.
      */
@@ -243,9 +247,11 @@ public class ParserUtil {
      * Parses {@code Collection<String> deliveryDays} into {@code Set<DeliveryDay>}.
      *
      * @param deliveryDays The raw string to parse delivery days from.
+     *                     It should not be null or an empty string.
      * @return A set of the DeliveryDay objects that represents the delivery days.
      * @throws ParseException If any of the characters in {@code deliveryDays}
-     *                        cannot be parsed into a DeliveryDay object.
+     *                        cannot be parsed into a DeliveryDay object
+     *                        or {@code deliveryDays} is an empty string.
      */
     public static Set<DeliveryDay> parseDeliveryDays(String deliveryDays) throws ParseException {
         requireNonNull(deliveryDays);
