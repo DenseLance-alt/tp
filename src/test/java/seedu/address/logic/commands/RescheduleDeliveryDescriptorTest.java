@@ -22,38 +22,38 @@ public class RescheduleDeliveryDescriptorTest {
 
     @Test
     public void equals() {
-        // same values -> returns true
+        // EP: same values -> returns true
         RescheduleDeliveryDescriptor descriptorWithSameValues = new RescheduleDeliveryDescriptor(DESC_AMY_RESCHEDULE);
         assertTrue(DESC_AMY_RESCHEDULE.equals(descriptorWithSameValues));
 
-        // same object -> returns true
+        // EP: same object -> returns true
         assertTrue(DESC_AMY_RESCHEDULE.equals(DESC_AMY_RESCHEDULE));
 
-        // null -> returns false
+        // EP: null -> returns false
         assertFalse(DESC_AMY_RESCHEDULE.equals(null));
 
-        // different types -> returns false
+        // EP: different types -> returns false
         assertFalse(DESC_AMY_RESCHEDULE.equals(5));
 
-        // different values -> returns false
+        // EP: different values -> returns false
         assertFalse(DESC_AMY_RESCHEDULE.equals(DESC_BOB_RESCHEDULE));
 
-        // different start date -> returns false
+        // EP: different start date -> returns false
         RescheduleDeliveryDescriptor editedAmy = new RescheduleDeliveryDescriptorBuilder(DESC_AMY_RESCHEDULE)
                 .withStartDate(VALID_START_DATE_BOB).build();
         assertFalse(DESC_AMY_RESCHEDULE.equals(editedAmy));
 
-        // different end date -> returns false
+        // EP: different end date -> returns false
         editedAmy = new RescheduleDeliveryDescriptorBuilder(DESC_AMY_RESCHEDULE)
                 .withEndDate(VALID_END_DATE_BOB).build();
         assertFalse(DESC_AMY_RESCHEDULE.equals(editedAmy));
 
-        // different delivery days -> returns false
+        // EP: different delivery days -> returns false
         editedAmy = new RescheduleDeliveryDescriptorBuilder(DESC_AMY_RESCHEDULE)
                 .withDeliveryDays(VALID_DELIVERY_DAY_BOB).build();
         assertFalse(DESC_AMY_RESCHEDULE.equals(editedAmy));
 
-        // different delivery time -> returns false
+        // EP: different delivery time -> returns false
         editedAmy = new RescheduleDeliveryDescriptorBuilder(DESC_AMY_RESCHEDULE)
                 .withDeliveryTime(VALID_DELIVERY_TIME_BOB).build();
         assertFalse(DESC_AMY_RESCHEDULE.equals(editedAmy));

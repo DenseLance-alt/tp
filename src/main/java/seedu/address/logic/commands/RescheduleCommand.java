@@ -12,7 +12,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -50,19 +52,23 @@ public class RescheduleCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_NON_EXISTENT_DELIVERY = "This customer does not have an existing delivery";
 
+    private static final Logger logger = LogsCenter.getLogger(RescheduleCommand.class);
     private final Index targetIndex;
     private final RescheduleDeliveryDescriptor rescheduleDeliveryDescriptor;
+
 
     /**
      * Creates a RescheduleCommand to edit the details of the delivery assigned to the specified person.
      *
-     * @param targetIndex Index of the person whose delivery is to be edited.
-     * @param rescheduleDeliveryDescriptor Details to edit the delivery with.
+     * @param targetIndex Index of the person whose delivery is to be edited must not be null.
+     * @param rescheduleDeliveryDescriptor Details to edit the delivery with must not be null.
      */
     public RescheduleCommand(Index targetIndex, RescheduleDeliveryDescriptor rescheduleDeliveryDescriptor) {
         requireNonNull(targetIndex);
         requireNonNull(rescheduleDeliveryDescriptor);
 
+        logger.fine("RescheduleCommand called with targetIndex: " + targetIndex.getOneBased()
+                + " and rescheduleDeliveryDescriptor: " + rescheduleDeliveryDescriptor);
         this.targetIndex = targetIndex;
         this.rescheduleDeliveryDescriptor = rescheduleDeliveryDescriptor;
     }
@@ -90,16 +96,18 @@ public class RescheduleCommand extends Command {
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToReschedule} but with the delivery
-     * details edited according to  {@code rescheduleDeliveryDescriptor}
+     * details edited according to  {@code rescheduleDeliveryDescriptor}.
      *
-     * @param personToReschedule The person whose delivery details are to be edited.
-     * @param rescheduleDeliveryDescriptor The details to edit the delivery with.
+     * @param personToReschedule The person whose delivery details are to be edited, expected to be non-null.
+     * @param rescheduleDeliveryDescriptor The details to edit the delivery with, expected to be non-null.
      * @return A new {@code Person} with the edited delivery details.
+     * @throws CommandException If the delivery details are invalid.
      */
     private Person createRescheduledPerson(Person personToReschedule,
                                            RescheduleDeliveryDescriptor rescheduleDeliveryDescriptor)
             throws CommandException {
         assert personToReschedule != null;
+        assert rescheduleDeliveryDescriptor != null;
 
         Delivery rescheduledDelivery = createRescheduledDelivery(personToReschedule, rescheduleDeliveryDescriptor);
         return new Person(personToReschedule.getName(), personToReschedule.getPhone(), personToReschedule.getEmail(),
@@ -163,7 +171,7 @@ public class RescheduleCommand extends Command {
         private DeliveryTime deliveryTime;
 
         /**
-         * Creates a RescheduleDeliveryDescriptor with empty fields.
+         * Creates a {@code RescheduleDeliveryDescriptor} with empty fields.
          */
         public RescheduleDeliveryDescriptor() {
         }
@@ -172,9 +180,11 @@ public class RescheduleCommand extends Command {
          * Creates a {@code RescheduleDeliveryDescriptor} by copying the fields of {@code toCopy}.
          *
          * @param toCopy Another RescheduleDeliveryDescriptor whose fields value will be copied to this object's
-         *               fields value.
+         *               fields value, expected to be non-null.
          */
         public RescheduleDeliveryDescriptor(RescheduleDeliveryDescriptor toCopy) {
+            assert toCopy != null;
+
             setStartDate(toCopy.startDate);
             setEndDate(toCopy.endDate);
             setDeliveryDays(toCopy.deliveryDays);

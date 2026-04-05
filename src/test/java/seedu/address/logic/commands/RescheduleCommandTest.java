@@ -43,6 +43,7 @@ public class RescheduleCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
+        // EP: all fields specified with valid values
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person personWithEditedDelivery = new PersonBuilder(firstPerson)
                 .withDelivery(DELIVERY_ELLE)
@@ -63,6 +64,7 @@ public class RescheduleCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
+        // EP: some fields specified with valid values
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         Delivery firstPersonsDelivery = firstPerson.getDelivery();
@@ -87,6 +89,7 @@ public class RescheduleCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
+        // EP: no field specified
         RescheduleCommand rescheduleCommand = new RescheduleCommand(INDEX_FIRST_PERSON,
                 new RescheduleDeliveryDescriptor());
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -123,6 +126,7 @@ public class RescheduleCommandTest {
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
+        // EP: invalid index
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         RescheduleDeliveryDescriptor descriptor = new RescheduleDeliveryDescriptorBuilder()
                 .withDeliveryTime(VALID_DELIVERY_TIME_AMY).build();
@@ -137,6 +141,7 @@ public class RescheduleCommandTest {
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
+        // EP: invalid index
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
@@ -153,7 +158,7 @@ public class RescheduleCommandTest {
     public void execute_invalidDeliveryDateRange_failure() {
         assert model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()) != null;
 
-        // start date is after the end date
+        // EP: invalid delivery date range where the start date is after the end date
         LocalDate startDateValue = parseDeliveryDate(VALID_START_DATE_AMY);
         LocalDate endDateValue = startDateValue.plusDays(-5);
         String endDateString = formatDeliveryDate(endDateValue);
@@ -168,6 +173,7 @@ public class RescheduleCommandTest {
 
     @Test
     public void execute_validPersonWithoutDelivery_failure() {
+        // EP: valid person without delivery
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person firstPersonWithoutDelivery = new PersonBuilder(firstPerson).withDelivery(null).build();
 
@@ -187,24 +193,24 @@ public class RescheduleCommandTest {
         final RescheduleCommand standardCommand = new RescheduleCommand(INDEX_FIRST_PERSON,
                 DESC_AMY_RESCHEDULE);
 
-        // same values -> returns true
+        // EP: same values -> returns true
         RescheduleDeliveryDescriptor copyDescriptor = new RescheduleDeliveryDescriptor(DESC_AMY_RESCHEDULE);
         RescheduleCommand commandWithSameValues = new RescheduleCommand(INDEX_FIRST_PERSON, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
-        // same object -> returns true
+        // EP: same object -> returns true
         assertTrue(standardCommand.equals(standardCommand));
 
-        // null -> returns false
+        // EP: null -> returns false
         assertFalse(standardCommand.equals(null));
 
-        // different types -> returns false
+        // EP: different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
 
-        // different index -> returns false
+        // EP: different index -> returns false
         assertFalse(standardCommand.equals(new RescheduleCommand(INDEX_SECOND_PERSON, DESC_AMY_RESCHEDULE)));
 
-        // different descriptor -> returns false
+        // EP: different descriptor -> returns false
         assertFalse(standardCommand.equals(new RescheduleCommand(INDEX_FIRST_PERSON, DESC_BOB_RESCHEDULE)));
     }
 
