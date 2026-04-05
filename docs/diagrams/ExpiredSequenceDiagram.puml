@@ -1,0 +1,79 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ExpiredCommandParser" as ExpiredCommandParser LOGIC_COLOR
+participant "e:ExpiredCommand" as ExpiredCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "p:PersonHasExpiredDeliveryPredicate" as Predicate MODEL_COLOR
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("expired bf/2026-02-01")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("expired bf/2026-02-01")
+activate AddressBookParser
+
+create ExpiredCommandParser
+AddressBookParser -> ExpiredCommandParser
+activate ExpiredCommandParser
+
+ExpiredCommandParser --> AddressBookParser
+deactivate ExpiredCommandParser
+
+'Extra space needed before prefix to denote empty preamble
+AddressBookParser -> ExpiredCommandParser : parse(" bf/2026-02-01")
+activate ExpiredCommandParser
+
+create Predicate
+ExpiredCommandParser -> Predicate : PersonHasExpiredDeliveryPredicate("2026-02-01")
+activate Predicate
+
+Predicate --> ExpiredCommandParser
+deactivate Predicate
+
+create ExpiredCommand
+ExpiredCommandParser -> ExpiredCommand : ExpiredCommand(p)
+activate ExpiredCommand
+
+ExpiredCommand --> ExpiredCommandParser
+deactivate ExpiredCommand
+
+ExpiredCommandParser --> AddressBookParser : e
+deactivate ExpiredCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ExpiredCommandParser -[hidden]-> AddressBookParser
+destroy ExpiredCommandParser
+
+AddressBookParser --> LogicManager : e
+deactivate AddressBookParser
+
+LogicManager -> ExpiredCommand : execute(m)
+activate ExpiredCommand
+
+ExpiredCommand -> Model : updateFilteredPersonList(p)
+activate Model
+
+Model --> ExpiredCommand
+deactivate Model
+
+create CommandResult
+ExpiredCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ExpiredCommand
+deactivate CommandResult
+
+ExpiredCommand --> LogicManager : r
+deactivate ExpiredCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -16,6 +16,9 @@
 ### Original Source
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
+### Other Sources
+* Displaying of delivery information under each person card was inspired by [SoCTAssist](https://github.com/AY2526S1-CS2103T-W11-1/tp).
+
 ### Libraries Used
 * [JavaFX](https://openjfx.io/) for GUI rendering.
 * [Jackson](https://github.com/FasterXML/jackson) for JSON processing.
@@ -251,6 +254,50 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 <br>
 
+### Find customers with expired delivery
+
+**Objective:** Allows administrative staff to track subscriptions that have ended and facilitate renewals.
+
+#### Implementation Details
+The following sequence diagram illustrates the interactions within the `Logic` component for finding customers with an expired delivery:
+
+<box type="info" light>
+
+**Note:** The lifeline for `ExpiredCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of the diagram.
+</box>
+
+<puml src="diagrams/ExpiredSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `expired bf/2026-02-01` Command">
+
+**Execution flow:**
+1. The user enters the `expired` command as an input string.
+2. `LogicManager` receives the input string and passes it to `AddressBookParser`.
+3. `AddressBookParser` creates an `ExpiredCommandParser` to parse the command arguments.
+4. `ExpiredCommandParser` parses the arguments and creates a `PersonHasExpiredDeliveryPredicate` object.
+5. `ExpiredCommandParser` uses the `PersonHasExpiredDeliveryPredicate` to create an `ExpiredCommand` object.
+6. `LogicManager` executes the `ExpiredCommand` object.
+7. `ExpiredCommand` requests `Model` to filter the customer list based on the given `PersonHasExpiredDeliveryPredicate`.
+8. `ExpiredCommand` completes and returns the result of the `expired` command.
+
+#### Design Considerations
+
+1. Functionality of the `expired` command.
+    * **Chosen:** Find all customers with deliveries that have ended before a user-specified date.
+      * Pros: Flexible, as it allows users to find deliveries that have expired today or are about to expire.
+      * Cons: Requires extra effort to decide on the correct date to key in.
+        * Note that users can find today's date easily by referring to the deliveries panel. 
+    * **Alternative:** Find all customers with deliveries that have ended before today.
+      * Pros: Simple and fast way to view recently expired deliveries.
+      * Cons: Reduces testability, as test cases have to be created with respect to the system's date time.
+2. How the prefix for the date field is named.
+    * **Chosen:** Name the prefix as `bf/` to represent "before".
+      * Pros: User-friendly and intuitive, as the prefix aligns with the intent of the command.
+      * Cons: `bf/` as an abbreviation for "before" might not be obvious to new users initially.
+    * **Alternative:** Name the prefix as `ed/` to represent "end date".
+      * Pros: Consistent with the format used for `find-delivery`.
+      * Cons: Ambiguous, since `expired ed/DATE` could refer to finding deliveries that end on that exact date.
+
+<br>
+
 ### Schedule delivery
 
 **Objective:** Allows administrative staff to add a delivery to be associated with the specified customer.
@@ -265,7 +312,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 <puml src="diagrams/ScheduleSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `schedule 1 st/2026-01-01 ed/2026-02-01 tm/14:00 d/123` Command" />
 
-**Execution flows:**
+**Execution flow:**
 1. The user enters the `schedule` command as an input string.
 2. `LogicManager` receives the input string and passes it to `AddressBookParser`.
 3. `AddressBookParser` creates a `ScheduleCommandParser` to parse the command arguments.
@@ -340,7 +387,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 <box type="info" light>
 
-**Note:** The lifeline for `UnscheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram. Additionally, another limitation of PlantUML is that a dotted line cannot be shown from the UML note.
+**Note:** The lifeline for `UnscheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
 <puml src="diagrams/UnscheduleSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `unschedule 2` Command" />
@@ -354,7 +401,8 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 6. `UnscheduleCommand` checks whether the specified customer and their delivery exist.
 7. If the customer has a delivery, `UnscheduleCommand` creates a new `Person` object with all existing fields intact except the delivery.
 8. `UnscheduleCommand` requests `Model` to replace the old entry in the address book with the newly created `Person` object.
-9. `UnscheduleCommand` completes and returns the result of the `unschedule` command.
+9. `UnscheduleCommand` requests `Model` to refresh the displayed customer list to show all customers.
+10. `UnscheduleCommand` completes and returns the result of the `unschedule` command.
 
 #### Design considerations
 
@@ -365,9 +413,9 @@ The following sequence diagram illustrates the interactions within the `Logic` c
     * **Alternative:** Name the command as `cancel`.
       * Pros: Familiar word that users are unlikely to mistype.
       * Cons: Ambiguous, since `cancel` could refer to cancelling of other actions beyond deliveries; breaks consistency with `schedule` and `reschedule`.
-2. How `unschedule` removes the delivery from a person.
+2. How `unschedule` removes the delivery from a customer.
     * **Chosen:** Implement a dedicated `unschedule` command.
-      * Pros: One-shot command that enables users to easily remove the delivery of the specified person.
+      * Pros: One-shot command that enables users to easily remove the delivery of the specified customer.
       * Cons: Requires implementing a new command class.
     * **Alternative:** Instruct the user to delete the customer and add them back without their delivery details.
       * Pros: Reuses existing `delete` and `add` commands without needing additional implementation effort.
