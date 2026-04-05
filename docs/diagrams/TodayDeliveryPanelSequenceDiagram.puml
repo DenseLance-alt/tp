@@ -1,0 +1,56 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam ParticipantPadding 75
+skinparam BoxPadding 0
+
+box Ui UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+participant ":TodayDeliveryPanel" as TodayDeliveryPanel UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+end box
+
+[-> MainWindow : fillInnerParts()
+activate MainWindow
+
+MainWindow -> LogicManager : getSortedPersonWithTodayDeliveryList()
+activate LogicManager
+
+LogicManager -> ModelManager : getSortedPersonWithTodayDeliveryList()
+activate ModelManager
+
+ModelManager --> LogicManager : \t\t\t\t list
+deactivate ModelManager
+
+LogicManager --> MainWindow : \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t list
+deactivate LogicManager
+
+MainWindow -> LogicManager : getTodayDate()
+activate LogicManager
+
+LogicManager -> ModelManager : getTodayDate()
+activate ModelManager
+
+ModelManager --> LogicManager : \t\t\t\t todayDate
+deactivate ModelManager
+
+LogicManager --> MainWindow : \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t todayDate
+deactivate LogicManager
+
+create TodayDeliveryPanel
+MainWindow -> TodayDeliveryPanel : TodayDeliveryPanel(list, todayDate)
+activate TodayDeliveryPanel
+
+TodayDeliveryPanel --> MainWindow
+deactivate TodayDeliveryPanel
+
+[<--MainWindow
+deactivate MainWindow
+@enduml

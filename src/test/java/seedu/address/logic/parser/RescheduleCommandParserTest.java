@@ -50,43 +50,50 @@ public class RescheduleCommandParserTest {
 
     @Test
     public void parse_missingParts_failure() {
-        // no index specified
+        // EP: no index specified
         assertParseFailure(parser, VALID_START_DATE_AMY, MESSAGE_INVALID_FORMAT);
 
-        // no field specified
+        // EP: no field specified
         assertParseFailure(parser, "1", RescheduleCommand.MESSAGE_NOT_EDITED);
 
-        // no index and no field specified
+        // EP: no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_invalidPreamble_failure() {
-        // negative index
+        // EP: negative index
         assertParseFailure(parser, "-5" + START_DATE_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
-        // zero index
+        // EP: zero index
         assertParseFailure(parser, "0" + START_DATE_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
-        // invalid arguments being parsed as preamble
+        // EP: invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
 
-        // invalid prefix being parsed as preamble
+        // EP: invalid prefix being parsed as preamble
         assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_invalidValue_failure() {
+        // EP: invalid start date
         assertParseFailure(parser, "1" + INVALID_START_DATE_DESC, StartDate.MESSAGE_CONSTRAINTS);
+
+        // EP: invalid end date
         assertParseFailure(parser, "1" + INVALID_END_DATE_DESC, EndDate.MESSAGE_CONSTRAINTS);
+
+        // EP: invalid delivery time
         assertParseFailure(parser, "1" + INVALID_TIME_DESC, DeliveryTime.MESSAGE_CONSTRAINTS);
+
+        // EP: invalid delivery days
         assertParseFailure(parser, "1" + INVALID_DAYS_DESC, MESSAGE_INVALID_DAY_NUMBER);
 
-        // invalid start date followed by valid end date
+        // EP: invalid start date followed by valid end date
         assertParseFailure(parser, "1" + INVALID_START_DATE_DESC + VALID_END_DATE_AMY,
                 StartDate.MESSAGE_CONSTRAINTS);
 
-        // multiple invalid values, but only the first invalid value is captured
+        // EP: multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_START_DATE_DESC + INVALID_END_DATE_DESC
                 + VALID_DAYS_AMY + VALID_DELIVERY_TIME_AMY, StartDate.MESSAGE_CONSTRAINTS);
     }
@@ -96,7 +103,7 @@ public class RescheduleCommandParserTest {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + START_DATE_DESC_AMY + END_DATE_DESC_AMY
                 + DAYS_DESC_AMY + TIME_DESC_AMY;
-
+        // EP: all fields specified with valid values
         RescheduleDeliveryDescriptor descriptor = new RescheduleDeliveryDescriptorBuilder()
                 .withStartDate(VALID_START_DATE_AMY)
                 .withEndDate(VALID_END_DATE_AMY)
@@ -112,7 +119,7 @@ public class RescheduleCommandParserTest {
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + START_DATE_DESC_AMY + END_DATE_DESC_AMY;
-
+        // EP: some fields specified with valid values
         RescheduleDeliveryDescriptor descriptor = new RescheduleDeliveryDescriptorBuilder()
                 .withStartDate(VALID_START_DATE_AMY)
                 .withEndDate(VALID_END_DATE_AMY)
@@ -124,7 +131,7 @@ public class RescheduleCommandParserTest {
 
     @Test
     public void parse_oneFieldSpecified_success() {
-        // start date
+        // EP: start date specified
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + START_DATE_DESC_AMY;
         RescheduleDeliveryDescriptor descriptor = new RescheduleDeliveryDescriptorBuilder()
@@ -132,21 +139,21 @@ public class RescheduleCommandParserTest {
         RescheduleCommand expectedCommand = new RescheduleCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // end date
+        // EP: end date specified
         userInput = targetIndex.getOneBased() + END_DATE_DESC_AMY;
         descriptor = new RescheduleDeliveryDescriptorBuilder()
                 .withEndDate(VALID_END_DATE_AMY).build();
         expectedCommand = new RescheduleCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // delivery days
+        // EP: delivery days specified
         userInput = targetIndex.getOneBased() + DAYS_DESC_AMY;
         descriptor = new RescheduleDeliveryDescriptorBuilder()
                 .withDeliveryDays(VALID_DELIVERY_DAY_AMY).build();
         expectedCommand = new RescheduleCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // delivery time
+        // EP: delivery time specified
         userInput = targetIndex.getOneBased() + TIME_DESC_AMY;
         descriptor = new RescheduleDeliveryDescriptorBuilder()
                 .withDeliveryTime(VALID_DELIVERY_TIME_AMY).build();
@@ -156,18 +163,18 @@ public class RescheduleCommandParserTest {
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        // valid followed by invalid
+        // EP: valid input followed by invalid input
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + START_DATE_DESC_AMY + INVALID_START_DATE_DESC;
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_START_DATE));
 
-        // invalid followed by valid
+        // EP: invalid input followed by valid input
         userInput = targetIndex.getOneBased() + INVALID_START_DATE_DESC + START_DATE_DESC_AMY;
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_START_DATE));
 
-        // multiple valid fields repeated
+        // EP: multiple valid fields repeated
         userInput = targetIndex.getOneBased() + START_DATE_DESC_AMY + END_DATE_DESC_AMY
                 + DAYS_DESC_AMY + TIME_DESC_AMY + START_DATE_DESC_BOB + END_DATE_DESC_BOB
                 + DAYS_DESC_BOB + TIME_DESC_BOB;
@@ -175,7 +182,7 @@ public class RescheduleCommandParserTest {
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(
                 PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_DAYS, PREFIX_TIME));
 
-        // multiple invalid values
+        // EP: multiple invalid values
         userInput = targetIndex.getOneBased() + INVALID_START_DATE_DESC + INVALID_END_DATE_DESC
                 + INVALID_DAYS_DESC + INVALID_TIME_DESC + INVALID_START_DATE_DESC + INVALID_END_DATE_DESC
                 + INVALID_DAYS_DESC + INVALID_TIME_DESC;

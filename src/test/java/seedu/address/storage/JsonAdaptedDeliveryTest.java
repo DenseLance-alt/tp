@@ -39,12 +39,14 @@ public class JsonAdaptedDeliveryTest {
 
     @Test
     public void toModelType_validDeliveryDetails_returnsDelivery() throws Exception {
+        // EP: all valid inputs
         JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(DELIVERY_ELLE);
         assertEquals(DELIVERY_ELLE, delivery.toModelType());
     }
 
     @Test
     public void toModelType_invalidStartDate_throwsIllegalValueException() {
+        // EP: invalid start date
         JsonAdaptedDelivery delivery =
                 new JsonAdaptedDelivery(INVALID_START_DATE, VALID_END_DATE,
                         VALID_DELIVERY_DAYS, VALID_DELIVERY_TIME);
@@ -54,6 +56,7 @@ public class JsonAdaptedDeliveryTest {
 
     @Test
     public void toModelType_nullStartDate_throwsIllegalValueException() {
+        // EP: null start date
         JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(null, VALID_END_DATE,
                 VALID_DELIVERY_DAYS, VALID_DELIVERY_TIME);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, StartDate.class.getSimpleName());
@@ -62,6 +65,7 @@ public class JsonAdaptedDeliveryTest {
 
     @Test
     public void toModelType_invalidEndDate_throwsIllegalValueException() {
+        // EP: invalid end date
         JsonAdaptedDelivery delivery =
                 new JsonAdaptedDelivery(VALID_START_DATE, INVALID_END_DATE,
                         VALID_DELIVERY_DAYS, VALID_DELIVERY_TIME);
@@ -71,6 +75,7 @@ public class JsonAdaptedDeliveryTest {
 
     @Test
     public void toModelType_nullEndDate_throwsIllegalValueException() {
+        // EP: null end date
         JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(VALID_START_DATE, null,
                 VALID_DELIVERY_DAYS, VALID_DELIVERY_TIME);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, EndDate.class.getSimpleName());
@@ -81,6 +86,7 @@ public class JsonAdaptedDeliveryTest {
     public void toModelType_invalidDeliveryDay_throwsIllegalValueException() {
         List<JsonAdaptedDeliveryDay> invalidDeliveryDays = new ArrayList<>(VALID_DELIVERY_DAYS);
         invalidDeliveryDays.add(new JsonAdaptedDeliveryDay(INVALID_DELIVERY_DAY));
+        // EP: invalid delivery days
         JsonAdaptedDelivery delivery =
                 new JsonAdaptedDelivery(VALID_START_DATE, VALID_END_DATE, invalidDeliveryDays,
                         VALID_DELIVERY_TIME);
@@ -90,6 +96,7 @@ public class JsonAdaptedDeliveryTest {
 
     @Test
     public void toModelType_nullDeliveryDays_throwsIllegalValueException() {
+        // EP: null delivery days
         JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(VALID_START_DATE, VALID_END_DATE, null,
                 VALID_DELIVERY_TIME);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, DeliveryDay.class.getSimpleName());
@@ -98,6 +105,7 @@ public class JsonAdaptedDeliveryTest {
 
     @Test
     public void toModelType_invalidDeliveryTime_throwsIllegalValueException() {
+        // EP: invalid delivery time
         JsonAdaptedDelivery delivery =
                 new JsonAdaptedDelivery(VALID_START_DATE, VALID_END_DATE, VALID_DELIVERY_DAYS,
                         INVALID_DELIVERY_TIME);
@@ -107,6 +115,7 @@ public class JsonAdaptedDeliveryTest {
 
     @Test
     public void toModelType_nullDeliveryTime_throwsIllegalValueException() {
+        // EP: null delivery time
         JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(VALID_START_DATE, VALID_END_DATE,
                 VALID_DELIVERY_DAYS, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, DeliveryTime.class.getSimpleName());

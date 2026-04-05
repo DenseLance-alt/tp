@@ -37,7 +37,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## Design
 
-<box type="info" seamless>
+<box type="info" light>
 
 **Note:** All references of a person in this design section represent a customer.
 </box>
@@ -88,6 +88,11 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
+<box type="info" light>
+
+**Note:** Due to a limitation of PlantUML, there is an overlap in the dependency arrowhead and inheritance triangle originating from `TodayDeliveryCard` to `Model` and `UiPart` respectively. The arrowheads and inheritance triangle should not overlap.
+</box>
+
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
@@ -109,7 +114,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-<box type="info" seamless>
+<box type="info" light>
 
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
@@ -145,7 +150,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<box type="info" seamless>
+<box type="info" light>
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` and `Delivery` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects. Similarly, only one `Delivery` object would be required per unique delivery, instead of each `Person` needing their own `Delivery` objects.<br>
 
@@ -178,7 +183,23 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Find customer by attribute
+### Today's deliveries panel
+
+The sequence diagram below illustrates the interactions between the `Ui`, `Logic` and `Model` components, to create the `TodayDeliveryPanel` when the application is launched.
+
+<puml src="diagrams/TodayDeliveryPanelSequenceDiagram.puml" alt="Interactions between the `Ui`, `Logic` and `Model` components, to create the `TodayDeliveryPanel` when the application is launched" />
+
+How the `TodayDeliveryPanel` is created:
+
+1. When `MainWindow` is called upon to fill its inner parts, it gets the list of persons with deliveries scheduled for the current day from the `LogicManager`.
+2. The `LogicManager` in turn calls `ModelManager`, which retrieves and returns the sorted list of today's deliveries. This list is sorted in ascending order of delivery time.
+3. `MainWindow` then gets the current date from the `LogicManager`, which in turn calls `ModelManager` to retrieve and return the current date.
+4. Next, `MainWindow` instantiates a `TodayDeliveryPanel` object using the sorted list of today's deliveries and the current date.<br>
+   Note that although `fillInnerParts()` is shown only instantiating a `TodayDeliveryPanel` object in the diagram above (for simplicity), in the code `fillInnerParts()` also instantiates other parts of the `Ui` (e.g. `PersonListPanel`).
+5. Finally, the newly created `TodayDeliveryPanel` object is used by `MainWindow` to fill the panel's placeholder, displaying the current date and the sorted list of today's deliveries.<br>
+   Note that this step is omitted in the diagram above (for simplicity).
+
+<br>
 
 ### Find delivery by date
 
@@ -187,7 +208,7 @@ This section describes some noteworthy details on how certain features are imple
 #### Implementation details
 The following sequence diagram illustrates the interactions within the `Logic` component for finding deliveries by date:
 
-<box type="info" seamless>
+<box type="info" light>
 
 **Note:** The lifeline for `FindDeliveryCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram. Additionally, another limitation of PlantUML is that a dotted line cannot be shown from the UML note.
 </box>
@@ -221,7 +242,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 #### Implementation details
 The following sequence diagram illustrates the interactions within the `Logic` component for scheduling a delivery:
 
-<box type="info" seamless>
+<box type="info" light>
 
 **Note:** The lifeline for `ScheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of the diagram. Additionally, another limitation of PlantUML is that a dotted line cannot be shown from the UML note.
 </box>
@@ -259,7 +280,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 #### Implementation details
 The following sequence diagram illustrates the interactions within the `Logic` component for rescheduling a delivery:
 
-<box type="info" seamless>
+<box type="info" light>
 
 **Note:** The lifeline for `RescheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram. Additionally, another limitation of PlantUML is that a dotted line cannot be shown from the UML note.
 </box>
@@ -297,7 +318,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 #### Implementation details
 The following sequence diagram illustrates the interactions within the `Logic` component for unscheduling a delivery:
 
-<box type="info" seamless>
+<box type="info" light>
 
 **Note:** The lifeline for `UnscheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram. Additionally, another limitation of PlantUML is that a dotted line cannot be shown from the UML note.
 </box>
@@ -361,45 +382,48 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 * Provides fast and organised solution for tingkat caterers to manage their customer information for delivery planning
 
 
-
+<!-- @@author MrMarshall12 -->
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​       | I want to …​                                         | So that I can…​                                                                                                |
 |----------|---------------|------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
-| `* * *`  | beginner user | add a customer                                       | keep track of customers                                                                                        |
-| `* * *`  | beginner user | view a list of all customers                         | have an overview of my operations                                                                              |
+| `* * *`  | beginner user | add a customer                                       | store their contact information                                                                                |
+| `* * *`  | beginner user | view a list of all customers                         | get a complete overview of my contact base                                                                     |
+| `* * *`  | beginner user | view deliveries for all customers                    | ensure that food is delivered on the correct days                                                              |
 | `* * *`  | beginner user | exit from the app easily                             | avoid cluttering my desktop screen once I have finished using the app                                          |
 | `* * *`  | beginner user | delete a customer                                    | get rid of customer records that I no longer need to track                                                     |
 | `* *`    | beginner user | see a message explaining how to access the help page | learn what each operation does                                                                                 |
 | `* *`    | user          | edit customer's data                                 | correct any mistakes or changes to customer data to keep information accuracy                                  |
 | `* *`    | user          | schedule a delivery                                  | track deliveries that need to be made                                                                          |
 | `* *`    | user          | reschedule a delivery                                | correct any mistakes or changes to delivery data belongs to a particular customer to keep information accuracy |
-| `* *`    | user          | unschedule a delivery                                | remove cancelled delivery                                                                                      |
-| `* *`    | familiar user | display all upcoming deliveries                      | inform delivery drivers on their delivery points and plan production                                           |
-| `* *`    | familiar user | track customers' subscription expiry date            | check how many customers have their subscription close to the expiration date and gently remind them           |
+| `* *`    | user          | unschedule a delivery                                | remove an inactive delivery                                                                                    |
+| `* *`    | familiar user | display all upcoming deliveries for the day          | prepare the food and plan for the deliveries                                                                   |
+| `* *`    | familiar user | find customers with expired subscriptions            | identify and follow up with customers to renew their subscription                                              |
 | `* *`    | familiar user | tag each customer by their food preference           | inform the cooks to prepare food that aligns with the customers' food preference                               |
 | `*`      | familiar user | create a delivery route                              | inform delivery drivers on their delivery route                                                                |
-| `*`      | busy user     | search for a customer by name, address, or tag       | quickly locate customer details when handling customer enquiries                                               |
+| `*`      | busy user     | search for a customer by name, address or tags       | quickly locate customer details                                                                                |
 | `*`      | expert user   | reorder stops within a delivery route                | ensures deliveries follow an efficient sequence                                                                |
 | `*`      | expert user   | import customer data in bulk                         | conveniently transition into the app                                                                           |
 | `*`      | expert user   | set estimated time of delivery for a customer        | ensure all customers have their food delivered on time                                                         |
 | `*`      | expert user   | set delivery status for a customer                   | keep track of deliveries that have been made and cancelled                                                     |
-| `*`      | expert user   | track customers' subscription payment                | know when I received their payements                                                                           |
+| `*`      | expert user   | track customers' subscription payment                | know when I received their payments                                                                            |
 | `*`      | expert user   | mass copy emails and contact numbers to clipboard    | mass email and message customer about upcoming promotions                                                      |
 | `*`      | expert user   | view free time slots                                 | schedule new deliveries for new customers                                                                      |
 | `*`      | expert user   | track the total revenue from a customer              | know how much I have earned from a customer                                                                    |
 | `*`      | expert user   | track number of days subscribed by a customer so far | know who are my loyal customers                                                                                |
 | `*`      | expert user   | back up customer and route data                      | ensure that delivery operations are not disrupted by data loss                                                 |
 | `*`      | expert user   | archive customers data                               | see only the relevant data for currently subscribed customers                                                  |
-
+<!-- @@author -->
 
 
 
 ### Use cases
 
 (For all use cases below, the **System** is the `ServeMate` and the **Actor** is the `user`, unless specified otherwise)
+
+<br>
 
 **Use case 1: Add a customer**
 
@@ -431,6 +455,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
+<br>
+
 **Use case 2: Delete a customer**
 
 **MSS**
@@ -460,6 +486,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. ServeMate shows an error message indicating that the provided index is invalid.
 
       Use case resumes at step 3.
+
+<br>
 
 **Use case 3: Edit customer record**
 
@@ -509,6 +537,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 3.
 
+<br>
+
 **Use case 4: Filter customers by attributes**
 
 **MSS**
@@ -539,22 +569,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+<br>
+
 **Use case 5: View all upcoming deliveries for the day**
 
 **MSS**
 
-1. User requests to view all upcoming deliveries for the day.
-2. ServeMate shows a list of all upcoming deliveries for the day.
+1. User launches application to view all upcoming deliveries for the day.
+2. ServeMate displays a list of all upcoming deliveries for the day, ordered from earliest to latest delivery time.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. ServeMate is unable to find any upcoming deliveries.
+* 1a. ServeMate detects there are no deliveries scheduled for the day.
 
-    * 1a1. ServeMate shows an empty result list.
+    * 1a1. ServeMate displays there are no upcoming deliveries for the day.
 
       Use case ends.
+
+<br>
 
 **Use case 6: Add upcoming delivery for a customer**
 
@@ -604,6 +638,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 3.
 
+<br>
+
 **Use case 7: Edit delivery details belonging to a customer**
 
 **MSS**
@@ -646,6 +682,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 3.
 
+<br>
 
 **Use case 8: Delete a delivery associated with a customer**
 
@@ -682,6 +719,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+<br>
+
 **Use case 9: Tag customer with delivery note**
 
 **MSS**
@@ -715,6 +754,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
       Use case resumes at step 3.
 
+<br>
+
+**Use case 10: Find expired deliveries**
+
+**MSS**
+
+1. User requests to find all customers whose deliveries have ended before a specific date.
+2. ServeMate displays the list of all matching customers.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. ServeMate detects an error in the command format.
+
+    * 1a1. ServeMate displays an error message describing the correct command format.
+
+      Use case resumes at step 1.
+
+* 1b. ServeMate detects that the provided date is invalid. 
+
+    * 1b1. ServeMate displays an error message describing that the date given is invalid.
+
+      Use case resumes at step 1.
+
+* 1c. No customers have deliveries which end before the specified date.
+
+    * 1c1. ServeMate displays an empty result list.
+
+      Use case ends.
+
+<br>
+
 ### Non-Functional Requirements
 
 #### ⚙️ Technical
@@ -744,6 +816,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. The Developer Guide and User Guide should be PDF-friendly (e.g. no expandable panels, embedded videos, animated GIFs, etc.).
 2. The Developer Guide and User Guide should have a maximum size of 15MB each, when downloaded as PDF files.
 
+<br>
+
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
@@ -766,7 +840,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<box type="info" seamless>
+<box type="info" light>
 
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
@@ -818,7 +892,7 @@ testers are expected to do more *exploratory* testing.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Appendix: Planned Enhancements
-
-1. **Handle tags longer than 50 characters**: 
-   - Current behavior: Tags are restricted to 50 characters.
-   - Planned Enhancement: Tags with more than 50 characters will be clipped. However, the user can view the full tag by clicking on the clipped tag, which will show the full tag in a tooltip or a pop-up window.
+Team size: 5
+1. **Refresh today's deliveries panel:** The current delivery panel does not update automatically when a new day starts. Users must restart the application to view the current day's deliveries. We plan to add a command (e.g. `today`) to refresh the delivery panel so that it reflects the new current date.
+2. **Combine existing find commands:** The current separation of the `find-delivery` and `find` commands does not allow filtering by both delivery information (e.g. date) and customer information (e.g. address). We plan to combine both commands into a single `find` command, so that filtering by both delivery information and customer information is possible (e.g. `find n/John dt/2026-04-01`).
+3. **Handle tags longer than 50 characters:** Currently, tags are restricted to 50 characters. We plan to allow tags with more than 50 characters, but the 51st character onwards will be clipped. The user can view the full tag by clicking on the clipped tag, which will show the full tag in a tooltip or a pop-up window.
