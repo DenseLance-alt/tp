@@ -470,6 +470,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | familiar user | tag each customer by their food preference           | inform the cooks to prepare food that aligns with the customers' food preference                               |
 | `*`      | familiar user | create a delivery route                              | inform delivery drivers on their delivery route                                                                |
 | `*`      | busy user     | search for a customer by name, address or tags       | quickly locate customer details                                                                                |
+| `*`      | busy user     | find customers with deliveries on a specific date or within a date range | quickly identify which customers need to be served on a given day or period                  |
 | `*`      | expert user   | reorder stops within a delivery route                | ensures deliveries follow an efficient sequence                                                                |
 | `*`      | expert user   | import customer data in bulk                         | conveniently transition into the app                                                                           |
 | `*`      | expert user   | set estimated time of delivery for a customer        | ensure all customers have their food delivered on time                                                         |
@@ -848,6 +849,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1c. No customers have deliveries which end before the specified date.
 
     * 1c1. ServeMate displays an empty result list.
+
+      Use case ends.
+
+<br>
+
+**Use case 11: Find customers by delivery date**
+
+**MSS**
+1. User requests to find customers with deliveries scheduled on a specified date or within a specified date range.
+2. ServeMate displays the list of customers that match the given date or date range.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. ServeMate detects an error in the command format.
+
+    * 1a1. ServeMate displays an error message describing the correct command format.
+
+      Use case resumes at step 1.
+
+* 1b. ServeMate detects that the provided date is invalid.
+
+    * 1b1. ServeMate displays an error message describing that the date given is invalid.
+
+      Use case resumes at step 1.
+
+* 1c. ServeMate detects that the start date is after the end date.
+
+    * 1c1. ServeMate displays an error message indicating that the start date must not be after the end date.
+
+      Use case resumes at step 1.
+
+* 1d. No customers match the specified date or date range.
+
+    * 1d1. ServeMate displays an empty result list.
 
       Use case ends.
 
