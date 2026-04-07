@@ -70,7 +70,8 @@ Meet Mdm Tan, an experienced administrative staff at a Tingkat catering business
 
 <box type="info" light>
 
-**Note:** This tutorial uses the sample data that comes preloaded with ServeMate so that you can practice right away. Please note that your screen might look different from our screenshots because what you see for the **delivery panel** on the right depends on your computer's date.
+**Note:** This tutorial uses the sample data that comes preloaded with ServeMate so that you can practice right away.
+Please note that your screen might look different from the screenshots below, because what you see for the **delivery panel** on the right depends on your computer's date.
 </box>
 
 ### Viewing all customer records
