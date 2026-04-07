@@ -156,7 +156,7 @@ public class DeliveryDatePredicateTest {
 
     // EP: delivery has multiple delivery days; query date matches only one of them
     @Test
-    public void test_multipleDeliveryDays_oneMatchingDay_returnsTrue() {
+    public void test_multipleDeliveryDays_returnsTrue() {
         Delivery delivery = new DeliveryBuilder()
                 .withStartDate("2026-04-01")
                 .withEndDate("2026-04-30")
