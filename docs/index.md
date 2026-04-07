@@ -10,7 +10,7 @@
 
 ![Ui](images/Ui.png)
 
-**ServeMate is a desktop address book created for administrative staff for tingkat food delivery to manage their customer contacts for delivery planning.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+**ServeMate is a desktop address book created for administrative staff for Tingkat catering businesses to manage their customer contacts for delivery planning.** While it has a GUI (Graphical User Interface), most of the user interactions happen using a CLI (Command Line Interface).
 
 * If you are interested in using ServeMate, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
 * If you are interested about developing ServeMate, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
@@ -19,4 +19,4 @@
 **Acknowledgements**
 
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5), [PlantUML](https://plantuml.com/stdlib)
-* AI model used: Google Gemini, GitHub Copilot
+* AI models used: Google Gemini, GitHub Copilot
