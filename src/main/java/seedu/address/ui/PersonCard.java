@@ -20,6 +20,8 @@ import seedu.address.model.person.Person;
  */
 public class PersonCard extends UiPart<Region> {
 
+    //Solution below adapted from
+    // https://github.com/AY2526S1-CS2103T-W11-1/tp/blob/master/src/main/java/seedu/address/ui/PersonCard.java
     public static final String STYLE_DELIVERY_DAY_PRESENT = "-fx-background-color: #3CB043; "
             + "-fx-text-fill: white; "
             + "-fx-font-weight: bold; "
