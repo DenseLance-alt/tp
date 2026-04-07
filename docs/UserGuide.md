@@ -123,7 +123,7 @@ edit 1 t/Halal t/LessOil
 
 <box type="warning" light>
 
-**Warning:** When you use the `edit` command to add new tags to a customer, ServeMate will **replace** all old tags. Always include the original tags (e.g. `Halal`) in your command if you want to keep them!
+**Warning:** When you use the `edit` command to add new tags to a customer, ServeMate will **replace** the old tags. You should always include the original tags (e.g. `Halal`) in your command if you want to keep them!
 </box>
 
 Mdm Tan checks that Irfan's record is updated correctly:
