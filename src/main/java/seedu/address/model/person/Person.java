@@ -149,7 +149,7 @@ public class Person {
      * or an empty string if person does not have a delivery assigned.
      *
      * @return Formatted string containing the start date, end date, and time of
-     * the person's delivery.
+     *         the person's delivery.
      */
     public String getFormattedDeliverySchedule() {
         if (!hasDelivery()) {
