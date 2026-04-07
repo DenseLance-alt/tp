@@ -390,8 +390,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
       * Cons: Not commonly used in standard English, which may cause first-time users to find it unusual.
     * **Alternative:** Name the command as `cancel`.
       * Pros: Familiar word that users are unlikely to mistype.
-      * Cons: Ambiguous, since `cancel` could refer to cancelling of other actions beyond deliveries; breaks consistency with `schedule` and `reschedule`.
-2. How `unschedule` removes the delivery from a customer.
+      * Cons: Ambiguous, since `cancel` could refer to cancelling of a payment made for the delivery instead.
     * **Chosen:** Implement a dedicated `unschedule` command.
       * Pros: One-shot command that enables users to easily remove the delivery of the specified customer.
       * Cons: Requires implementing a new command class.
