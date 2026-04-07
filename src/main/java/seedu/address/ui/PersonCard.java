@@ -104,6 +104,10 @@ public class PersonCard extends UiPart<Region> {
 
     //Solution below inspired by
     // https://github.com/AY2526S1-CS2103T-W11-1/tp/blob/master/src/main/java/seedu/address/ui/PersonCard.java
+    /**
+     * Displays delivery details for the person if they have a delivery,
+     * otherwise it is not shown.
+     */
     private void showDeliveryInfo() {
         // no delivery -> do not show delivery section
         if (!person.hasDelivery()) {
@@ -111,13 +115,13 @@ public class PersonCard extends UiPart<Region> {
             return;
         }
 
-        displayDeliverySchedule(person);
-        displayDeliveryDays(person);
+        displayDeliverySchedule();
+        displayDeliveryDays();
         showDeliverySection(true);
     }
 
     /**
-     * Shows delivery details if {@code true}, otherwise it is not shown.
+     * Makes delivery details visible if {@code true}.
      */
     private void showDeliverySection(boolean shouldShow) {
         deliverySection.setVisible(shouldShow);
@@ -125,21 +129,17 @@ public class PersonCard extends UiPart<Region> {
     }
 
     /**
-     * Displays delivery schedule for a person.
-     *
-     * @param person Person whose delivery schedule should be displayed.
+     * Displays delivery schedule for the person.
      */
-    private void displayDeliverySchedule(Person person) {
+    private void displayDeliverySchedule() {
         String formattedDeliverySchedule = person.getFormattedDeliverySchedule();
         deliverySchedule.setText(formattedDeliverySchedule);
     }
 
     /**
-     * Displays delivery days for a person.
-     *
-     * @param person Person whose delivery days should be displayed.
+     * Displays delivery days for the person.
      */
-    private void displayDeliveryDays(Person person) {
+    private void displayDeliveryDays() {
         deliveryDaysContainer.getChildren().clear();
         Set<String> deliveryDayNames = person.getDeliveryDayNames();
         for (DayOfWeek day : DayOfWeek.values()) {
