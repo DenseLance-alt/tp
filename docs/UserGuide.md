@@ -48,7 +48,7 @@ Welcome to **ServeMate**, the mate that helps you serve faster. Follow these sim
 
 ## Dashboard layout
 
-The ServeMate window should look like the image below. Notice how the app contains some sample data.
+The ServeMate window should look like the image below. Notice how the app already contains some sample data.
 <br>![UI](images/Ui.png)
 <!-- @@author elijah-ng -->
 
@@ -67,6 +67,11 @@ The ServeMate window should look like the image below. Notice how the app contai
 ## Step-by-step tutorial
 
 Meet Mdm Tan, an experienced administrative staff at a Tingkat catering business. Let's see how she handles her morning rush with ease using **ServeMate**!
+
+<box type="info" light>
+
+**Note:** This tutorial uses the sample data that comes preloaded with ServeMate so that you can practice right away. Please note that your screen might look different from our screenshots because what you see for the **delivery panel** on the right depends on your computer's date.
+</box>
 
 ### Viewing all customer records
 Before the day starts, Mdm Tan wants to check the full list of customers.
@@ -90,13 +95,11 @@ Now that Bryan has finally paid for his two-month Tingkat plan every day from 7 
 ```text
 schedule 7 st/2026-04-07 ed/2026-06-07 d/1234567 tm/17:00
 ```
-<br>
 
 <box type="info" light>
 
 **Note:** The examples provided in this tutorial use **7 April 2026** as today's date. To see Bob’s name appear in the delivery panel, ensure that `st/` (start date) is today, and `ed/` (end date) is 2 months later.
 </box>
-<br>
 
 Since Bryan’s Tingkat plan starts today, his delivery will also be added to the delivery panel on the right:
 <br>![Tutorial for Schedule Command](images/Tutorial-ScheduleCommand.png)
@@ -117,13 +120,11 @@ Next, Mdm Tan uses the `edit` command to update Irfan's tags to reflect his pref
 ```text
 edit 1 t/Halal t/LessOil
 ```
-<br>
 
 <box type="warning" light>
 
 **Warning:** When you use the `edit` command to add new tags to a customer, ServeMate will **replace** all old tags. Always include the original tags (e.g. `Halal`) in your command if you want to keep them!
 </box>
-<br>
 
 Mdm Tan checks that Irfan's record is updated correctly:
 <br>![Tutorial for Edit Command](images/Tutorial-EditCommand.png)
