@@ -184,7 +184,7 @@ You can refer to the [Features](#features) section below to look up details abou
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * Dates are in `yyyy-MM-dd` format, where `yyyy` is the 4-digit year, `MM` is the 2-digit month, and `dd` is the 2-digit day.<br>
-  e.g. 9th March 2026 can be written has `2026-03-09`.
+  e.g. 9th March 2026 can be written as `2026-03-09`.
 
 * Tags (`t/[TAG]`) are intended for use in placing delivery notes for a particular customer.
   * Tags should only consist of alphanumerical values without whitespaces.
