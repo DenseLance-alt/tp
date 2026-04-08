@@ -68,7 +68,7 @@ The ServeMate window should look like the image below. Notice how the app contai
 * The delivery panel on the right allows you to view today's deliveries. It provides a quick reference to view deliveries scheduled for the current day, from earliest to latest delivery time.
 * You can adjust the width of the panels by left-clicking and dragging the divider between them.
 
-<box type="info" light>
+<box type="info">
 
 **Note:** The date shown in the delivery panel is based on your computer's date setting. If you find today's date is incorrectly reflected, check that your computer's date is correct, then close and relaunch ServeMate.
 </box>
@@ -80,7 +80,7 @@ The ServeMate window should look like the image below. Notice how the app contai
 
 Meet Mdm Tan, an experienced administrative staff at a Tingkat catering business. Let's see how she handles her morning rush with ease using **ServeMate**!
 
-<box type="info" light>
+<box type="info">
 
 **Note:** This tutorial uses the sample data that comes preloaded with ServeMate so that you can practice right away.
 Please note that your screen might look different from the screenshots below, because what you see for the **delivery panel** on the right depends on your computer's date.
@@ -107,7 +107,7 @@ add n/Bryan Wong p/86422468 a/25 Paya Lebar Crescent, S536050 e/wongbryan87@gmai
 
 Bryan appears instantly in the customer panel on the left, and becomes the 7th customer on the list:
 <br>![Tutorial for Add Command](images/Tutorial-AddCommand.png)
-<br><br>
+<br>
 
 Now that Bryan has finally paid for his daily Tingkat plan from 7 April 2026 to 7 June 2026, Mdm Tan starts to schedule his recurring 5pm delivery:
 ```text
@@ -115,11 +115,10 @@ schedule 7 st/2026-04-07 ed/2026-06-07 d/1234567 tm/17:00
 ```
 <br>
 
-<box type="info" light>
+<box type="info">
 
 **Note:** The examples provided in this tutorial use **7 April 2026** as today's date. To see Bob’s name appear in the delivery panel, ensure that `st/` (start date) is today, and `ed/` (end date) is 2 months later.
 </box>
-<br>
 
 Since Bryan’s Tingkat plan starts today, his delivery will also be added to the delivery panel on the right:
 <br>![Tutorial for Schedule Command](images/Tutorial-ScheduleCommand.png)
@@ -133,10 +132,11 @@ Instead of slowly scrolling through the entire list of customers, Mdm Tan uses t
 ```text
 find n/Irfan a/Tampines
 ```
+<br>
 
 The customer panel will display a filtered list containing all customers with the name `Irfan` and address in `Tampines`:
 <br>![Tutorial for Find Command](images/Tutorial-FindCommand.png)
-<br>
+<br><br>
 
 Next, Mdm Tan uses the `edit` command to update Irfan's tags to reflect his preference for less oily food:
 ```text
@@ -144,7 +144,7 @@ edit 1 t/Halal t/LessOil
 ```
 <br>
 
-<box type="warning" light>
+<box type="warning">
 
 **Warning:** When you use the `edit` command to add new tags to a customer, ServeMate will **replace** the old tags. You should always include the original tags (e.g. `Halal`) in your command if you want to keep them!
 </box>
@@ -154,9 +154,9 @@ Mdm Tan checks that Irfan's record is updated correctly:
 <br>![Tutorial for Edit Command](images/Tutorial-EditCommand.png)
 <br><br>
 
-<box type="success" light>
+<box type="success" icon=":tada:">
 
-**Congrats!** You are now ready to use ServeMate for your daily tasks. 
+**Congratulations!** You are now ready to use ServeMate for your daily tasks!
 </box>
 <br>
 
@@ -190,7 +190,7 @@ You can refer to the [Features](#features) section below to look up details abou
 
 ## Features
 
-<box type="info" light>
+<box type="info">
 
 **Notes about the command format:**<br>
 
@@ -236,7 +236,7 @@ Creates a new customer record.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-<box type="tip" light>
+<box type="tip">
 
 **Tip:** A customer can have any number of tags (including 0)
 </box>
@@ -418,7 +418,7 @@ Examples:
 
 Deletes **all** customer records and their delivery details (if any).
 
-<box type="warning" light>
+<box type="warning">
 
 **Warning:**
 This action **cannot be undone** and results in a **permanent loss of data**. Ensure that you have thoroughly reviewed and backed up any necessary data before proceeding.
@@ -446,7 +446,7 @@ ServeMate data are saved in the hard disk automatically after any command that c
 
 ServeMate data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" light>
+<box type="warning">
 
 **Warning:**
 If your changes to the data file makes its format invalid, ServeMate will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -485,23 +485,20 @@ If you like to find customers matching any of the filters (e.g. find all custome
 
 ## Known issues
 
-1. **Application window opens off-screen**  
-   If you used ServeMate on a second screen and later switched to using a single screen, the application window may open off-screen for future start-ups.
+1. **Application window opens off-screen**: If you used ServeMate on a second screen and later switched to using a single screen, the application window may open off-screen for future start-ups.
    * **Solution**: Delete the `preferences.json` file located in the same folder as `ServeMate.jar` before restarting ServeMate.
-<box type="warning" light>
+<box type="warning">
 
 **Warning:**
 The `preferences.json` file saves configuration settings used by ServeMate. If you choose to edit the file directly, do note that certain edits can cause ServeMate to behave in unexpected ways. Therefore, edit the file only if you are confident that you can update it correctly.
 </box>
 
-2. **Help window does not appear**  
-   If you minimize the Help Window and then try to open it again (using the `help` command, `F1` key, or `Help` menu), ServeMate will not open a second Help Window.
+2. **Help window does not appear**: If you minimize the Help Window and then try to open it again (using the `help` command, `F1` key, or `Help` menu), ServeMate will not open a second Help Window.
    * **Solution**: Look for the minimized Help Window in your computer's taskbar and click on it to restore it back to the screen.
 
-3. **Screen lags when scrolling quickly**  
-   If you quickly scroll through a very long list of customers, you might notice that ServeMate starts to slow down.
+3. **Screen lags when scrolling quickly**: If you quickly scroll through a very long list of customers, you might notice that ServeMate starts to slow down.
    * **Solution**: Scroll at a slower speed to allow the screen to update more smoothly.
-<box type="tip" light>
+<box type="tip">
 
 **Tip:**
 Use the `find` command to search for the customer you want for faster navigation!
