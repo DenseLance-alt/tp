@@ -359,7 +359,7 @@ Examples:
 * `schedule 4 st/2026-03-11 ed/2026-04-01 tm/15:30 d/246` adds a delivery for the 4th customer on the list. The delivery starts on 11 March 2026, ends on 1 April 2026 and occurs at 3:30 PM on Tuesday, Thursdays and Saturdays.
 
 <br>
-<!-- @@author MrMarshall12 -->
+
 ### Editing a delivery : `reschedule`
 
 Edits the delivery associated with the specified customer.
@@ -376,7 +376,6 @@ Format: `reschedule INDEX [st/START_DATE] [ed/END_DATE] [tm/DELIVERY_TIME] [d/DE
 Examples:
 * `reschedule 1 ed/2026-02-02 tm/12:45` Edits the delivery end date and delivery time for the 1st customer to be `2026-02-02` and `12:45` respectively.
 * `reschedule 2 d/25` Edits the delivery days for the 2nd customer to be `25` (Tuesday and Friday).
-<!-- @@author -->
   <br>![result for 'reschedule 2 d/25'](images/rescheduleBernice.png)
 
 <br>
