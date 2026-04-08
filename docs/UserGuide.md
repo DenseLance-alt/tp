@@ -360,6 +360,8 @@ Examples:
 
 <br>
 
+<!-- @@author MrMarshall12 -->
+
 ### Editing a delivery : `reschedule`
 
 Edits the delivery associated with the specified customer.
@@ -377,6 +379,8 @@ Examples:
 * `reschedule 1 ed/2026-02-02 tm/12:45` Edits the delivery end date and delivery time for the 1st customer to be `2026-02-02` and `12:45` respectively.
 * `reschedule 2 d/25` Edits the delivery days for the 2nd customer to be `25` (Tuesday and Friday).
   <br>![result for 'reschedule 2 d/25'](images/rescheduleBernice.png)
+
+<!-- @@author  -->
 
 <br>
 
