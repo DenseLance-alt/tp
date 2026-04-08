@@ -23,6 +23,7 @@ public class FindDeliveryCommandParser implements Parser<FindDeliveryCommand> {
      * Parses the given {@code String} of arguments in the context of the
      * FindDeliveryCommand and returns a FindDeliveryCommand object for execution.
      *
+     * @param args The arguments string to parse.
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindDeliveryCommand parse(String args) throws ParseException {
