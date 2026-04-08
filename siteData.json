@@ -136,6 +136,7 @@
         "finding-customers-by-delivery-date-or-date-range-find-delivery": "Finding customers by delivery date or date range: find-delivery",
         "finding-customers-with-expired-delivery-expired": "Finding customers with expired delivery: expired",
         "scheduling-a-delivery-schedule": "Scheduling a delivery : schedule",
+        "editing-a-delivery-reschedule": "Editing a delivery : reschedule",
         "unscheduling-a-delivery-unschedule": "Unscheduling a delivery : unschedule",
         "clearing-all-entries-clear": "Clearing all entries : clear",
         "exiting-the-program-exit": "Exiting the program : exit",
