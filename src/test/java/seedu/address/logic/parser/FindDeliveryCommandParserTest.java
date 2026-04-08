@@ -63,7 +63,7 @@ public class FindDeliveryCommandParserTest {
     }
 
     // EP: Valid date range with st/ and ed/ on the same date
-    //     Boundary: start date == end date
+    // Boundary: start date == end date
     @Test
     public void parse_sameDateRange_returnsFindDeliveryCommand() {
         LocalDate date = LocalDate.parse("2026-04-01");
