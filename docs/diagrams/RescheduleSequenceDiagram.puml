@@ -15,6 +15,7 @@ participant "rd:RescheduleDeliveryDescriptor" as RescheduleDescriptor MODEL_COLO
 participant "delivery:Delivery" as Delivery MODEL_COLOR
 participant "updated:Person" as UpdatedPerson MODEL_COLOR
 participant "m:Model" as Model MODEL_COLOR
+participant "target:Person" as TargetPerson MODEL_COLOR
 end box
 
 [-> LogicManager : execute("reschedule 1 tm/14:00")
