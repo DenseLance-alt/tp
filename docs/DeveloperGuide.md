@@ -186,6 +186,11 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+<box type="info" light>
+
+**Note:** The UML sequence diagrams and execution flows described in the Implementation section represent the high-level interactions between major components. Internal logic, such as input parsing, argument validation, and error handling, are omitted for brevity but may be found in the codebase.
+</box>
+
 ### Today's deliveries panel
 
 The sequence diagram below illustrates the interactions between the `Ui`, `Logic` and `Model` components, to create the `TodayDeliveryPanel` when the application is launched.
