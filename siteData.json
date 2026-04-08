@@ -42,10 +42,10 @@
       "headings": {
         "servemate-developer-guide": "ServeMate Developer Guide",
         "acknowledgements": "Acknowledgements",
-        "original-source": "Original Source",
-        "other-sources": "Other Sources",
-        "libraries-used": "Libraries Used",
-        "ai-generated-work": "AI Generated Work",
+        "original-source": "Original source",
+        "other-sources": "Other sources",
+        "libraries-used": "Libraries used",
+        "ai-generated-work": "AI generated work",
         "getting-started": "Getting started",
         "design": "Design",
         "architecture": "Architecture",
@@ -57,7 +57,22 @@
         "implementation": "Implementation",
         "today-s-deliveries-panel": "Today's deliveries panel",
         "find-delivery-by-date": "Find delivery by date",
-        "find-customers-with-expired-delivery": "Find customers with expired delivery"
+        "find-customers-with-expired-delivery": "Find customers with expired delivery",
+        "schedule-delivery": "Schedule delivery",
+        "reschedule-delivery": "Reschedule delivery",
+        "unschedule-delivery": "Unschedule delivery",
+        "documentation-logging-testing-configuration-dev-ops": "Documentation, logging, testing, configuration, dev-ops",
+        "appendix-requirements": "Appendix: Requirements",
+        "product-scope": "Product scope",
+        "user-stories": "User stories",
+        "use-cases": "Use cases",
+        "non-functional-requirements": "Non-functional requirements",
+        "glossary": "Glossary",
+        "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
+        "launch-and-shutdown": "Launch and shutdown",
+        "deleting-a-customer": "Deleting a customer",
+        "saving-data": "Saving data",
+        "appendix-planned-enhancements": "Appendix: Planned enhancements"
       },
       "headingKeywords": {}
     },
@@ -103,7 +118,13 @@
       "headings": {
         "servemate-user-guide": "ServeMate User Guide",
         "introduction": "Introduction",
-        "quick-start": "Quick Start",
+        "quick-start": "Quick start",
+        "dashboard-layout": "Dashboard layout",
+        "step-by-step-tutorial": "Step-by-step tutorial",
+        "viewing-all-customer-records": "Viewing all customer records",
+        "welcoming-a-new-customer": "Welcoming a new customer",
+        "handling-customer-feedback": "Handling customer feedback",
+        "what-s-next": "What's next",
         "command-summary": "Command summary",
         "features": "Features",
         "getting-help-help": "Getting help: help",
@@ -130,7 +151,8 @@
       "src": "index.md",
       "title": "",
       "headings": {
-        "servemate": "ServeMate"
+        "servemate": "ServeMate",
+        "acknowledgements": "Acknowledgements"
       },
       "headingKeywords": {}
     },
