@@ -11,6 +11,7 @@ participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
+participant "p:DeliveryDatePredicate" as DeliveryDatePredicate MODEL_COLOR
 participant "m:Model" as Model MODEL_COLOR
 end box
 
@@ -30,15 +31,16 @@ deactivate FindDeliveryCommandParser
 AddressBookParser -> FindDeliveryCommandParser : parse("dt/2026-04-01")
 activate FindDeliveryCommandParser
 
-create FindDeliveryCommand
-FindDeliveryCommandParser -> FindDeliveryCommand
-activate FindDeliveryCommand
+create DeliveryDatePredicate
+FindDeliveryCommandParser -> DeliveryDatePredicate : DeliveryDatePredicate("2026-04-01")
+activate DeliveryDatePredicate
 
-note right of FindDeliveryCommandParser
-  Creates a DeliveryDatePredicate
-  from the parsed date(s),
-  then wraps it in FindDeliveryCommand
-end note
+DeliveryDatePredicate --> FindDeliveryCommandParser : p
+deactivate DeliveryDatePredicate
+
+create FindDeliveryCommand
+FindDeliveryCommandParser -> FindDeliveryCommand : FindDeliveryCommand(p)
+activate FindDeliveryCommand
 
 FindDeliveryCommand --> FindDeliveryCommandParser :
 deactivate FindDeliveryCommand
@@ -55,7 +57,7 @@ deactivate AddressBookParser
 LogicManager -> FindDeliveryCommand : execute(m)
 activate FindDeliveryCommand
 
-FindDeliveryCommand -> Model : updateFilteredPersonList(predicate)
+FindDeliveryCommand -> Model : updateFilteredPersonList(p)
 activate Model
 
 Model --> FindDeliveryCommand
