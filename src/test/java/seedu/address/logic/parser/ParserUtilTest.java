@@ -216,16 +216,19 @@ public class ParserUtilTest {
         assertEquals(expectedTagSet, actualTagSet);
     }
 
+    // EP: null -> throws NullPointerException
     @Test
     public void parseStartDate_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseStartDate((String) null));
     }
 
+    // EP: string with invalid start date -> throws ParseException
     @Test
     public void parseStartDate_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseStartDate(INVALID_START_DATE));
     }
 
+    // EP: string with valid start date -> returns appropriate StartDate
     @Test
     public void parseStartDate_validValueWithoutWhitespace_returnsStartDate() throws Exception {
         StartDate expectedStartDate = new StartDate(VALID_START_DATE);
@@ -262,16 +265,19 @@ public class ParserUtilTest {
         assertEquals(expectedEndDate, ParserUtil.parseEndDate(endDateWithWhitespace));
     }
 
+    // EP: null -> throws NullPointerException
     @Test
     public void parseDeliveryTime_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseDeliveryTime((String) null));
     }
 
+    // EP: string with invalid delivery time -> throws ParseException
     @Test
     public void parseDeliveryTime_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseDeliveryTime(INVALID_TIME));
     }
 
+    // EP: string with valid start date -> returns appropriate DeliveryTime
     @Test
     public void parseDeliveryTime_validValueWithoutWhitespace_returnsDeliveryTime() throws Exception {
         DeliveryTime expectedDeliveryTime = new DeliveryTime(VALID_TIME);
@@ -285,16 +291,19 @@ public class ParserUtilTest {
         assertEquals(expectedDeliveryTime, ParserUtil.parseDeliveryTime(deliveryTimeWithWhitespace));
     }
 
+    // EP: null -> throws NullPointerException
     @Test
     public void parseDeliveryDayNumber_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseDeliveryDayNumber((String) null));
     }
 
+    // EP: string with invalid delivery day -> throws ParseException
     @Test
     public void parseDeliveryDayNumber_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseDeliveryDayNumber(INVALID_DAY_NUMBER));
     }
 
+    // EP: string with valid delivery day -> returns appropriate DeliveryDay
     @Test
     public void parseDeliveryDayNumber_validValue_returnsDeliveryDay() throws ParseException {
         String dayWord = convertDayNumberToDayWord(VALID_DAY_NUMBER_1);
@@ -302,16 +311,19 @@ public class ParserUtilTest {
         assertEquals(expectedDeliveryDay, ParserUtil.parseDeliveryDayNumber(VALID_DAY_NUMBER_1));
     }
 
+    // EP: null -> throws NullPointerException
     @Test
     public void parseDeliveryDays_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseDeliveryDays((String) null));
     }
 
+    // EP: string with invalid delivery days -> throws ParseException
     @Test
     public void parseDeliveryDays_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseDeliveryDays(INVALID_DAYS));
     }
 
+    // EP: string with duplicate delivery days -> throws ParseException
     @Test
     public void parseDeliveryDays_duplicatedValue_throwsParseException() {
         String[] deliveryDayNumbers = {VALID_DAY_NUMBER_1, VALID_DAY_NUMBER_3, VALID_DAY_NUMBER_3, VALID_DAY_NUMBER_4};
@@ -323,6 +335,7 @@ public class ParserUtilTest {
         assertThrows(ParseException.class, () -> ParserUtil.parseDeliveryDays(deliveryDayNumbersArgument));
     }
 
+    // EP: string with valid delivery day -> returns appropriate set of DeliveryDays
     @Test
     public void parseDeliveryDays_unsortedValue_returnsSortedDeliveryDaySet() throws Exception {
         Set<DeliveryDay> actualDeliveryDaySet = ParserUtil.parseDeliveryDays(UNSORTED_DAYS);

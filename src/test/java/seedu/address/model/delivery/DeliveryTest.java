@@ -25,6 +25,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.DeliveryBuilder;
 
 public class DeliveryTest {
+
+    // EP: start date after end date -> throws IllegalArgumentException
     @Test
     public void constructor_invalidDateRange_throwsIllegalArgumentException() {
         StartDate startDate = new StartDate(VALID_START_DATE_BOB);
@@ -36,6 +38,7 @@ public class DeliveryTest {
                 new Delivery(startDate, endDate, deliveryDaySet, deliveryTime));
     }
 
+    // EP: start date after end date -> returns false
     @Test
     public void isValidDateRange_invalidDateRange_returnsFalse() {
         StartDate startDate = new StartDate(VALID_START_DATE_BOB);
@@ -44,6 +47,8 @@ public class DeliveryTest {
         assertFalse(isValidDateRange(startDate, endDate));
     }
 
+    // EP: start date not after end date -> returns true
+    // Boundary value: same dates
     @Test
     public void isValidDateRange_validDateRange_returnsTrue() {
         StartDate startDate = new StartDate(VALID_START_DATE_BOB);
