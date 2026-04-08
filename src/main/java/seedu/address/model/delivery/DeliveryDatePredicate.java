@@ -19,7 +19,7 @@ public class DeliveryDatePredicate implements Predicate<Person> {
     /**
      * Creates a DeliveryDatePredicate that tests whether a person has a delivery on {@code date}.
      *
-     * @param date the date to check for deliveries.
+     * @param date The date to check for deliveries.
      */
     public DeliveryDatePredicate(LocalDate date) {
         this(date, date);
@@ -29,8 +29,8 @@ public class DeliveryDatePredicate implements Predicate<Person> {
      * Creates a DeliveryDatePredicate that tests whether a person has a delivery
      * within the range from {@code startDate} to {@code endDate} (inclusive).
      *
-     * @param startDate the start of the date range to check for deliveries (inclusive).
-     * @param endDate the end of the date range to check for deliveries (inclusive).
+     * @param startDate The start of the date range to check for deliveries (inclusive).
+     * @param endDate The end of the date range to check for deliveries (inclusive).
      */
     public DeliveryDatePredicate(LocalDate startDate, LocalDate endDate) {
         this.startDate = startDate;
@@ -40,7 +40,7 @@ public class DeliveryDatePredicate implements Predicate<Person> {
     /**
      * Tests whether the given {@code Person} has a delivery scheduled within the stored date range.
      *
-     * @param person the person to test.
+     * @param person The person to test.
      * @return {@code true} if the person has a delivery that falls within the date range, {@code false} otherwise.
      */
     @Override

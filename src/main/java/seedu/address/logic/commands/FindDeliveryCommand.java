@@ -26,7 +26,7 @@ public class FindDeliveryCommand extends Command {
      * Creates a FindDeliveryCommand to find persons whose delivery falls on the date
      * specified by the given {@code predicate}.
      *
-     * @param predicate the predicate used to filter persons by their delivery date or date range.
+     * @param predicate The predicate used to filter persons by their delivery date or date range.
      */
     public FindDeliveryCommand(DeliveryDatePredicate predicate) {
         this.predicate = predicate;
@@ -35,8 +35,8 @@ public class FindDeliveryCommand extends Command {
     /**
      * Executes the find-delivery command by filtering the person list using the stored predicate.
      *
-     * @param model the {@code Model} which the command should operate on.
-     * @return a {@code CommandResult} containing the number of persons listed.
+     * @param model The {@code Model} which the command should operate on.
+     * @return A {@code CommandResult} containing the number of persons listed.
      */
     @Override
     public CommandResult execute(Model model) {
