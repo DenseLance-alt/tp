@@ -107,7 +107,7 @@ add n/Bryan Wong p/86422468 a/25 Paya Lebar Crescent, S536050 e/wongbryan87@gmai
 
 Bryan appears instantly in the customer panel on the left, and becomes the 7th customer on the list:
 <br>![Tutorial for Add Command](images/Tutorial-AddCommand.png)
-<br><br>
+<br>
 
 Now that Bryan has finally paid for his daily Tingkat plan from 7 April 2026 to 7 June 2026, Mdm Tan starts to schedule his recurring 5pm delivery:
 ```text
@@ -119,7 +119,6 @@ schedule 7 st/2026-04-07 ed/2026-06-07 d/1234567 tm/17:00
 
 **Note:** The examples provided in this tutorial use **7 April 2026** as today's date. To see Bob’s name appear in the delivery panel, ensure that `st/` (start date) is today, and `ed/` (end date) is 2 months later.
 </box>
-<br>
 
 Since Bryan’s Tingkat plan starts today, his delivery will also be added to the delivery panel on the right:
 <br>![Tutorial for Schedule Command](images/Tutorial-ScheduleCommand.png)
@@ -133,10 +132,11 @@ Instead of slowly scrolling through the entire list of customers, Mdm Tan uses t
 ```text
 find n/Irfan a/Tampines
 ```
+<br>
 
 The customer panel will display a filtered list containing all customers with the name `Irfan` and address in `Tampines`:
 <br>![Tutorial for Find Command](images/Tutorial-FindCommand.png)
-<br>
+<br><br>
 
 Next, Mdm Tan uses the `edit` command to update Irfan's tags to reflect his preference for less oily food:
 ```text
@@ -156,7 +156,7 @@ Mdm Tan checks that Irfan's record is updated correctly:
 
 <box type="success" icon=":tada:">
 
-**Congrats!** You are now ready to use ServeMate for your daily tasks. 
+**Congratulations!** You are now ready to use ServeMate for your daily tasks!
 </box>
 <br>
 
