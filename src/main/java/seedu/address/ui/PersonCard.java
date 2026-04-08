@@ -16,7 +16,7 @@ import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * The UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -106,6 +106,10 @@ public class PersonCard extends UiPart<Region> {
 
     //Solution below inspired by
     // https://github.com/AY2526S1-CS2103T-W11-1/tp/blob/master/src/main/java/seedu/address/ui/PersonCard.java
+    /**
+     * Displays delivery details for the person if they have a delivery,
+     * otherwise it is not shown.
+     */
     private void showDeliveryInfo() {
         // no delivery -> do not show delivery section
         if (!person.hasDelivery()) {
@@ -113,13 +117,13 @@ public class PersonCard extends UiPart<Region> {
             return;
         }
 
-        displayDeliverySchedule(person);
-        displayDeliveryDays(person);
+        displayDeliverySchedule();
+        displayDeliveryDays();
         showDeliverySection(true);
     }
 
     /**
-     * Shows delivery details if {@code true}, otherwise it is not shown.
+     * Makes delivery details visible if {@code true}.
      */
     private void showDeliverySection(boolean shouldShow) {
         deliverySection.setVisible(shouldShow);
@@ -127,21 +131,17 @@ public class PersonCard extends UiPart<Region> {
     }
 
     /**
-     * Displays delivery schedule for a person.
-     *
-     * @param person Person whose delivery schedule should be displayed.
+     * Displays delivery schedule for the person.
      */
-    private void displayDeliverySchedule(Person person) {
+    private void displayDeliverySchedule() {
         String formattedDeliverySchedule = person.getFormattedDeliverySchedule();
         deliverySchedule.setText(formattedDeliverySchedule);
     }
 
     /**
-     * Displays delivery days for a person.
-     *
-     * @param person Person whose delivery days should be displayed.
+     * Displays delivery days for the person.
      */
-    private void displayDeliveryDays(Person person) {
+    private void displayDeliveryDays() {
         deliveryDaysContainer.getChildren().clear();
         Set<String> deliveryDayNames = person.getDeliveryDayNames();
         for (DayOfWeek day : DayOfWeek.values()) {
@@ -154,8 +154,8 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a day box for a particular day-of-week.
      *
-     * @param day The day-of-week to create a day box for.
-     * @return Box with a label denoting the day-of-week.
+     * @param day Day-of-week to create a day box for.
+     * @return Box with a label that denotes the day-of-week.
      */
     private Label createDayBox(DayOfWeek day) {
         String dayString = day.toString();
@@ -172,7 +172,9 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Colours a day box given the day-of-week and set of delivery day names.
      *
-     * @param dayBox The day box to colour.
+     * @param dayBox Day box to colour.
+     * @param day Day-of-week for the day box.
+     * @param deliveryDayNames Set of delivery day names.
      */
     private void colourDayBox(Label dayBox, DayOfWeek day, Set<String> deliveryDayNames) {
         String dayName = day.toString();

@@ -28,13 +28,13 @@ public class ExpiredCommandParser implements Parser<ExpiredCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_BEFORE_DATE);
 
-        // Check that required prefixes are present and there is no text before the first prefix.
+        // Check that required prefixes are present and there is no text before the first prefix
         if (!arePrefixesPresent(argMultimap, PREFIX_BEFORE_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExpiredCommand.MESSAGE_USAGE));
         }
 
-        // Check that there are no duplicate prefixes.
+        // Check that there are no duplicate prefixes
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_BEFORE_DATE);
 
         String dateString = argMultimap.getValue(PREFIX_BEFORE_DATE).get();

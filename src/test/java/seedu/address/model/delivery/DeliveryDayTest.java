@@ -10,11 +10,13 @@ import org.junit.jupiter.api.Test;
 
 public class DeliveryDayTest {
 
+    // EP: null string -> throws NullPointerException
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> toDeliveryDay(null));
     }
 
+    // EP: string with invalid day -> throws IllegalArgumentException
     @Test
     public void constructor_invalidDay_throwsIllegalArgumentException() {
         String invalidDay = "";
@@ -23,15 +25,18 @@ public class DeliveryDayTest {
 
     @Test
     public void isValidDeliveryDay() {
-        // null day
+        // EP: null day -> throws NullPointerException
         assertThrows(NullPointerException.class, () -> DeliveryDay.isValidDeliveryDay(null));
 
-        // invalid days
-        assertFalse(DeliveryDay.isValidDeliveryDay("")); // empty string
-        assertFalse(DeliveryDay.isValidDeliveryDay(" ")); // spaces only
+        // EP: string with no day -> returns false
+        // Boundary value: empty string
+        assertFalse(DeliveryDay.isValidDeliveryDay(""));
+        assertFalse(DeliveryDay.isValidDeliveryDay(" "));
+
+        // EP: string with incorrect day format -> returns false
         assertFalse(DeliveryDay.isValidDeliveryDay("Mon")); // only 3-character day
 
-        // valid days
+        // EP: string with valid day in correct format -> returns true
         assertTrue(DeliveryDay.isValidDeliveryDay("Monday"));
         assertTrue(DeliveryDay.isValidDeliveryDay("thursday"));
         assertTrue(DeliveryDay.isValidDeliveryDay("FRIDAY"));
@@ -42,19 +47,19 @@ public class DeliveryDayTest {
     public void equals() {
         DeliveryDay day = toDeliveryDay("Tuesday");
 
-        // same values -> returns true
+        // EP: same values -> returns true
         assertTrue(day.equals(toDeliveryDay("Tuesday")));
 
-        // same object -> returns true
+        // EP: same object -> returns true
         assertTrue(day.equals(day));
 
-        // null -> returns false
+        // EP: null -> returns false
         assertFalse(day.equals(null));
 
-        // different types -> returns false
+        // EP: different types -> returns false
         assertFalse(day.equals(5.0f));
 
-        // different values -> returns false
+        // EP: different values -> returns false
         assertFalse(day.equals(toDeliveryDay("Thursday")));
     }
 }

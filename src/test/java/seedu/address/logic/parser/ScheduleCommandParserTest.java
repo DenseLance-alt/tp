@@ -41,6 +41,7 @@ import seedu.address.testutil.DeliveryBuilder;
 public class ScheduleCommandParserTest {
     private ScheduleCommandParser parser = new ScheduleCommandParser();
 
+    // EP: all fields present -> success
     @Test
     public void parse_allFieldsPresent_success() {
         Index index = INDEX_FIRST_PERSON;
@@ -54,6 +55,7 @@ public class ScheduleCommandParserTest {
                            new ScheduleCommand(INDEX_FIRST_PERSON, delivery));
     }
 
+    // EP: repeated fields present -> failure
     @Test
     public void parse_repeatedCompulsoryField_failure() {
         String validExpectedDeliveryString = INDEX_FIRST_PERSON.getOneBased() + START_DATE_DESC_BOB
@@ -95,8 +97,44 @@ public class ScheduleCommandParserTest {
 
     }
 
+    // EP: a necessary field missing -> failure
     @Test
     public void parse_compulsoryFieldMissing_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE);
+
+        // missing start date
+        assertParseFailure(parser,
+                           INDEX_FIRST_PERSON.getOneBased() + END_DATE_DESC_BOB
+                                   + TIME_DESC_BOB + DAYS_DESC_BOB,
+                           expectedMessage);
+
+        // missing end date
+        assertParseFailure(parser,
+                           INDEX_FIRST_PERSON.getOneBased() + START_DATE_DESC_BOB
+                                   + TIME_DESC_BOB + DAYS_DESC_BOB,
+                           expectedMessage);
+
+        // missing delivery time
+        assertParseFailure(parser,
+                           INDEX_FIRST_PERSON.getOneBased() + START_DATE_DESC_BOB
+                                   + END_DATE_DESC_BOB + DAYS_DESC_BOB,
+                           expectedMessage);
+
+        // missing delivery days
+        assertParseFailure(parser,
+                           INDEX_FIRST_PERSON.getOneBased() + START_DATE_DESC_BOB
+                                   + END_DATE_DESC_BOB + TIME_DESC_BOB,
+                           expectedMessage);
+
+        // all fields missing
+        assertParseFailure(parser,
+                           INDEX_FIRST_PERSON.getOneBased() + "",
+                           expectedMessage);
+    }
+
+    // EP: a necessary field prefix missing -> failure
+    @Test
+    public void parse_compulsoryFieldPrefixMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE);
 
         // missing start date prefix
@@ -130,6 +168,7 @@ public class ScheduleCommandParserTest {
                            expectedMessage);
     }
 
+    // EP: invalid field value -> failure
     @Test
     public void parse_invalidValue_failure() {
         // invalid start date

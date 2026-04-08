@@ -126,7 +126,7 @@ public class Person {
      *
      * @param beforeDate Date to compare against.
      * @return {@code true} if the person has a delivery assigned and the delivery's
-     *                       end date occurs before the specified date.
+     *                       end date occurs before the specified date,
      *         {@code false} otherwise.
      */
     public boolean hasExpiredDelivery(LocalDate beforeDate) {
@@ -145,10 +145,11 @@ public class Person {
     //@@author
 
     /**
-     * Returns a formatted string of the person's delivery schedule for display, or an empty string
-     * if person does not have a delivery assigned.
+     * Returns a formatted string of the person's delivery schedule for display,
+     * or an empty string if person does not have a delivery assigned.
      *
-     * @return Formatted string containing the start date, end date, and time of the person's delivery.
+     * @return Formatted string containing the start date, end date, and time of
+     *         the person's delivery.
      */
     public String getFormattedDeliverySchedule() {
         if (!hasDelivery()) {
@@ -159,11 +160,11 @@ public class Person {
 
     /**
      * Returns an immutable set of delivery day names.
-     * <p>If the person does not have a delivery assigned or has a delivery with no delivery days,
-     * an empty set is returned.
+     * <p>If the person does not have a delivery assigned or has a delivery with
+     * no delivery days, an empty set is returned.
      * <p>Example of delivery day names: Monday, Tuesday ...
      *
-     * @return A set of delivery day names if the person has a delivery assigned.
+     * @return Set of delivery day names.
      */
     public Set<String> getDeliveryDayNames() {
         if (!hasDelivery()) {

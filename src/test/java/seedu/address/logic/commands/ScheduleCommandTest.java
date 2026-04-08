@@ -31,11 +31,13 @@ public class ScheduleCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
+    // EP: null delivery -> throws NullPointerException
     @Test
     public void execute_nullDelivery_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new ScheduleCommand(INDEX_FIRST_PERSON, null));
     }
 
+    // EP: valid Index and Delivery -> success
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Delivery delivery = new DeliveryBuilder().build();
@@ -60,6 +62,7 @@ public class ScheduleCommandTest {
         assertCommandSuccess(scheduleCommand, model, expectedMessage, expectedModel);
     }
 
+    // EP: out of bound index -> failure
     @Test
     public void execute_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
@@ -69,6 +72,7 @@ public class ScheduleCommandTest {
         assertCommandFailure(scheduleCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
+    // EP: add Delivery to Person already with Delivery -> failure
     @Test
     public void execute_personAlreadyWithDeliveryUnfilteredList_failure() {
         Delivery delivery = new DeliveryBuilder().build();
@@ -162,26 +166,26 @@ public class ScheduleCommandTest {
         ScheduleCommand scheduleThirdCommand = new ScheduleCommand(INDEX_SECOND_PERSON, firstDelivery);
         ScheduleCommand scheduleFourthCommand = new ScheduleCommand(INDEX_FIRST_PERSON, secondDelivery);
 
-        // same object -> returns true
+        // EP: same object -> returns true
         assertTrue(scheduleFirstCommand.equals(scheduleFirstCommand));
 
-        // same values -> returns true
+        // EP: same values -> returns true
         ScheduleCommand scheduleFirstCommandCopy = new ScheduleCommand(INDEX_FIRST_PERSON, firstDelivery);
         assertTrue(scheduleFirstCommand.equals(scheduleFirstCommandCopy));
 
-        // different types -> returns false
+        // EP: different types -> returns false
         assertFalse(scheduleFirstCommand.equals(1));
 
-        // null -> returns false
+        // EP: null -> returns false
         assertFalse(scheduleFirstCommand.equals(null));
 
-        // different objects with completely different values -> returns false
+        // EP: different objects with completely different values -> returns false
         assertFalse(scheduleFirstCommand.equals(scheduleSecondCommand));
 
-        // different objects with the same index but different delivery -> returns false
+        // EP: different objects with the same index but different delivery -> returns false
         assertFalse(scheduleFirstCommand.equals(scheduleThirdCommand));
 
-        // different objects with the same delivery but different index -> returns false
+        // EP: different objects with the same delivery but different index -> returns false
         assertFalse(scheduleFirstCommand.equals(scheduleFourthCommand));
     }
 

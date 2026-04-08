@@ -9,11 +9,13 @@ import org.junit.jupiter.api.Test;
 
 //@@author BenedTj
 public class DeliveryTimeTest {
+    // EP: null string -> throws NullPointerException
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new DeliveryTime(null));
     }
 
+    // EP: string with invalid time -> throws IllegalArgumentException
     @Test
     public void constructor_invalidTime_throwsIllegalArgumentException() {
         String invalidTime = "";
@@ -22,18 +24,19 @@ public class DeliveryTimeTest {
 
     @Test
     public void isValidDeliveryTime() {
-        // null time
+        // EP: null time -> throws NullPointerException
         assertThrows(NullPointerException.class, () -> DeliveryTime.isValidDeliveryTime(null));
 
-        // invalid times
-        assertFalse(DeliveryTime.isValidDeliveryTime("")); // empty string
+        // EP: string with no time -> returns false
+        // Boundary value: empty string
+        assertFalse(DeliveryTime.isValidDeliveryTime(""));
         assertFalse(DeliveryTime.isValidDeliveryTime(" ")); // spaces only
         assertFalse(DeliveryTime.isValidDeliveryTime("12")); // only one number
         assertFalse(DeliveryTime.isValidDeliveryTime("01-12")); // does not contain year
         assertFalse(DeliveryTime.isValidDeliveryTime("2020-01")); // does not contain date number
         assertFalse(DeliveryTime.isValidDeliveryTime("2026-01-12")); // date format
 
-        // valid time
+        // EP: string with valid time -> returns true
         assertTrue(DeliveryTime.isValidDeliveryTime("12:59")); // correct time format
     }
 
@@ -67,19 +70,19 @@ public class DeliveryTimeTest {
     public void equals() {
         DeliveryTime time = new DeliveryTime("12:59");
 
-        // same values -> returns true
+        // EP: same values -> returns true
         assertTrue(time.equals(new DeliveryTime("12:59")));
 
-        // same object -> returns true
+        // EP: same object -> returns true
         assertTrue(time.equals(time));
 
-        // null -> returns false
+        // EP: null -> returns false
         assertFalse(time.equals(null));
 
-        // different types -> returns false
+        // EP: different types -> returns false
         assertFalse(time.equals(5.0f));
 
-        // different values -> returns false
+        // EP: different values -> returns false
         assertFalse(time.equals(new DeliveryTime("13:43")));
     }
 }

@@ -98,7 +98,7 @@ public class Delivery {
      * Returns an immutable set of delivery day names.
      * <p>Example of delivery day names: Monday, Tuesday ...
      *
-     * @return A set of delivery day names.
+     * @return Set of delivery day names.
      */
     public Set<String> getDeliveryDayNames() {
         return deliveryDays

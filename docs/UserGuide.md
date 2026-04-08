@@ -276,7 +276,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd customer on the list.
-* `find n/Betsy` followed by `delete 1` deletes the 1st customer in the results of the `find` command.
+* `find n/Alex` displays the list of customers whose names contain `Alex`, followed by `delete 1` which deletes the 1st customer in the results of that `find` command.
 
 <br>
 
@@ -286,27 +286,27 @@ Find customers whose attributes (name, address, tag) match at least 1 of the key
 
 Format: `find [n/NAME_KEYWORDS...] [a/ADDRESS_KEYWORDS...] [t/TAG_KEYWORDS...]`
 
-* The search is case-insensitive. e.g `n/hans` will match a customer with the name `Hans`.
+* The search is case-insensitive. e.g `n/hans` will match a customer whose name contains `Hans`.
 * Only full words will be matched e.g. `n/Han` will not match a customer with the name `Hans`.
-* The order of keywords do not matter. e.g. `n/Hans Bo` is the same as `n/Bo Hans`.
+* The order of keywords does not matter. e.g. `n/Hans Bo` is the same as `n/Bo Hans`.
 * The order of filters do not matter. e.g. `n/John t/Halal` is the same as `t/Halal n/John`.
 * At least 1 filter with a keyword must be specified.
 * If a filter is not specified or there are no keywords, the filter is *not applied*.
 * Only customers matching *all* filters specified will be displayed.
 * For each filter, multiple keywords (each separated by a space) can be specified. A customer matches the filter if *at least one* keyword matches (i.e. `OR` search).
-  e.g. `n/John Lily t/Vegetarian` will return all your customers whose name is `John` or `Lily`, and tagged with dietary restriction `Vegetarian`.
+  e.g. `n/John Lily t/Vegetarian` will return all your customers whose names contain `John` or `Lily`, and tagged with dietary restriction `Vegetarian`.
 
 Examples:
 * `find a/Jurong` displays all customers with address containing `Jurong`.
 * `find t/Vegetarian` displays all customers tagged with dietary restriction `Vegetarian`.
-* `find n/Alex t/Vegetarian` displays customers whose name is `Alex` *and* tagged with dietary restriction `Vegetarian`.
-* `find n/Bernice a/Yishun Jurong` displays customers whose name is `Bernice` *and* with address containing `Yishun` or `Jurong`.
-* `find n/Alex Bernice a/Yishun t/Vegetarian` displays customers whose name is `Alex` or `Bernice`, with address containing `Yishun` *and* tagged with dietary restriction `Vegetarian`.<br>
-  <img src="images/findAlexBerniceResult.png" alt="result for 'find n/Alex Bernice a/Yishun t/Vegetarian'" width="500"/>
+* `find n/Alex t/Vegetarian` displays customers whose names contain `Alex` *and* tagged with dietary restriction `Vegetarian`.
+* `find n/Bernice a/Yishun Jurong` displays customers whose names contain `Bernice` *and* with address containing `Yishun` or `Jurong`.
+* `find n/Alex Roy a/Street t/Vegetarian` displays customers whose names contain `Alex` or `Roy`, with address containing `Street` *and* tagged with dietary restriction `Vegetarian`.<br>
+  <img src="images/FindCommand.png" alt="result for `find n/Alex Roy a/Street t/Vegetarian`" width="350"/>
 
 <br>
 
-### Finding deliveries on a given date: `find-delivery`
+### Finding customers by delivery date or date range: `find-delivery`
 
 Finds customers who have a delivery scheduled on the given date or within the given date range.
 
@@ -359,7 +359,7 @@ Examples:
 * `schedule 4 st/2026-03-11 ed/2026-04-01 tm/15:30 d/246` adds a delivery for the 4th customer on the list. The delivery starts on 11 March 2026, ends on 1 April 2026 and occurs at 3:30 PM on Tuesday, Thursdays and Saturdays.
 
 <br>
-
+<!-- @@author MrMarshall12 -->
 ### Editing a delivery : `reschedule`
 
 Edits the delivery associated with the specified customer.
@@ -367,7 +367,7 @@ Edits the delivery associated with the specified customer.
 Format: `reschedule INDEX [st/START_DATE] [ed/END_DATE] [tm/DELIVERY_TIME] [d/DELIVERY_DAYS]`
 
 * Parameters `st/`, `ed/`, `tm/` and `d/` are optional, but at least one of them must be provided.
-* Existing values will be updated to the input values. 
+* Existing values will be updated to the input values.
 * Edits the delivery associated with the customer at the specified `INDEX`.
 * The specified customer must have an existing delivery.
 * The index refers to the index number shown in the displayed customer panel.
@@ -376,6 +376,7 @@ Format: `reschedule INDEX [st/START_DATE] [ed/END_DATE] [tm/DELIVERY_TIME] [d/DE
 Examples:
 * `reschedule 1 ed/2026-02-02 tm/12:45` Edits the delivery end date and delivery time for the 1st customer to be `2026-02-02` and `12:45` respectively.
 * `reschedule 2 d/25` Edits the delivery days for the 2nd customer to be `25` (Tuesday and Friday).
+<!-- @@author -->
   <br>![result for 'reschedule 2 d/25'](images/rescheduleBernice.png)
 
 <br>
@@ -473,7 +474,7 @@ If you like to find customers matching any of the filters (e.g. find all custome
 <box type="warning" light>
 
 **Warning:**
-The `preferences.json` file saves configuration settings used by ServeMate. We recommend that you do not edit the file directly as certain edits can cause ServeMate to behave in unexpected ways. Therefore, edit the file only if you are confident that you can update it correctly.
+The `preferences.json` file saves configuration settings used by ServeMate. If you choose to edit the file directly, do note that certain edits can cause ServeMate to behave in unexpected ways. Therefore, edit the file only if you are confident that you can update it correctly.
 </box>
 
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.

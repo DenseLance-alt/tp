@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Person} has a delivery and it is expired.
+ * Tests that a {@code Person} has a delivery and the delivery is expired.
  * <p>A delivery is considered expired if its end date is before the specified date.
  */
 public class PersonHasExpiredDeliveryPredicate implements Predicate<Person> {

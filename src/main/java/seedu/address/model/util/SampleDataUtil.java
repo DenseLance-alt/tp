@@ -49,7 +49,7 @@ public class SampleDataUtil {
     /**
      * Returns an array of {@code Person} objects containing sample data.
      *
-     * @return An array of {@code Person} objects containing sample data.
+     * @return Array of {@code Person} objects containing sample data.
      */
     public static Person[] getSamplePersons() {
         return new Person[] {

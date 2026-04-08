@@ -232,7 +232,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 <box type="info" light>
 
-**Note:** The lifeline for `FindDeliveryCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram. Additionally, another limitation of PlantUML is that a dotted line cannot be shown from the UML note.
+**Note:** The lifeline for `FindDeliveryCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
 <puml src="diagrams/FindDeliverySequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `find-delivery dt/2026-04-01` Command" />
@@ -250,7 +250,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 #### Design considerations
 
 1. How `find-delivery` accepts date input.
-    * **Chosen:** Support both a single date (`dt/`) and a date range (`st/` and `ed/`), but not both at the same time.
+    * **Chosen:** Support both a single date (`dt/`) and a date range (`st/` and `ed/`), but not both at the same time. The date range is inclusive of both `START_DATE` and `END_DATE`.
         * Pros: Flexible; covers the common case of checking a single day as well as planning for a longer window.
         * Cons: Parser must validate that the two modes are mutually exclusive, adding some complexity.
     * **Alternative:** Accept only a single date.
@@ -312,7 +312,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 <box type="info" light>
 
-**Note:** The lifeline for `ScheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of the diagram. Additionally, another limitation of PlantUML is that a dotted line cannot be shown from the UML note.
+**Note:** The lifeline for `ScheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML.
 </box>
 
 <puml src="diagrams/ScheduleSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `schedule 1 st/2026-01-01 ed/2026-02-01 tm/14:00 d/123` Command" />
@@ -477,6 +477,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | familiar user | tag each customer by their food preference           | inform the cooks to prepare food that aligns with the customers' food preference                               |
 | `*`      | familiar user | create a delivery route                              | inform delivery drivers on their delivery route                                                                |
 | `*`      | busy user     | search for a customer by name, address or tags       | quickly locate customer details                                                                                |
+| `*`      | busy user     | find customers with deliveries on a specific date or within a date range | quickly identify which customers need to be served on a given day or period                  |
 | `*`      | expert user   | reorder stops within a delivery route                | ensures deliveries follow an efficient sequence                                                                |
 | `*`      | expert user   | import customer data in bulk                         | conveniently transition into the app                                                                           |
 | `*`      | expert user   | set estimated time of delivery for a customer        | ensure all customers have their food delivered on time                                                         |
@@ -855,6 +856,72 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1c. No customers have deliveries which end before the specified date.
 
     * 1c1. ServeMate displays an empty customer list on the customer panel.
+
+      Use case ends.
+
+<br>
+
+**Use case 11: Find customers by delivery date**
+
+**MSS**
+1. User requests to find customers with deliveries scheduled on a specified date.
+2. ServeMate displays the list of customers that match the given date.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. ServeMate detects an error in the command format.
+
+    * 1a1. ServeMate displays an error message describing the correct command format.
+
+      Use case resumes at step 1.
+
+* 1b. ServeMate detects that the provided date is invalid.
+
+    * 1b1. ServeMate displays an error message describing that the date given is invalid.
+
+      Use case resumes at step 1.
+
+* 1c. No customers match the specified date.
+
+    * 1c1. ServeMate displays an empty result list.
+
+      Use case ends.
+
+<br>
+
+**Use case 12: Find customers by delivery date range**
+
+**MSS**
+1. User requests to find customers with deliveries scheduled within a specified date range.
+2. ServeMate displays the list of customers that match the given date range.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. ServeMate detects an error in the command format.
+
+    * 1a1. ServeMate displays an error message describing the correct command format.
+
+      Use case resumes at step 1.
+
+* 1b. ServeMate detects that one or more provided dates are invalid.
+
+    * 1b1. ServeMate displays an error message describing that one or more dates given are invalid.
+
+      Use case resumes at step 1.
+
+* 1c. ServeMate detects that the start date is after the end date.
+
+    * 1c1. ServeMate displays an error message indicating that the start date must not be after the end date.
+
+      Use case resumes at step 1.
+
+* 1d. No customers match the specified date range.
+
+    * 1d1. ServeMate displays an empty result list.
 
       Use case ends.
 
