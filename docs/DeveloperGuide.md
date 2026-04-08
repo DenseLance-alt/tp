@@ -212,7 +212,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 <box type="info" light>
 
-**Note:** The lifeline for `FindDeliveryCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram. Additionally, another limitation of PlantUML is that a dotted line cannot be shown from the UML note.
+**Note:** The lifeline for `FindDeliveryCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
 <puml src="diagrams/FindDeliverySequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `find-delivery dt/2026-04-01` Command" />
@@ -230,7 +230,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 #### Design considerations
 
 1. How `find-delivery` accepts date input.
-    * **Chosen:** Support both a single date (`dt/`) and a date range (`st/` and `ed/`), but not both at the same time.
+    * **Chosen:** Support both a single date (`dt/`) and a date range (`st/` and `ed/`, inclusive of both `START_DATE` and `END_DATE`), but not both at the same time.
         * Pros: Flexible; covers the common case of checking a single day as well as planning for a longer window.
         * Cons: Parser must validate that the two modes are mutually exclusive, adding some complexity.
     * **Alternative:** Accept only a single date.
