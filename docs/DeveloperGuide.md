@@ -771,7 +771,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The list of upcoming deliveries is empty.
+* 1a. The list of customers is empty.
 
   Use case ends.
 
