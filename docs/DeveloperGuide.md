@@ -767,6 +767,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. User requests to delete a customer's delivery.
 4. ServeMate deletes the delivery associated with the specified customer.
 5. ServeMate shows a success message that includes the customer's name and details of the deleted delivery.
+   
    Use case ends.
 
 **Extensions**
