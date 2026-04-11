@@ -18,6 +18,42 @@ import seedu.address.model.tag.Tag;
  */
 public class PersonUtil {
 
+    public static final String ALICE = "alice";
+    public static final String BOB = "bob";
+    public static final String CHARLIE = "charlie";
+    public static final String TAN = "tan";
+    public static final String LACK = "lack";
+    public static final String ONG = "ong";
+    public static final String LIN = "lin";
+    public static final String ALICE_TAN = "Alice Tan";
+    public static final String ALICE_BOB = "Alice Bob";
+    public static final String ALICE_CAROL = "Alice Carol";
+    public static final String PASCAL_CASE_ALICE = "Alice";
+    public static final String PASCAL_CASE_BOB = "Bob";
+    public static final String PASCAL_CASE_CAROL = "Carol";
+
+    public static final String CLEMENTI = "clementi";
+    public static final String JURONG = "jurong";
+    public static final String TAMPINES = "tampines";
+    public static final String ORCHARD = "orchard";
+    public static final String AVE = "ave";
+    public static final String STREET = "Street";
+    public static final String PASCAL_CASE_YISHUN = "Yishun";
+    public static final String PASCAL_CASE_ORCHARD = "Orchard";
+    public static final String CLEMENTI_AVE = "311, Clementi Ave 2, #02-25";
+
+    public static final String NORTH = "north";
+    public static final String EAST = "east";
+    public static final String WEST = "west";
+    public static final String CENTRAL = "central";
+    public static final String PASCAL_CASE_WEST = "West";
+    public static final String PASCAL_CASE_NORTH = "North";
+    public static final String PASCAL_CASE_CENTRAL = "Central";
+    public static final String VEGETARIAN = "vegetarian";
+
+    public static final String ALICE_EMAIL = "alice@email.com";
+    public static final String DUMMY_PHONE = "12345";
+
     /**
      * Returns an add command string for adding the {@code person}.
      */
