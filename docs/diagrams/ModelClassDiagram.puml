@@ -43,16 +43,16 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Person *--> "1" Name
+Person *--> "1" Phone
+Person *--> "1" Email
+Person *--> "1" Address
 Person *--> "*" Tag
 Person *--> "0..1"Delivery
 
-Delivery *--> StartDate
-Delivery *--> EndDate
-Delivery *--> DeliveryTime
+Delivery *--> "1" StartDate
+Delivery *--> "1" EndDate
+Delivery *--> "1" DeliveryTime
 Delivery *--> "1..7"DeliveryDay
 
 Person -[hidden]up--> I
