@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 public class EndDate {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "End date should be a real date and of the valid start date format yyyy-MM-dd";
+            "End date should be a real date and of the valid end date format yyyy-MM-dd";
 
     /**
      * The date must follow the format yyyy-MM-dd
