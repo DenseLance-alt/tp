@@ -89,6 +89,8 @@ deactivate CommandResult
 RescheduleCommand --> LogicManager : r
 deactivate RescheduleCommand
 
+
 [<--LogicManager
 deactivate LogicManager
+destroy RescheduleCommand
 @enduml
