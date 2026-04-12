@@ -487,6 +487,7 @@ If you like to find customers matching any of the filters (e.g. find all custome
 
 1. **Application window opens off-screen**: If you used ServeMate on a second screen and later switched to using a single screen, the application window may open off-screen for future start-ups.
    <br>**Solution**: Delete the `preferences.json` file located in the same folder as `ServeMate.jar` before restarting ServeMate.
+2. **Error message regarding date parsing**: If you entered either a date string with an invalid format or an invalid date, ServeMate does not specify which issue the input has.
 
 <box type="warning">
 
