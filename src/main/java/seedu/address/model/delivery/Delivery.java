@@ -19,7 +19,7 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Delivery {
     public static final String MESSAGE_CONSTRAINTS =
-            "Start date of the delivery must not be before the end date";
+            "Start date of the delivery must not be after the end date";
 
     // Data fields
     private final StartDate startDate;
