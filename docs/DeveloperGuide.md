@@ -1020,7 +1020,7 @@ testers are expected to do more *exploratory* testing.
 1. Deleting a customer who has a delivery.
     1. Prerequisites: Bernice Yu must be present in the customer list with a delivery (she has one in the default sample data). Run `find n/Bernice` — she should appear at index 1.
     2. Test case: `find n/Bernice`, then `delete 1`<br>
-       Expected: Bernice Yu is deleted from the list. Run `find-delivery st/2026-03-20 ed/2026-03-29` — Bernice Yu should no longer appear, confirming that her associated delivery was also removed.
+       Expected: Bernice Yu is deleted from the list. Run `find-delivery st/2026-08-09 ed/2027-02-09` — Bernice Yu should no longer appear, confirming that her associated delivery was also removed.
 
 ### Today's delivery panel
 
@@ -1041,27 +1041,27 @@ testers are expected to do more *exploratory* testing.
 
 <box type="info">
 
-The following test cases use the default sample data. Customers with a delivery are: David L (delivery period: 2026-10-15 to 2026-10-19, delivery days: Mon/Tue/Thu), Bernice Yu (2026-03-20 to 2026-03-29, Mon/Tue/Fri/Sun), and Charlotte Oliveiro (2026-03-01 to 2026-03-30, Mon/Tue/Thu).
+The following test cases use the default sample data. Customers with a delivery are: Alex Yeoh (delivery period: 2026-09-20 to 2026-12-20, delivery days: Mon/Tue/Wed/Fri/Sun), Bernice Yu (2026-08-09 to 2027-02-09, Mon/Thu/Fri/Sat), Irfan Ibrahim (2025-01-01 to 2100-01-01, Mon/Tue/Wed/Thu/Fri), and Roy Balakrishnan (2025-12-25 to 2100-12-25, Sat/Sun).
 
 </box>
 
 1. Finding customers by exact delivery date.
     1. Prerequisites: List all customers using the `list` command.
-    2. Test case: `find-delivery dt/2026-10-19`<br>
-       Expected: David L is shown. (2026-10-19 is a Monday, which falls within his delivery period and is one of his delivery days.)
-    3. Test case: `find-delivery dt/2026-10-16`<br>
-       Expected: No customers shown. (2026-10-16 is a Friday. Although it falls within David L's delivery period, Friday is not one of his delivery days.)
-    4. Test case: `find-delivery dt/2026-03-23`<br>
-       Expected: Both Charlotte Oliveiro and Bernice Yu are shown. (2026-03-23 is a Monday, within both their delivery periods and a delivery day for both.)
+    2. Test case: `find-delivery dt/2026-10-08`<br>
+       Expected: Bernice Yu and Irfan Ibrahim are shown. (2026-10-08 is a Thursday, which is a delivery day for both and falls within their delivery periods.)
+    3. Test case: `find-delivery dt/2026-10-10`<br>
+       Expected: Bernice Yu and Roy Balakrishnan are shown. (2026-10-10 is a Saturday. Alex Yeoh is not shown despite his delivery being active from 2026-09-20 to 2026-12-20, because Saturday is not one of his delivery days.)
+    4. Test case: `find-delivery dt/2024-12-31`<br>
+       Expected: No customers shown. (All delivery periods start after this date.)
 
 1. Finding customers by delivery date range.
     1. Prerequisites: List all customers using the `list` command.
-    2. Test case: `find-delivery st/2026-10-19 ed/2026-10-19`<br>
-       Expected: David L is shown. (A single-day range is equivalent to using `dt/`; verifies that the range endpoints are inclusive.)
-    3. Test case: `find-delivery st/2026-03-01 ed/2026-10-19`<br>
-       Expected: All three customers with deliveries are shown.
-    4. Test case: `find-delivery st/2026-11-01 ed/2026-12-31`<br>
-       Expected: No customers shown. (No deliveries fall within this range.)
+    2. Test case: `find-delivery st/2026-09-20 ed/2026-09-20`<br>
+       Expected: Alex Yeoh and Roy Balakrishnan are shown. (2026-09-20 is a Sunday; verifies that the range start date is inclusive and that only customers with Sunday as a delivery day are shown.)
+    3. Test case: `find-delivery st/2026-09-20 ed/2026-12-20`<br>
+       Expected: All four customers with deliveries are shown.
+    4. Test case: `find-delivery st/2026-09-15 ed/2026-09-19`<br>
+       Expected: Bernice Yu, Irfan Ibrahim, and Roy Balakrishnan are shown. (Alex Yeoh's delivery starts on 2026-09-20, which is outside this range.)
 
 1. Invalid `find-delivery` commands.
     1. Test case: `find-delivery dt/2026-04-01 st/2026-04-01 ed/2026-04-30`<br>
@@ -1077,25 +1077,25 @@ The following test cases use the default sample data. Customers with a delivery 
 
 1. Finding customers whose deliveries have expired.
     1. Prerequisites: List all customers using the `list` command.
-    2. Test case: `expired bf/2026-03-30`<br>
-       Expected: Only Bernice Yu is shown. (Her delivery ends on 2026-03-29, which is strictly before 2026-03-30. Charlotte Oliveiro's delivery ends on 2026-03-30 itself, which does not qualify.)
-    3. Test case: `expired bf/2026-10-20`<br>
-       Expected: All three customers with deliveries are shown. (All delivery end dates are before 2026-10-20.)
-    4. Test case: `expired bf/2026-01-01`<br>
-       Expected: No customers shown. (No deliveries have ended before this date.)
+    2. Test case: `expired bf/2026-12-21`<br>
+       Expected: Only Alex Yeoh is shown. (His delivery ends on 2026-12-20, which is strictly before 2026-12-21.)
+    3. Test case: `expired bf/2026-12-20`<br>
+       Expected: No customers shown. (Alex Yeoh's delivery ends on 2026-12-20 itself, which does not qualify as expired before that date.)
+    4. Test case: `expired bf/2027-02-10`<br>
+       Expected: Alex Yeoh and Bernice Yu are shown. (Bernice Yu's delivery ends on 2027-02-09, which is before 2027-02-10.)
     5. Other incorrect commands to try: `expired bf/2026-13-01` (invalid date), `expired` (no arguments)<br>
        Expected: Error message shown.
 
 ### Scheduling a delivery: `schedule`
 
 1. Scheduling a delivery for a customer without an existing delivery.
-    1. Prerequisites: Irfan Ibrahim must be present in the customer list without a delivery (he has none in the default sample data). Run `find n/Irfan` — he should appear at index 1 with no delivery information on his card.
-    2. Test case: `find n/Irfan`, then `schedule 1 st/2026-05-01 ed/2026-05-31 tm/12:00 d/135`<br>
-       Expected: Delivery details appear on Irfan Ibrahim's card. Success message is shown.
+    1. Prerequisites: Charlotte Oliveiro must be present in the customer list without a delivery (she has none in the default sample data). Run `find n/Charlotte` — she should appear at index 1 with no delivery information on her card.
+    2. Test case: `find n/Charlotte`, then `schedule 1 st/2026-05-01 ed/2026-05-31 tm/12:00 d/135`<br>
+       Expected: Delivery details appear on Charlotte Oliveiro's card. Success message is shown.
 
 1. Scheduling a delivery for a customer who already has one.
-    1. Prerequisites: Irfan Ibrahim must have an existing delivery. If not yet set up, first complete the previous test case.
-    2. Test case: `find n/Irfan`, then `schedule 1 st/2026-06-01 ed/2026-06-30 tm/14:00 d/2`<br>
+    1. Prerequisites: Charlotte Oliveiro must have an existing delivery. If not yet set up, first complete the previous test case.
+    2. Test case: `find n/Charlotte`, then `schedule 1 st/2026-06-01 ed/2026-06-30 tm/14:00 d/2`<br>
        Expected: No delivery added. Error message shown.
     3. Other incorrect commands to try: start date after end date, delivery day out of range (e.g. `d/8`), `24:00` as delivery time<br>
        Expected: Error message shown.
@@ -1103,27 +1103,27 @@ The following test cases use the default sample data. Customers with a delivery 
 ### Rescheduling a delivery: `reschedule`
 
 1. Rescheduling the delivery of a customer who has one.
-    1. Prerequisites: Irfan Ibrahim must have an existing delivery. If not yet set up, run `find n/Irfan`, then `schedule 1 st/2026-05-01 ed/2026-05-31 tm/12:00 d/135`.
-    2. Test case: `find n/Irfan`, then `reschedule 1 ed/2026-06-30`<br>
+    1. Prerequisites: Charlotte Oliveiro must have an existing delivery. If not yet set up, run `find n/Charlotte`, then `schedule 1 st/2026-05-01 ed/2026-05-31 tm/12:00 d/135`.
+    2. Test case: `find n/Charlotte`, then `reschedule 1 ed/2026-06-30`<br>
        Expected: The end date of the delivery is updated to 2026-06-30. Success message is shown.
 
 1. Rescheduling the delivery of a customer without one.
     1. Prerequisites: David Li must be present in the customer list without a delivery (he has none in the default sample data). Run `find n/David Li` — he should appear at index 1 with no delivery information on his card.
     2. Test case: `find n/David Li`, then `reschedule 1 ed/2026-06-30`<br>
        Expected: No changes made. Error message shown.
-    3. Other incorrect commands to try: `find n/Irfan`, then `reschedule 1` (no fields provided)<br>
+    3. Other incorrect commands to try: `find n/Charlotte`, then `reschedule 1` (no fields provided)<br>
        Expected: Error message shown.
 
 ### Unscheduling a delivery: `unschedule`
 
 1. Unscheduling the delivery of a customer who has one.
-    1. Prerequisites: Irfan Ibrahim must have an existing delivery. If not yet set up, run `find n/Irfan`, then `schedule 1 st/2026-05-01 ed/2026-05-31 tm/12:00 d/135`.
-    2. Test case: `find n/Irfan`, then `unschedule 1`<br>
-       Expected: Delivery details are removed from Irfan Ibrahim's card. Success message is shown.
+    1. Prerequisites: Charlotte Oliveiro must have an existing delivery. If not yet set up, run `find n/Charlotte`, then `schedule 1 st/2026-05-01 ed/2026-05-31 tm/12:00 d/135`.
+    2. Test case: `find n/Charlotte`, then `unschedule 1`<br>
+       Expected: Delivery details are removed from Charlotte Oliveiro's card. Success message is shown.
 
 1. Unscheduling the delivery of a customer without one.
-    1. Prerequisites: Irfan Ibrahim must not have a delivery. If not yet set up, first complete the previous test case.
-    2. Test case: `find n/Irfan`, then `unschedule 1`<br>
+    1. Prerequisites: Charlotte Oliveiro must not have a delivery. If not yet set up, first complete the previous test case.
+    2. Test case: `find n/Charlotte`, then `unschedule 1`<br>
        Expected: No changes made. Error message shown.
 
 ### Saving data
