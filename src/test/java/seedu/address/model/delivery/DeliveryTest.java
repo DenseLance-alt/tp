@@ -26,6 +26,11 @@ import seedu.address.testutil.DeliveryBuilder;
 
 public class DeliveryTest {
 
+    private final Delivery delivery = new DeliveryBuilder()
+            .withStartDate("2023-03-01")
+            .withEndDate("2023-04-01")
+            .build();
+
     // EP: start date after end date -> throws IllegalArgumentException
     @Test
     public void constructor_invalidDateRange_throwsIllegalArgumentException() {
@@ -73,13 +78,8 @@ public class DeliveryTest {
 
     @Test
     public void hasExpired_deliveryExpired_returnsTrue() {
-        Delivery delivery = new DeliveryBuilder()
-                .withStartDate("2024-03-01")
-                .withEndDate("2024-04-01")
-                .build();
-
         // Boundary value: delivery expired one day ago
-        LocalDate beforeDate = LocalDate.of(2024, 4, 2);
+        LocalDate beforeDate = LocalDate.of(2023, 4, 2);
         assertTrue(delivery.hasExpired(beforeDate));
 
         // Equivalence partition for expired delivery
@@ -89,11 +89,6 @@ public class DeliveryTest {
 
     @Test
     public void hasExpired_deliveryNotExpired_returnsFalse() {
-        Delivery delivery = new DeliveryBuilder()
-                .withStartDate("2023-03-01")
-                .withEndDate("2023-04-01")
-                .build();
-
         // Boundary value: delivery expires today
         LocalDate beforeDate = LocalDate.of(2023, 4, 1);
         assertFalse(delivery.hasExpired(beforeDate));
