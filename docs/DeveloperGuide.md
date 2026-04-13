@@ -1025,12 +1025,6 @@ testers are expected to do more *exploratory* testing.
 
 ### Finding customers by delivery date: `find-delivery`
 
-<box type="info">
-
-The following test cases use the default sample data. Customers with a delivery are: Alex Yeoh (delivery period: 2026-09-20 to 2026-12-20, delivery days: Mon/Tue/Wed/Fri/Sun), Bernice Yu (2026-08-09 to 2027-02-09, Mon/Thu/Fri/Sat), Irfan Ibrahim (2025-01-01 to 2100-01-01, Mon/Tue/Wed/Thu/Fri), and Roy Balakrishnan (2025-12-25 to 2100-12-25, Sat/Sun).
-
-</box>
-
 1. Finding customers by exact delivery date.
     1. Prerequisites: List all customers using the `list` command.
     2. Test case: `find-delivery dt/2026-10-08`<br>
@@ -1119,7 +1113,7 @@ The following test cases use the default sample data. Customers with a delivery 
     2. Test case: `delete 1`<br>
        Expected: The first customer is deleted from the list. A success message is shown in the result display.
     3. Test case: `delete 0`<br>
-       Expected: No customer is deleted. An error message for the command format is shown.
+       Expected: No customer is deleted. An error message for the invalid index is shown.
     4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: No customer is deleted. An error message for the command format or an invalid index is shown.
 
