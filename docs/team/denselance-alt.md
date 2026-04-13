@@ -5,7 +5,7 @@
 
 ### Project: ServeMate
 
-ServeMate is a desktop address book created for **administrative staff** for Tingkat food delivery to manage their customer contacts for delivery planning. The user interacts with it using a CLI, and it has a GUI created with JavaFX.
+ServeMate is a desktop application created for **administrative staff** of tingkat catering businesses to manage their customer contacts and schedule deliveries.
 
 Given below are my contributions to the project.
 
@@ -23,9 +23,12 @@ Given below are my contributions to the project.
     * New Design: `PersonHasExpiredDeliveryPredicate.test(person)` $\to$ `person.hasExpiredDelivery(beforeDate)` $\to$ `delivery.hasExpired(beforeDate)`.
       * Simple design, which reduced my functional and test code by a total of approximately 200 LoC.
 
+* **New Feature**: Update UI to include delivery information for each person ([\#110](https://github.com/AY2526S2-CS2103T-W14-2/tp/pull/110)).
+  * What it does: Allows administrative staff to view delivery information for each person on the customer panel.
+  * Justification: This feature is important so that users know that they have scheduled the correct delivery details for a customer.
+
 * **Enhancements to Existing Features**:
   * Erase all traces of AB3 and replace them with ServeMate ([\#13](https://github.com/AY2526S2-CS2103T-W14-2/tp/pull/13), [\#69](https://github.com/AY2526S2-CS2103T-W14-2/tp/pull/69), [\#94](https://github.com/AY2526S2-CS2103T-W14-2/tp/pull/94)).
-  * Update UI to include delivery information for each person ([\#110](https://github.com/AY2526S2-CS2103T-W14-2/tp/pull/110)).
   * Add sample delivery data ([\#80](https://github.com/AY2526S2-CS2103T-W14-2/tp/pull/80), [\#147](https://github.com/AY2526S2-CS2103T-W14-2/tp/pull/147), [\#168](https://github.com/AY2526S2-CS2103T-W14-2/tp/pull/168), [\#241](https://github.com/AY2526S2-CS2103T-W14-2/tp/pull/241)).
 
 * **Contributions to Documentation**:
@@ -49,7 +52,9 @@ Given below are my contributions to the project.
   * Write additional tests for existing and new features to increase test coverage.
   * Submit release [Alpha Version v1.4](https://github.com/AY2526S2-CS2103T-W14-2/tp/releases/tag/v1.4), with contributions from other team members.
 
-* **Issues Submitted**: [GitHub Submitted Issues](https://github.com/AY2526S2-CS2103T-W14-2/tp/issues?q=author%3ADenseLance-alt)
+* **Issues Submitted**: [GitHub Submitted Issues](https://github.com/AY2526S2-CS2103T-W14-2/tp/issues?q=is%3Aissue%20author%3A%40denselance-alt)
+
+* **Issues Commented**: [GitHub Commented Issues](https://github.com/AY2526S2-CS2103T-W14-2/tp/issues?q=is%3Aissue%20commenter%3A%40denselance-alt)
 
 * **PRs Submitted**: [GitHub Submitted PRs](https://github.com/AY2526S2-CS2103T-W14-2/tp/pulls?q=author%3ADenseLance-alt)
 
@@ -62,8 +67,9 @@ Given below are my contributions to the project.
 
 * **Administrative Work**:
   * Set up and maintain project's Google Drive and its documents.
+  * Kickstart and add tags for bug triaging after PE-D.
   * Organise team meetings. Describe objectives and initial plans for some team meetings.
   * Track and remind team of deadlines. Close milestones once complete. Incorporate explicit buffers into milestones to absorb unforeseen delays.
   * Help to submit team tasks on Canvas and TEAMMATES.
-  * Discover subtle bugs in PRs reviewed.
+  * Identify major and subtle bugs, and propose suggestions to fix them in PR reviews and team group chats.
   * Point out issues with current design decisions and suggest ways to improve them.

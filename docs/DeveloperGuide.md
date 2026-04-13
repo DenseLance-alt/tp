@@ -16,6 +16,11 @@
 ### Original source
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
+<box type="info">
+
+**Note:** All references of address book in the Developer Guide represent ServeMate, since ServeMate helps to store contact information.
+</box>
+
 ### Other sources
 * Displaying of delivery information under each person card was inspired by [SoCTAssist](https://github.com/AY2526S1-CS2103T-W11-1/tp).
 
@@ -1039,6 +1044,6 @@ Team size: 5
 4. **Allow alphabets, special characters and spaces for customer's phone number**: The current phone number field for a customer does not allow phone numbers containing alphabets, special characters and spaces. We plan to allow entering phone numbers with alphabets, special characters and spaces (e.g. `+65 9876 5432 (HP) 6560-6060 (Office)` when a customer has multiple phone numbers).
 5. **Handle tags longer than 25 characters:** Currently, tags are restricted to 25 characters. We plan to allow tags with more than 25 characters, but the 26th character onwards will be clipped. The user can view the full tag by clicking on the clipped tag, which will show the full tag in a tooltip or a pop-up window.
 6. **Implement `undo` command:** Other than to manually re-enter data or keep a backup `addressbook.json` file, there is currently no simple method to recover from accidental modifications or deletions. We plan to implement the `undo` command for users to revert their changes made.
-    * ServeMate will store a history of the past 5 address book states in a stack.
+    * ServeMate will store a history of the past 5 states in a stack.
     * When any command except `undo` is executed, the state before the command is executed will be pushed to the stack.
     * When `undo` is executed, ServeMate will pop the previous state from the stack and restore it if the stack is non-empty.
