@@ -805,42 +805,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list customers.
-2. ServeMate shows a list of customers.
-3. User requests to tag a customer in the list with a delivery note.
-4. ServeMate tags the customer in the customer record with the delivery note.
-5. ServeMate shows a success message with the updated customer's details including the delivery note.
-
-**Extensions**
-
-* 1a. The list of customers is empty.
-
-  Use case ends.
-
-* 3a. ServeMate detects that the given index is not a positive integer.
-
-    * 3a1. ServeMate shows an error message describing the correct command format.
-
-      Use case resumes at step 3.
-
-* 3b. ServeMate detects that the given index is out of range.
-
-    * 3b1. ServeMate shows an error message describing that the index value given is invalid.
-
-      Use case resumes at step 3.
-
-* 3c. ServeMate detects that the given delivery note is empty.
-
-    * 3c1. ServeMate shows an error message describing that the delivery note is missing.
-  
-      Use case resumes at step 3.
-
-<br>
-
-**Use case 10: Find expired deliveries**
-
-**MSS**
-
 1. User requests to find all customers whose deliveries have ended before a specific date.
 2. ServeMate displays the list of all matching customers on the customer panel.
 
