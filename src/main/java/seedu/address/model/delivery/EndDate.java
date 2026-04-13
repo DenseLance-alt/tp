@@ -13,8 +13,9 @@ import java.time.format.DateTimeFormatter;
  * Guarantees: immutable; is valid as declared in {@link #isValidEndDate(String)}
  */
 public class EndDate {
+
     public static final String MESSAGE_CONSTRAINTS =
-            "Date should be of the valid end date format yyyy-MM-dd";
+            "End date should be a real date and of the valid end date format yyyy-MM-dd";
 
     /**
      * The date must follow the format yyyy-MM-dd

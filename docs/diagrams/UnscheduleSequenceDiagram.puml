@@ -90,4 +90,6 @@ deactivate UnscheduleCommand
 
 [<--LogicManager
 deactivate LogicManager
+destroy UnscheduleCommand
+destroy TargetPerson
 @enduml

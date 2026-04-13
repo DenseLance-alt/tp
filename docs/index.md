@@ -19,4 +19,4 @@
 ## Acknowledgements
 
 * **Libraries used:** [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5), [PlantUML](https://plantuml.com/stdlib)
-* **AI models used:** Google Gemini, GitHub Copilot, ChatGPT
+* **AI models used:** Google Gemini, GitHub Copilot, ChatGPT and Claude.

@@ -122,7 +122,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 <box type="info">
 
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+**Note:** The lifelines for `DeleteCommandParser` and `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifelines continue till the end of diagram.
 </box>
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
@@ -273,7 +273,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 <box type="info">
 
-**Note:** The lifeline for `ExpiredCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of the diagram.
+**Note:** The lifelines for `ExpiredCommandParser` and `ExpiredCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifelines continue till the end of the diagram.
 </box>
 
 <puml src="diagrams/ExpiredSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `expired bf/2026-02-01` Command" />
@@ -397,7 +397,7 @@ The following sequence diagram illustrates the interactions within the `Logic` c
 
 <box type="info">
 
-**Note:** The lifeline for `UnscheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+**Note:** The lifelines for `UnscheduleCommandParser`, `UnscheduleCommand`, and `target` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifelines continue till the end of diagram.
 </box>
 
 <puml src="diagrams/UnscheduleSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `unschedule 2` Command" />
@@ -805,42 +805,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list customers.
-2. ServeMate shows a list of customers.
-3. User requests to tag a customer in the list with a delivery note.
-4. ServeMate tags the customer in the customer record with the delivery note.
-5. ServeMate shows a success message with the updated customer's details including the delivery note.
-
-**Extensions**
-
-* 1a. The list of customers is empty.
-
-  Use case ends.
-
-* 3a. ServeMate detects that the given index is not a positive integer.
-
-    * 3a1. ServeMate shows an error message describing the correct command format.
-
-      Use case resumes at step 3.
-
-* 3b. ServeMate detects that the given index is out of range.
-
-    * 3b1. ServeMate shows an error message describing that the index value given is invalid.
-
-      Use case resumes at step 3.
-
-* 3c. ServeMate detects that the given delivery note is empty.
-
-    * 3c1. ServeMate shows an error message describing that the delivery note is missing.
-  
-      Use case resumes at step 3.
-
-<br>
-
-**Use case 10: Find expired deliveries**
-
-**MSS**
-
 1. User requests to find all customers whose deliveries have ended before a specific date.
 2. ServeMate displays the list of all matching customers on the customer panel.
 
@@ -1135,6 +1099,38 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Close the app and navigate to the folder containing `data/addressbook.json`.
     2. Delete `data/addressbook.json`, then launch the app again from the same folder.<br>
        Expected: The app starts successfully and loads the default sample data.
+
+### Finding customers by attributes (name, address, tag)
+
+1. Finding customers by name.
+
+    1. Prerequisites: List all customers using the `list` command. There are multiple customers in the list.
+
+    2. Test case: `find n/alex`<br>
+       Expected: Only customers whose name contains `alex` (case-insensitive) are listed (if any).
+
+    3. Test case: `find n/al-ex`<br>
+       Expected: `find` command is not executed and the list of customers remains the same. An error message for the name keywords format is shown.
+   
+    4. Test case: `find n/`<br>
+      Expected: `find` command is not executed and the list of customers remains the same. An error message for the command format is shown.
+
+2. Finding customers by name and address.
+
+    1. Prerequisites: List all customers using the `list` command. There are multiple customers in the list.
+
+    2. Test case: `find n/alex a/geylang`<br>
+       Expected: Only customers whose name contains `alex` and address contains `geylang` (both case-insensitive) are listed (if any).
+
+3. Finding customers by name, address and tag.
+
+    1. Prerequisites: List all customers using the `list` command. There are multiple customers in the list.
+
+    2. Test case: `find n/alex a/geylang t/vegetarian`<br>
+       Expected: Only customers whose name contains `alex`, address contains `geylang` and tagged with `vegetarian` (all three are case-insensitive) are listed (if any).
+   
+    3. Test case: `find n/alex a/geylang t/vege-tarian`<br>
+      Expected: `find` command is not executed and the list of customers remains the same. An error message for the tag keywords format is shown.
 
 --------------------------------------------------------------------------------------------------------------------
 

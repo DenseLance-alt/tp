@@ -76,4 +76,5 @@ deactivate ExpiredCommand
 
 [<--LogicManager
 deactivate LogicManager
+destroy ExpiredCommand
 @enduml

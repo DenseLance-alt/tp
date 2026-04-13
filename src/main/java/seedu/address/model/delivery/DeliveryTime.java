@@ -15,7 +15,7 @@ import seedu.address.commons.util.DateTimeUtil;
  */
 public class DeliveryTime implements Comparable<DeliveryTime> {
     public static final String MESSAGE_CONSTRAINTS =
-            "Time should be of the valid delivery time format HH:mm";
+            "Time should be of the valid delivery time format HH:mm and between 00:00 and 23:59 inclusive";
 
     public final LocalTime time;
 
