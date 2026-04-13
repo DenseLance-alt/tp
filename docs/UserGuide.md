@@ -329,7 +329,8 @@ Format: `find-delivery dt/DATE` or `find-delivery st/START_DATE ed/END_DATE`
 * `dt/` searches for an exact date. `st/` and `ed/` must be used together to search within a date range.
 * A customer is shown only if all of the following criteria are met:
   * They have a delivery assigned.
-  * The customer has a scheduled delivery that falls on the given date or within the date range specified (including the start and end dates itself).
+  * The given date, or at least one date within the given date range, falls within the customer’s delivery period (including the start and end dates).
+  * That matching date is one of the customer’s scheduled delivery days.
 * If no customers match, an empty list is shown.
 
 Examples:
