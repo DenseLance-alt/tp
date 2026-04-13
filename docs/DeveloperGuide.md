@@ -1083,7 +1083,7 @@ testers are expected to do more *exploratory* testing.
 ### Rescheduling a delivery: `reschedule`
 
 1. Rescheduling the delivery of a customer who has one.
-    1. Prerequisites: Charlotte Oliveiro must have an existing delivery. If not yet set up, run `find n/Charlotte`, then `schedule 1 st/2026-05-01 ed/2026-05-31 tm/12:00 d/135`.
+    1. Prerequisites: Charlotte Oliveiro must have an existing delivery. Run `find n/Charlotte` — she should appear at index 1. If she has no delivery, run `schedule 1 st/2026-05-01 ed/2026-05-31 tm/12:00 d/135` to set one up.
     2. Test case: `find n/Charlotte`, then `reschedule 1 ed/2026-06-30`<br>
        Expected: The end date of the delivery is updated to 2026-06-30. A success message is shown in the result display.
 
@@ -1097,7 +1097,7 @@ testers are expected to do more *exploratory* testing.
 ### Unscheduling a delivery: `unschedule`
 
 1. Unscheduling the delivery of a customer who has one.
-    1. Prerequisites: Charlotte Oliveiro must have an existing delivery. If not yet set up, run `find n/Charlotte`, then `schedule 1 st/2026-05-01 ed/2026-05-31 tm/12:00 d/135`.
+    1. Prerequisites: Charlotte Oliveiro must have an existing delivery. Run `find n/Charlotte` — she should appear at index 1. If she has no delivery, run `schedule 1 st/2026-05-01 ed/2026-05-31 tm/12:00 d/135` to set one up.
     2. Test case: `find n/Charlotte`, then `unschedule 1`<br>
        Expected: Delivery details are removed from Charlotte Oliveiro's card. A success message is shown in the result display.
 
