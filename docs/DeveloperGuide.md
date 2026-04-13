@@ -1115,9 +1115,9 @@ The following test cases use the default sample data. Customers with a delivery 
 1. Deleting a customer while all customers are being shown.
     1. Prerequisites: List all customers using the `list` command. Multiple customers in the list.
     2. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+       Expected: First contact is deleted from the list. Success message is shown.
     3. Test case: `delete 0`<br>
-       Expected: No customer is deleted. Error details shown in the status message.
+       Expected: No customer is deleted. Error message shown.
     4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
