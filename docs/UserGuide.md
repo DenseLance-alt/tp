@@ -213,7 +213,7 @@ You can refer to the [Features](#features) section below to look up details abou
 * Dates are in `yyyy-MM-dd` format, where `yyyy` is the 4-digit year, `MM` is the 2-digit month, and `dd` is the 2-digit day.<br>
   e.g. 9th March 2026 can be written as `2026-03-09`.
 
-* Times should be in the 24-hour `HH:mm` format, where `HH` is the 2-git hour and `mm` is the 2-digit minute, and be between `00:00` and `23:59`.<br>
+* Times should be in the 24-hour `HH:mm` format, where `HH` is the 2-digit hour and `mm` is the 2-digit minute, and be between `00:00` and `23:59`.<br>
   e.g. 9:30 PM can be written as `21:30`.
 
 * Tags (`t/[TAG]`) are intended for use in placing delivery notes for a particular customer.
