@@ -195,6 +195,9 @@ You can refer to the [Features](#features) section below to look up details abou
 
 **Notes about the command format:**<br>
 
+* Command words are case-insensitive.<br>
+  e.g. `liSt`, `List` and `LIST` all refer to the `list` command.
+
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
