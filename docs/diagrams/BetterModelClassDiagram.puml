@@ -20,8 +20,8 @@ Delivery -[hidden]up- UniquePersonList
 Person -up-> "*" Tag
 Person "1" -up-> "0..1" Delivery
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Person *--> "1" Name
+Person *--> "1" Phone
+Person *--> "1" Email
+Person *--> "1" Address
 @enduml

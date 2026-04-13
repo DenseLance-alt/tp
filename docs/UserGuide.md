@@ -355,12 +355,12 @@ Examples:
 
 ### Scheduling a delivery : `schedule`
 
-Adds a delivery or overwrites the existing delivery associated with the specified customer.
+Adds a delivery to the specified customer.
 
 Format: `schedule INDEX st/START_DATE ed/END_DATE tm/DELIVERY_TIME d/DELIVERY_DAYS`
 
 * Adds the delivery for the customer at the specified `INDEX`.
-* If the specified customer already has a delivery, the delivery field is overwritten.
+* If the specified customer already has a delivery, adding a new delivery to the same customer should not be allowed using this command.
 * The index refers to the index number shown in the displayed customer list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * `DELIVERY_DAYS` must be a set of numbers **within the range of 1-7 inclusive** without whitespaces where 1 = Monday, 2 = Tuesday, …​, 7 = Sunday.
