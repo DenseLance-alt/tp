@@ -482,6 +482,11 @@ If you like to find customers matching any of the filters (e.g. find all custome
 **Question**: Why does the `find` command use full word matching for keywords?<br>
 **Answer**: ServeMate's `find` command does not support partial word matching, to reduce the number of irrelevant results returned so that you can find customers quickly. In the event that you might not remember exactly the full word to search for (e.g. `Richard` or `Richards`), you may specify multiple keywords within a filter (e.g. `find n/Richard Richards`) to find customers matching any 1 keyword.
 
+<br>
+
+9. **Question**: Why do some error messages refer to ServeMate as an address book?<br>
+   **Answer**: ServeMate is an address book since it helps to store your customers' contact information.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
